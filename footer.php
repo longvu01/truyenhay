@@ -2,7 +2,7 @@
 	#div_duoi{
 		width: 100%;
 		height: 7%;
-		/*background: darkgreen;*/
+		background: #F0F0F0;
 		position: absolute;
 		bottom: 0px;
 	}

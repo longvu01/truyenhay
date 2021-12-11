@@ -68,14 +68,14 @@
 			background: #ff6122;
 		}
 		li[class="menu_text"]:hover{
-			color: #A0A0A0;
+			color: #FFFFCC;
 
 		}
 		li[class="menu_text"]:hover ul{
 			display: block;
 			position: absolute;
 			top: 35px;
-			width: 200px;
+			width: 150px;
 		}
 		.menu_text{
 			font-family: Comic Sans MS, cursive, sans-serif;
@@ -111,7 +111,7 @@
 			font-family: Comic Sans MS, cursive, sans-serif;
 			font-size: 13px;
 		}
-		a{
+		a[class='menu']{
 			text-decoration: none;
 			color: #E4E6EB;
 		}

@@ -48,9 +48,9 @@
             />
           </td>
           <td style="font-size: 15px; text-align: right;">
-            <a href=""> Đăng ký</a>
+            <a href="" class='menu'> Đăng ký</a>
             /
-            <a href=""> Đăng nhập</a>
+            <a href="" class='menu'> Đăng nhập</a>
           </td>
         </tr>
       </table>

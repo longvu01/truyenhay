@@ -25,20 +25,33 @@
 			/*background: orange;*/
 			float: left;
 		}
-	.Tung_truyen{
+	.tung_truyen{
 		width: 22%;
-		/*background: black;
-		border: 1px solid white;*/
+		/*background: black;*/
+		/*border: 1px solid white;*/
 		float: left;
 		padding-left: 10px;
-		/*margin-bottom: 10px;*/
+		/*margin-top: 20px;*/
 	}
-	div[class='Tung_truyen']>img{
+	div[class="tung_truyen"]:hover p{
+		color: #FF6633 !important;
+	}
+	div[class="tung_truyen"]:hover{
+		transform: scale(1.08) !important;
+	}
+	a[class='tung_truyen']{
+		width: 100%;
+		text-decoration: none;
+		color: #E4E6EB;
+		padding-left: 0;
+		/*background: yellow;*/
+	}
+	div[class='tung_truyen']>img{
 		width: 100%;
 		height: 250px;
 		/*padding-bottom: 20px;*/
 	}
-	div[class='Tung_truyen']>p{
+	div[class='tung_truyen']>p{
 		background: #696969;
 		width: 100%;
 		color: #E4E6EB;
@@ -50,11 +63,13 @@
 		height: 40%;
 		/*background: yellow;*/
 		margin-top: 20px;
+		/*padding-bottom: 10px;*/
 	}
 	#truyen_hot_text{
 		text-decoration: underline;
 		font-size: 20px; 
 		left: 0px;
+		margin-bottom: 10px;
 	}
 	#truyen_moi{
 		width: 100%;
@@ -101,6 +116,7 @@
 	#truyen_da_hoan_thanh{
 		width: 100%;
 		height: 40%;
+		margin-bottom: 10px;
 		/*background: purple;*/
 	}
 	#truyen_da_hoan_thanh_text{
@@ -122,35 +138,42 @@
 	  				TRUYỆN HOT
   				</a>
   			</div>
-  			<div class="Tung_truyen">
+  			<div class="tung_truyen">
+  			
+  			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
+  			<a href=".\tableOfContents.php" class='tung_truyen' target='_blank'>
+  			<p style="background: #696969;
+					width: 100%;
+					color: #E4E6EB;
+					margin-top: 0;">
+				Nhà giả kim</p>
+  			</a>
+  		</div>
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
-  		<div class="Tung_truyen">
-  			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
-  			<p>Nhà giả kim</p>
-  		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim</p>
   		</div>
@@ -273,35 +296,35 @@
   				</a>
   		</div>
   		<div >
-  			<div class="Tung_truyen">
+  			<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br> FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br>FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br> FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br>FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br>FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br>FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br>FULL: 1000 Chương</p>
   		</div>
-  		<div class="Tung_truyen">
+  		<div class="tung_truyen">
   			<img src="https://cdn.glitch.me/f46c82e2-3ebb-48c0-9afb-19ea915ff09d%2Ftr1.jpg?v=1639159644112">
   			<p>Nhà giả kim <br>FULL: 1000 Chương</p>
   		</div>
