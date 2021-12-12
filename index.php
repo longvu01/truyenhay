@@ -4,9 +4,6 @@
 	<title>Truyện hay</title>
 	<script src="https://kit.fontawesome.com/141da4893d.js" crossorigin="anonymous"></script>
 	<?php include 'style.css'; ?>
-	<style type="text/css">
-	
-	</style>
 </head>
 <body>
 	<div id="div_tong">

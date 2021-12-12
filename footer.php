@@ -27,6 +27,16 @@
 	.lien_he{
 		color: #989898;
 	}
+	p[class="lien_he"]>a{
+		text-decoration: none;
+		color: #989898;
+	}
+	a[class='goi_dien']:hover{
+		color: #ff6122;
+	}
+	a[class='email']:hover{
+		color: #ff6122;
+	}
 </style>
 <div id="div_duoi">
 	<div class="trai">
@@ -40,12 +50,12 @@
 		<p class=lien_he>
 			Liên hệ với chúng tôi
 			<br>
-			<a href="tel:0123456"> 
+			<a href="tel:0123456" class='goi_dien'> 
 				<i class="fas fa-phone"></i>	
 				Gọi điện
 			</a>
 			<br>
-			<a href="mailto: tranphuongwch@gmail.com"> 
+			<a href="mailto: tranphuongwch@gmail.com" class="email"> 
 				<i class="fas fa-envelope"></i>
 				Email
 			</a>

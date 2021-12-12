@@ -6,10 +6,9 @@
           <tr>
             <td>
               <i class="fas fa-book"></i>
-              <a
-                style="font-family: Comic Sans MS, cursive, sans-serif; font-size: 20px;"
-                >TRUYỆN HAY</a
-              >
+              <a href="index.php" target="_blank" 
+                style="font-family: Comic Sans MS, cursive, sans-serif; font-size: 20px; text-decoration: none; color: #E4E6EB"
+                >TRUYỆN HAY</a>
             </td>
           </tr>
         </table>

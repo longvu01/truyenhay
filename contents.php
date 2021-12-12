@@ -1,30 +1,4 @@
 <style type="text/css">
-	#div_giua{
-			width: 100%;
-			height: 83%;
-			/*background: green;*/
-			position: absolute;
-			top: 80px;
-			
-		}
-		#div_giua >.trai{
-			width: 15%;
-			height: 100%;
-			/*background: blue;*/
-			float: left;
-		}
-		#div_giua >.giua{
-			width: 70%;
-			height: 100%;
-			/*background: grey;*/
-			float: left;
-		}
-		#div_giua >.phai{
-			width: 15%;
-			height: 100%;
-			/*background: orange;*/
-			float: left;
-		}
 	.tung_truyen{
 		width: 22%;
 		/*background: black;*/
@@ -34,7 +8,8 @@
 		/*margin-top: 20px;*/
 	}
 	div[class="tung_truyen"]:hover p{
-		color: #FF6633 !important;
+		color: #F4A460 !important;
+		text-shadow: 0px 0px 10px #F4A460, 0 -1px black;
 	}
 	div[class="tung_truyen"]:hover{
 		transform: scale(1.08) !important;
@@ -57,7 +32,6 @@
 		color: #E4E6EB;
 		margin-top: 0;
 	}
-
 	#truyen_hot{
 		width: 100%;
 		height: 40%;
@@ -126,7 +100,6 @@
 		text-decoration: underline;
 		padding-bottom: 5px;
 	}
-	
 </style>
 <div id="div_giua">
   <div class="trai"></div>
