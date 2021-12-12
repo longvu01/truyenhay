@@ -155,6 +155,10 @@
 			text-decoration: none;
 			color: #383838;
 		}
+		a[class="chuong"]:hover{
+			color: #ff6122;
+			text-shadow: 2px 2px 7px;
+		}
 		.muc_luc{
 			width: 100%;
 			height: 90%;

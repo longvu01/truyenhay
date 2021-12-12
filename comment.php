@@ -9,6 +9,7 @@
     		height: 30px;
     		/*background: blue;*/
     		border-bottom: 1px solid darkgrey;
+        margin-top: 10px; 
     	}
     	.binh_luan_truyen>p{
     		width: 220px;
@@ -23,8 +24,9 @@
     		/*background: purple;*/
     		font-weight: bold;
     		padding-left: 10px;
+        padding-top: 10px;
     		font-size: 18px;
-    		margin: 0;
+    		margin:0;
     	}
     	.thong_tin_binh_luan{
     		width: 100%;
@@ -108,6 +110,8 @@
     		background: #ff6122;
     		color: #E4E6EB;
     		font-size: 15px;
+        border: none;
+        border-radius: 8px;
     	}
     	button[class=tai_them]:hover{
     		color: #FFFFCC;

@@ -16,6 +16,7 @@
 			text-align: center;
 			font-size: 27px;
 			color: #ff6122;
+			font-weight: bold;
 		}
 		#div_giua>.giua>.ten_chuong{
 			width: 100%;
@@ -55,6 +56,9 @@
 			width: 200px;
 			height: 70%;
 			font-size: 18px;
+			border: none;
+			border-radius: 4px;
+			margin-left: 10px;
 		}
 		.noi_dung{
 			width: 100%;
@@ -80,6 +84,9 @@
 			width: 200px;
 			height: 70%;
 			font-size: 18px;
+			border: none;
+			border-radius: 4px;
+			margin-left: 10px;
 		}
 		button[class="danh_sach_chuong"]{
 			width: 50px;
