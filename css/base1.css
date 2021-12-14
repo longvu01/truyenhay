@@ -1,0 +1,27 @@
+:root {
+    --primary-color: #8d6767;
+    --secondary-color: #793d3d;
+}
+
+body {
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1630px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 15px;
+}
+textarea {
+    resize: none;
+}
+
+/* btn */
+.btn {
+    transition: all 0.2s ease-in-out;
+}
+.btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
