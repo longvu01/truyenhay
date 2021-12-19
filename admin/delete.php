@@ -1,5 +1,5 @@
 <?php
-    require_once("../cdb.php");
+    require_once("root/cdb.php");
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
     if ($id < 1) return ;
 
@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Xóa</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -32,13 +32,13 @@
 </head>
 <body>
 
-    <?php require_once ('header_admin.php'); ?>
-    <?php require_once ('menu.php'); ?>
+    <?php require_once ('root/header_admin.php'); ?>
+    <?php require_once ('root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_delete.php">
             <h1 class= "form__title">Xóa sản phẩm</h1>
-            <input type="hidden" name="id" value="<?php echo $item["id"]?>"/>
+            <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">
                 <div class="form-group">
                     <label>Chuyên mục</label>
