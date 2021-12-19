@@ -1,5 +1,5 @@
 <?php
-    require("../cdb.php");
+    require("root/cdb.php");
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
@@ -22,13 +22,17 @@
     $total_page = ceil($total_records / $nop);
     $offset = $nop * ($p - 1);
 
-    $sql = "select * from grab_content where title like '%$search%' 
+    // sql select and search
+    $sql = "select 
+    grab_content.*,
+    grab_categories.title as c_name
+    from grab_content 
+    join grab_categories on grab_content.cid = grab_categories.id
+    where grab_content.title like '%$search%' 
+    order by grab_content.id
     limit $nop offset $offset";
-    
+    // die($sql);
     $result = mysqli_query($conn, $sql);
-
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +41,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tìm kiếm</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -49,8 +53,8 @@
 </head>
 <body>
     
-    <?php require_once ('header_admin.php'); ?>
-    <?php require ('menu.php'); ?>
+    <?php require_once ('root/header_admin.php'); ?>
+    <?php require ('root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <!-- SEARCH -->
@@ -63,6 +67,7 @@
             <table >
                 <tr>
                     <th>Id</th><!--  -->
+                    <th>Tên chuyên mục</th>
                     <th>Ảnh sản phẩm</th>
                     <th>Tiêu đề</th>
                     <th>Giá bán</th>
@@ -75,8 +80,9 @@
                 <?php foreach ($result as $item) {?>
                     <tr>
                         <td><?php echo $item['id'];?></td>
+                        <td><?php echo $item['c_name'];?></td>
                         <td>
-                            <img src="<?php echo $item['img_link']?>">
+                            <img src="photos/<?php echo $item['img_link']?>">
                         </td>
                         <td><?php echo $item['title'];?></td>
                         <td><?php echo '$'.$item['current_price']?></td>
@@ -84,7 +90,7 @@
                         <td><?php echo $item['colors'];?></td>
                         <td><?php echo $item['description'];?></td>
                         <td>
-                            <a href="edit.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
+                            <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
                         </td>
                         <td>
                             <a href="delete.php?id=<?php echo $item['id'];?>"><i class="fas fa-trash-alt"></i></a>
@@ -97,7 +103,7 @@
         </form>
         <div class="pagination">
             <?php for($i = 1; $i <= $total_page; $i++) { ?>
-                <a href="?p=<?php echo $i ?>&search=<?php echo $search ?>">
+                <a href="?p=<?php echo $i ?><?php if($search) echo '&search=' . $search ?>">
                     <?php echo $i ?>
                 </a>
             <?php } ?>

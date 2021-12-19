@@ -1,5 +1,5 @@
 <?php
-    require_once("../cdb.php");
+    require_once("root/cdb.php");
 
     $sql = "select * from grab_categories";
     $cates = mysqli_query($conn, $sql);
@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -24,8 +24,8 @@
 </head>
 <body>
 
-    <?php require_once ('header_admin.php'); ?>
-    <?php require_once ('menu.php'); ?>
+    <?php require_once ('root/header_admin.php'); ?>
+    <?php require_once ('root/menu.php'); ?>
     
     <div class="wrapper">
     <!-- Form -->
@@ -44,8 +44,8 @@
             </div>
             
             <div class="form-group">
-                <label>Đường dẫn ảnh sản phẩm</label>
-                <input name="img_link" value=""/>
+                <label>Ảnh minh họa</label>
+                <input type="file" name="img_link" value=""/>
             </div>
     
             <div class="form-group">

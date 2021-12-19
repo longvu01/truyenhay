@@ -1,16 +1,29 @@
 <?php
-require_once("../cdb.php");
+require_once("root/cdb.php");
 
-$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
-if ($id < 1) return ;
+$id = $_GET['id'];
 
-$sql = "select * from grab_content where id = $id";
+$location = "window.location = 'index.php'";
+if(empty($_GET['id']) || ($id < 1)) {
+    echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
+    echo"<script>$location</script>";
+}
+
+$sql = "select * from grab_content where id = '$id'";
 
 $sql_result = mysqli_query($conn, $sql);
+$number_rows = mysqli_num_rows($sql_result);
+if($number_rows != 1) {
+    echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
+    echo"<script>$location</script>";
+}
+
 $result = mysqli_fetch_array($sql_result);
 
 $sql = "select * from grab_categories";
 $cates = mysqli_query($conn, $sql);
+
+
 
 mysqli_close($conn);
 ?>
@@ -20,7 +33,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chỉnh sửa</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -32,31 +45,39 @@ mysqli_close($conn);
 </head>
 <body>
 
-    <?php require_once ('header_admin.php'); ?>
-    <?php require_once ('menu.php'); ?>
+    <?php require_once ('root/header_admin.php'); ?>
+    <?php require_once ('root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_edit.php">
+        <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_update.php">
             <h1 class= "form__title">Sửa thông tin</h1>
-            <input type="hidden" name="id" value="<?php echo $item["id"]?>"/>
+            <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">
                 <div class="form-group">
                     <label>Chuyên mục</label>
                     <select name="cid">
-                        <?php foreach ($cates as $item) {?>
-                            <option value="<?php echo $item["id"]?>" <?php if ($item["id"] == $result["cid"]){?> selected <?php } ?>>
-                                <?php echo $item["title"]?>
+                        <?php foreach ($cates as $cate) {?>
+                            <option value="<?php echo $cate["id"]?>" 
+                                <?php if ($cate["id"] == $result["cid"]){?> 
+                                    selected 
+                                <?php } ?>>
+                                <?php echo $cate["title"]?>
                             </option>
                         <?php } ?>
                     </select>
                 </div>
             </div>
-            
+
             <div class="form-group">
-                <label>Đường dẫn ảnh sản phẩm</label>
-                <input name="img_link" value="<?php echo $result["img_link"]?>"/>
+                <label>Đổi ảnh mới</label>
+                <input name="img_link_new" type="file"/>
+                <br>
+                <br>
+                <label>Hoặc vẫn giữ ảnh cũ</label>
+                <img src="photos/<?php echo $result["img_link"]?>" width="200px"/>
+                <input type="hidden" name="img_link_old" value="<?php echo $result["img_link"]?>"/>
             </div>
-    
+
             <div class="form-group">
                 <label>Tiêu đề</label>
                 <input name="title" value="<?php echo $result["title"]?>"/>

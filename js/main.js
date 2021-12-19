@@ -7,6 +7,7 @@ let formProcesses = $$('.form__process')
 let formTitle = $('.form__title')
 let btnDel = $('#btn_del')
 let menuRightItems = $$('.menu__right--item')
+let notiBtn = $('.noti')
 
 let formTitleContent = formTitle.innerText
 menuRightItems.forEach((item) => {
@@ -31,3 +32,7 @@ if(btnDel) {
     })
 }
 
+notiBtn.onclick = function() {
+    this.classList.toggle('active')
+    this.classList.toggle('muted')
+}
