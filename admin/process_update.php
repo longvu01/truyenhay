@@ -14,7 +14,7 @@ $id = $_POST['id'];
 $category_id = $_POST['category_id'];
 $img_link_new = $_FILES['img_link_new'];
 if($img_link_new['size'] > 0) {
-    $folder = 'photos/' ;
+    $folder = '../photos/' ;
     $file_extension = explode('.', $img_link_new['name'])[1];
     $file_name = time() . '.' . $file_extension;
     $file_path = $folder . $file_name;

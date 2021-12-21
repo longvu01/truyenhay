@@ -56,18 +56,13 @@
             </div>
 
             <div class="form-group">
-                <label>Trạng thái</label>
-                <input name="status" />
-            </div>
-
-            <div class="form-group">
                 <label>Ảnh</label>
                 <input name="img_link" type = "file"/>
             </div>
 
             <div class="form-group">
-                <label>Xem trước</label>
-                <input name="pre_view" />
+                <label>Xem trước/ mô tả</label>
+                <textarea name="pre_view" id="" cols="30" rows="10"></textarea>
             </div>
 
             <button class="btn" type="submit" name="submit">Thêm truyện</button>

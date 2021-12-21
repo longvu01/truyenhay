@@ -84,7 +84,7 @@
                         <td><?php echo $item['c_name'];?></td>
                         <td><?php echo $item['title'];?></td>
                         <td>
-                            <img src="photos/<?php echo $item['img_link']?>">
+                            <img src="../photos/<?php echo $item['img_link']?>">
                         </td>
                         <td><?php echo $item['author'];?></td>
                         <td><?php echo '$'.$item['status']?></td>

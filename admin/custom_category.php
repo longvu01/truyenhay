@@ -48,7 +48,7 @@
             <button class="btn" type="submit" name="submit">Thêm thể loại</button>
         </form>
         <!-- Search -->
-        <form class="form form__process">
+        <div class="form form__process">
             <h1 class= "form__title">Thể loại hiện có</h1>
             <table >
                 <tr>
@@ -75,7 +75,7 @@
                     </tr>
                 <?php } ?>
             </table>
-        </form>
+        </div>
         
     </div>
 

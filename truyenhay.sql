@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 21, 2021 at 03:34 AM
+-- Generation Time: Dec 21, 2021 at 01:48 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.21
 
@@ -34,17 +34,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `category_name`) VALUES
-(2, 'Kiếm hiệp'),
-(3, 'Xuyên không'),
-(11, 'Ngôn tình'),
-(14, 'Dị giới');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -88,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `novel` (
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Chưa hoàn thành',
   `author` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `img_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_chapters` int(11) NOT NULL DEFAULT '0',
@@ -96,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `novel` (
   `view_count` int(11) NOT NULL,
   `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 

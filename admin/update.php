@@ -1,7 +1,13 @@
 <?php
 require_once("../cdb.php");
 
-$id = $_GET['id'];
+// $id = $_GET['id'];
+$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
+if ($id < 1) {
+    echo '<script>alert("Chưa có truyện nào!")</script>';
+    echo"<script>window.location = 'custom_category.php'</script>";
+    return ;
+}
 
 $location = "window.location = 'index.php'";
 if(empty($_GET['id']) || ($id < 1)) {
@@ -79,7 +85,7 @@ mysqli_close($conn);
                 <br>
                 <br>
                 <label>Hoặc vẫn giữ ảnh cũ</label>
-                <img src="photos/<?php echo $result["img_link"]?>" width="200px"/>
+                <img src="../photos/<?php echo $result["img_link"]?>" width="200px"/>
                 <input type="hidden" name="img_link_old" value="<?php echo $result["img_link"]?>"/>
             </div>
 
@@ -95,7 +101,7 @@ mysqli_close($conn);
 
             <div class="form-group">
                 <label>Xem trước</label>
-                <input name="pre_view" value="<?php echo $result["pre_view"]?>"/>
+                <textarea name="pre_view" id="" cols="30" rows="10"><?php echo $result["pre_view"]?></textarea>
             </div>
 
             <button type="submit" name="submit">Sửa thông tin</button>

@@ -1,7 +1,11 @@
 <?php
     require_once("../cdb.php");
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
-    if ($id < 1) return ;
+    if ($id < 1) {
+        echo '<script>alert("Chưa có truyện nào!")</script>';
+        echo"<script>window.location = 'custom_category.php'</script>";
+        return ;
+    }
 
     $sql = "select * from novel where id = $id";
 
@@ -69,7 +73,7 @@
 
             <div class="form-group">
                 <label>Ảnh</label>
-                <image src="photos/<?php echo $result["img_link"]?>" width="300" disabled/>
+                <image src="../photos/<?php echo $result["img_link"]?>" width="300" disabled/>
             </div>
     
             <div class="form-group">
@@ -79,7 +83,7 @@
 
             <div class="form-group">
                 <label>Xem trước</label>
-                <input value="<?php echo $result["pre_view"]?>" disabled/>
+                <textarea name="pre_view" id="" cols="30" rows="10" disabled><?php echo $result["pre_view"]?></textarea>
             </div>
 
             <div class="form-group">

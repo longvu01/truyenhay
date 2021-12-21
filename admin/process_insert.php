@@ -12,18 +12,17 @@ if(empty($_POST['title'])) {
 $user_id = $_POST['user_id'];
 $category_id = $_POST['category_id'];
 $title = $_POST['title'];
-$status = $_POST['status'];
 $author = $_POST['author'];
 $img_link = $_FILES['img_link'];
 $pre_view = $_POST['pre_view'];
 
-$folder = 'photos/' ;
+$folder = '../photos/' ;
 $file_extension = explode('.', $img_link['name'])[1];
 $file_name = time() . '.' . $file_extension;
 $file_path = $folder . $file_name;
 move_uploaded_file($img_link["tmp_name"], $file_path);
 
-$sql = "insert into novel (user_id, category_id, title, status, author, img_link, pre_view) values ('$user_id', '$category_id', '$title', '$status', '$author', '$file_name', '$pre_view')";
+$sql = "insert into novel (user_id, category_id, title, author, img_link, pre_view) values ('$user_id', '$category_id', '$title', '$author', '$file_name', '$pre_view')";
 
 // die($sql);
 
