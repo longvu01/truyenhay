@@ -65,10 +65,18 @@
 }
 
 .menu__left a,
-.menu__right a {
+.menu__right a,
+.menu__right p {
     font-size: 1.6rem;
     padding: 8px;
-    margin: 4px 0;
+    margin-bottom: 4px;
+}
+
+.menu__right p {
+    color: rgb(76, 211, 49);
+    font-size: 2rem;
+    font-style: italic;
+    cursor: default;
 }
 
 .menu__right {
@@ -82,7 +90,6 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 12px 0 0 12px;
-    margin: 0 0 4px 0;
     padding: 12px;
     position: relative;
     z-index: 1;
@@ -231,7 +238,7 @@
     cursor: pointer;
 }
 
-.form__process h1 {
+.form__title {
     font-size: 3rem;
     text-align: center;
     margin-bottom: 20px;
@@ -275,7 +282,8 @@ table {
     gap: 16px;
 }
 
-.form__search input {
+.form__search input,
+.category__name-input {
     width: 100%;
 }
 

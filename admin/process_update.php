@@ -1,8 +1,8 @@
 <?php
-require_once("root/cdb.php");
+require_once("../cdb.php");
 // Get id and back to last record from table when data is empty
 if(empty($_POST['id']) ) {
-    $sql = 'SELECT * FROM grab_content ORDER BY id DESC LIMIT 1';
+    $sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
     $resultLast = mysqli_query($conn, $sql);
     $item = mysqli_fetch_array($resultLast);
     $id = $item['id'];
@@ -11,7 +11,7 @@ if(empty($_POST['id']) ) {
 }
 
 $id = $_POST['id'];
-$cid = $_POST['cid'];
+$category_id = $_POST['category_id'];
 $img_link_new = $_FILES['img_link_new'];
 if($img_link_new['size'] > 0) {
     $folder = 'photos/' ;
@@ -22,23 +22,18 @@ if($img_link_new['size'] > 0) {
 } else {
     $file_name = $_POST['img_link_old'];
 }
-$title = $_POST['title'];
-$original_price = isset($_POST["original_price"]) ? $_POST["original_price"] : "";
-$current_price = $_POST['current_price'];
-$size = $_POST['size'];
-$colors = $_POST['colors'];
-$gender = $_POST['gender'];
-$description = $_POST['description'];
 
-$sql = "update grab_content set
-cid = '$cid',
+$category_id = $_POST['category_id'];
+$title = $_POST['title'];
+$status = $_POST['status'];
+$pre_view = $_POST['pre_view'];
+
+$sql = "update novel set
+category_id = '$category_id',
+title = '$title',
+status = '$status',
 img_link = '$file_name',
-original_price = '$original_price',
-current_price = '$current_price',
-size = '$size',
-colors = '$colors',
-gender = '$gender',
-description = '$description'
+pre_view = '$pre_view'
 where
 id = $id";
 
@@ -46,7 +41,7 @@ id = $id";
 
 mysqli_query($conn, $sql);
 $location = "window.location = 'update.php?id=$id'";
-echo '<script>alert("✅Bạn đã sửa thông tin sản phẩm thành công!")</script>';
+echo '<script>alert("✅Bạn đã sửa thông tin truyện thành công!")</script>';
 echo"<script>$location</script>";
 mysqli_close($conn);
 ?>

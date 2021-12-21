@@ -1,5 +1,5 @@
 <?php
-require_once("root/cdb.php");
+require_once("../cdb.php");
 
 $id = $_GET['id'];
 
@@ -9,7 +9,7 @@ if(empty($_GET['id']) || ($id < 1)) {
     echo"<script>$location</script>";
 }
 
-$sql = "select * from grab_content where id = '$id'";
+$sql = "select * from novel where id = '$id'";
 
 $sql_result = mysqli_query($conn, $sql);
 $number_rows = mysqli_num_rows($sql_result);
@@ -20,7 +20,7 @@ if($number_rows != 1) {
 
 $result = mysqli_fetch_array($sql_result);
 
-$sql = "select * from grab_categories";
+$sql = "select * from categories";
 $cates = mysqli_query($conn, $sql);
 
 
@@ -33,7 +33,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa</title>
+    <title>Chỉnh sửa truyện</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -50,22 +50,27 @@ mysqli_close($conn);
     <!-- Form -->
     <div class="wrapper">
         <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_update.php">
-            <h1 class= "form__title">Sửa thông tin</h1>
+            <h1 class= "form__title">Sửa truyện</h1>
             <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">
                 <div class="form-group">
                     <label>Chuyên mục</label>
-                    <select name="cid">
+                    <select name="category_id">
                         <?php foreach ($cates as $cate) {?>
                             <option value="<?php echo $cate["id"]?>" 
-                                <?php if ($cate["id"] == $result["cid"]){?> 
+                                <?php if ($cate["id"] == $result["category_id"]){?> 
                                     selected 
                                 <?php } ?>>
-                                <?php echo $cate["title"]?>
+                                <?php echo $cate["category_name"]?>
                             </option>
                         <?php } ?>
                     </select>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tiêu đề</label>
+                <input name="title" value="<?php echo $result["title"]?>"/>
             </div>
 
             <div class="form-group">
@@ -79,43 +84,18 @@ mysqli_close($conn);
             </div>
 
             <div class="form-group">
-                <label>Tiêu đề</label>
-                <input name="title" value="<?php echo $result["title"]?>"/>
-            </div>
-    
-            <div class="form-group">
-                <label>Giá ban đầu</label>
-                <input name="original_price" value="<?php echo $result["original_price"]?>"/>
+                <label>Trạng thái</label>
+                <input name="status" value="<?php echo $result["status"]?>"/>
             </div>
 
             <div class="form-group">
-                <label>Giá hiện tại</label>
-                <input name="current_price" value="<?php echo $result["current_price"]?>"/>
+                <label>Tác giả</label>
+                <input name="author" value="<?php echo $result["author"]?>"/>
             </div>
 
             <div class="form-group">
-                <label>Size</label>
-                <input name="size" value="<?php echo $result["size"]?>"/>
-            </div>
-
-            <div class="form-group">
-                <label>Màu sắc</label>
-                <input name="colors" value="<?php echo $result["colors"]?>"/>
-            </div>
-
-            <div class="form-group">
-                <label>Giới tính</label>
-                <select name="gender">
-                    <option hidden>Lựa chọn</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="both">Both</option>
-                </select>
-            </div>
-    
-            <div class="form-group">
-                <label>Mô tả</label>
-                <textarea name="description" rows="5"><?php echo $result["description"]?></textarea>
+                <label>Xem trước</label>
+                <input name="pre_view" value="<?php echo $result["pre_view"]?>"/>
             </div>
 
             <button type="submit" name="submit">Sửa thông tin</button>

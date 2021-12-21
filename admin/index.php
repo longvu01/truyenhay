@@ -1,9 +1,8 @@
 <?php
-    require_once("root/cdb.php");
+    require_once("../cdb.php");
 
-    $sql = "select * from grab_categories";
+    $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>Thêm truyện</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -30,65 +29,48 @@
     <div class="wrapper">
     <!-- Form -->
         <form class="form form__process active" method="POST" enctype="multipart/form-data" action="process_insert.php">
-            <h1 class= "form__title">Thêm sản phẩm</h1>
+            <h1 class= "form__title">Thêm truyện</h1>
             <div class = "form__process--top">
                 <div class="form-group">
-                    <label>Chuyên mục</label>
-                    <select name="cid" required>
-                        <option hidden>Chọn chuyên mục</option>
-                        <?php foreach ($cates as $item) {?>
-                            <option value="<?php echo $item["id"]?>"><?php echo $item["title"]?></option>
+                    <label>Thể loại</label>
+                    <select name="category_id">
+                        <?php foreach ($cates as $cate) {?>
+                            <option value="<?php echo $cate["id"]?>">
+                                <?php echo $cate["category_name"]?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>
             </div>
-            
+            <!-- User id qua session -->
+            <input name="user_id" type = "hidden" value = "1"/>
+            <!--  -->
             <div class="form-group">
-                <label>Ảnh minh họa</label>
-                <input type="file" name="img_link" value=""/>
+                <label>Tác giả</label>
+                <input name="author" />
             </div>
-    
+
             <div class="form-group">
                 <label>Tiêu đề</label>
-                <input name="title" value=""/>
-            </div>
-    
-            <div class="form-group">
-                <label>Giá ban đầu</label>
-                <input name="original_price" value=""/>
+                <input name="title"/>
             </div>
 
             <div class="form-group">
-                <label>Giá hiện tại</label>
-                <input name="current_price" value=""/>
+                <label>Trạng thái</label>
+                <input name="status" />
             </div>
 
             <div class="form-group">
-                <label>Size</label>
-                <input name="size" value=""/>
+                <label>Ảnh</label>
+                <input name="img_link" type = "file"/>
             </div>
 
             <div class="form-group">
-                <label>Màu sắc</label>
-                <input name="colors" value=""/>
+                <label>Xem trước</label>
+                <input name="pre_view" />
             </div>
 
-            <div class="form-group">
-                <label>Giới tính</label>
-                <select name="gender" required>
-                    <option hidden>Lựa chọn</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="both">Both</option>
-                </select>
-            </div>
-    
-            <div class="form-group">
-                <label>Mô tả</label>
-                <textarea name="description" rows="5"></textarea>
-            </div>
-
-            <button class="btn" type="submit" name="submit">Thêm sản phẩm</button>
+            <button class="btn" type="submit" name="submit">Thêm truyện</button>
         </form>
     </div>
 

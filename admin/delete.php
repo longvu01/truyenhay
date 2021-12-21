@@ -1,14 +1,14 @@
 <?php
-    require_once("root/cdb.php");
+    require_once("../cdb.php");
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
     if ($id < 1) return ;
 
-    $sql = "select * from grab_content where id = $id";
+    $sql = "select * from novel where id = $id";
 
     $sql_result = mysqli_query($conn, $sql);
     $result = mysqli_fetch_array($sql_result);
 
-    $sql = "select * from grab_categories";
+    $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
 
     mysqli_close($conn);
@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xóa</title>
+    <title>Xóa truyện</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -37,15 +37,15 @@
     <!-- Form -->
     <div class="wrapper">
         <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_delete.php">
-            <h1 class= "form__title">Xóa sản phẩm</h1>
+            <h1 class= "form__title">Xóa truyện</h1>
             <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">
                 <div class="form-group">
-                    <label>Chuyên mục</label>
-                    <select name="cid" disabled>
-                        <?php foreach ($cates as $item) {?>
-                            <option value="<?php echo $item["id"]?>" <?php if ($item["id"] == $result["cid"]){?> selected <?php } ?>>
-                                <?php echo $item["title"]?>
+                    <label>Thể loại</label>
+                    <select disabled>
+                        <?php foreach ($cates as $cate) {?>
+                            <option value="<?php echo $cate["id"]?>" <?php if ($cate["id"] == $result["category_id"]){?> selected <?php } ?>>
+                                <?php echo $cate["category_name"]?>
                             </option>
                         <?php } ?>
                     </select>
@@ -53,51 +53,41 @@
             </div>
             
             <div class="form-group">
-                <label>Đường dẫn ảnh sản phẩm</label>
-                <input name="img_link" value="<?php echo $result["img_link"]?>" disabled/>
+                <label>Tác giả</label>
+                <input value="<?php echo $result["author"]?>" disabled/>
             </div>
-    
+
             <div class="form-group">
                 <label>Tiêu đề</label>
-                <input name="title" value="<?php echo $result["title"]?>" disabled/>
+                <input value="<?php echo $result["title"]?>" disabled/>
+            </div>
+
+            <div class="form-group">
+                <label>Trạng thái</label>
+                <input value="<?php echo $result["status"]?>" disabled/>
+            </div>
+
+            <div class="form-group">
+                <label>Ảnh</label>
+                <image src="photos/<?php echo $result["img_link"]?>" width="300" disabled/>
             </div>
     
             <div class="form-group">
-                <label>Giá ban đầu</label>
-                <input name="original_price" value="<?php echo $result["original_price"]?>" disabled/>
+                <label>Tổng số chương</label>
+                <input value="<?php echo $result["total_chapters"]?>" disabled/>
             </div>
 
             <div class="form-group">
-                <label>Giá hiện tại</label>
-                <input name="current_price" value="<?php echo $result["current_price"]?>" disabled/>
+                <label>Xem trước</label>
+                <input value="<?php echo $result["pre_view"]?>" disabled/>
             </div>
 
             <div class="form-group">
-                <label>Size</label>
-                <input name="size" value="<?php echo $result["size"]?>" disabled/>
+                <label>Lượt xem</label>
+                <input value="<?php echo $result["view_count"]?>" disabled/>
             </div>
 
-            <div class="form-group">
-                <label>Màu sắc</label>
-                <input name="colors" value="<?php echo $result["colors"]?>" disabled/>
-            </div>
-
-            <div class="form-group">
-                <label>Giới tính</label>
-                <select name="gender" disabled>
-                    <option hidden>Lựa chọn</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="both">Both</option>
-                </select>
-            </div>
-    
-            <div class="form-group">
-                <label>Mô tả</label>
-                <textarea name="description" rows="5" disabled><?php echo $result["description"]?></textarea>
-            </div>
-
-            <button id= "btn_del"type="submit" name="submit">Xóa sản phẩm</button>
+            <button id= "btn_del" type="submit" name="submit">Xóa truyện</button>
         </form>
     </div>
 

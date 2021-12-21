@@ -1,5 +1,5 @@
 <?php
-    require("root/cdb.php");
+    require("../cdb.php");
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
@@ -11,25 +11,25 @@
         $search = $_GET['search'];
     }
 
-	$sql_total_records = "select count(*) from grab_content where title like '%$search%'";
+	$sql_total_records = "select count(*) from novel where title like '%$search%'";
     $arr_total = mysqli_query($conn, $sql_total_records);
     $total_result = mysqli_fetch_array($arr_total);
     $total_records = $total_result['count(*)'];
 
     // Number records / page
-    $nop = 2;
+    $nop = 5;
 
     $total_page = ceil($total_records / $nop);
     $offset = $nop * ($p - 1);
 
     // sql select and search
     $sql = "select 
-    grab_content.*,
-    grab_categories.title as c_name
-    from grab_content 
-    join grab_categories on grab_content.cid = grab_categories.id
-    where grab_content.title like '%$search%' 
-    order by grab_content.id
+    novel.*,
+    categories.category_name as c_name
+    from novel 
+    join categories on novel.category_id = categories.id
+    where novel.title like '%$search%' 
+    order by novel.id
     limit $nop offset $offset";
     // die($sql);
     $result = mysqli_query($conn, $sql);
@@ -41,7 +41,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tìm kiếm</title>
+    <title>Tìm kiếm truyện</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -59,7 +59,7 @@
     <div class="wrapper">
         <!-- SEARCH -->
         <form class="form form__process" method="GET">
-            <h1 class= "form__title">Tìm kiếm sản phẩm</h1>
+            <h1 class= "form__title">Tìm kiếm truyện</h1>
             <div class="form__search">
                 <input name="search" type="search" value="<?php echo $search ?>" />
                 <button>Tìm kiếm</button>
@@ -67,13 +67,14 @@
             <table >
                 <tr>
                     <th>Id</th><!--  -->
-                    <th>Tên chuyên mục</th>
-                    <th>Ảnh sản phẩm</th>
+                    <th>Tên thể loại</th>
                     <th>Tiêu đề</th>
-                    <th>Giá bán</th>
-                    <th>Size</th>
-                    <th>Màu sắc</th>
-                    <th>Mô tả</th>
+                    <th>Ảnh</th>
+                    <th>Tác giả</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng số chương</th>
+                    <th>Xem trước</th>
+                    <th>Lượt xem</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </tr>
@@ -81,14 +82,15 @@
                     <tr>
                         <td><?php echo $item['id'];?></td>
                         <td><?php echo $item['c_name'];?></td>
+                        <td><?php echo $item['title'];?></td>
                         <td>
                             <img src="photos/<?php echo $item['img_link']?>">
                         </td>
-                        <td><?php echo $item['title'];?></td>
-                        <td><?php echo '$'.$item['current_price']?></td>
-                        <td><?php echo $item['size'];?></td>
-                        <td><?php echo $item['colors'];?></td>
-                        <td><?php echo $item['description'];?></td>
+                        <td><?php echo $item['author'];?></td>
+                        <td><?php echo '$'.$item['status']?></td>
+                        <td><?php echo $item['total_chapters'];?></td>
+                        <td><?php echo $item['pre_view'];?></td>
+                        <td><?php echo $item['view_count'];?></td>
                         <td>
                             <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
                         </td>
