@@ -11,28 +11,33 @@
         $search = $_GET['search'];
     }
 
-	$sql_total_records = "select count(*) from novel where title like '%$search%'";
+	$sql_total_records = "select sum(total_chapters) from novel where title like '%$search%'";
     $arr_total = mysqli_query($conn, $sql_total_records);
     $total_result = mysqli_fetch_array($arr_total);
-    $total_records = $total_result['count(*)'];
-
+    // print_r($total_result);exit();
+    $total_records = $total_result['sum(total_chapters)'];
     // Number records / page
     $nop = 5;
 
     $total_page = ceil($total_records / $nop);
     $offset = $nop * ($p - 1);
 
+    $user_id = 1;
+
     // sql select and search
     $sql = "select 
-    novel.*,
-    categories.category_name as c_name
-    from novel 
-    join categories on novel.category_id = categories.id
-    where novel.title like '%$search%' 
-    order by novel.id
+    chapter.*,
+    novel.title as n_name
+    from chapter 
+    join novel on chapter.novel_id = novel.id
+    where novel.title like '%$search%'
+    and user_id = '$user_id'
+    order by novel.id, chap
     limit $nop offset $offset";
     // die($sql);
     $result = mysqli_query($conn, $sql);
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +46,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tìm kiếm truyện</title>
+    <title>Tìm chương</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -59,44 +64,26 @@
     <div class="wrapper">
         <!-- SEARCH -->
         <form class="form form__process" method="GET">
-            <h1 class= "form__title">Tìm kiếm truyện</h1>
+            <h1 class= "form__title">Tìm chương</h1>
             <div class="form__search">
-                <input name="search" type="search" value="<?php echo $search ?>" />
-                <button>Tìm kiếm</button>
+                <input name="search" type="search" value="<?php echo $search ?>" placeholder="Nhập tên truyện có chương cần sửa"/>
+                <button>Tìm tên truyện</button>
             </div>
             <table >
                 <tr>
-                    <th>Id</th><!--  -->
-                    <th>Tên thể loại</th>
-                    <th>Tiêu đề</th>
-                    <th>Ảnh</th>
-                    <th>Tác giả</th>
-                    <th>Trạng thái</th>
-                    <th>Tổng số chương</th>
-                    <th>Xem trước</th>
-                    <th>Lượt xem</th>
+                    <th>Tên truyện</th>
+                    <th>Chương</th>
+                    <th>Nội dung</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </tr>
                 <?php foreach ($result as $item) {?>
                     <tr>
-                        <td><?php echo $item['id'];?></td>
-                        <td><?php echo $item['c_name'];?></td>
-                        <td><?php echo $item['title'];?></td>
-                        <td>
-                            <img src="../photos/<?php echo $item['img_link']?>">
-                        </td>
-                        <td><?php echo $item['author'];?></td>
-                        <td><?php echo $item['status']?></td>
-                        <td><?php echo $item['total_chapters'];?></td>
-                        <td><?php echo $item['pre_view'];?></td>
-                        <td><?php echo $item['view_count'];?></td>
-                        <td>
-                            <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
-                        </td>
-                        <td>
-                            <a href="delete.php?id=<?php echo $item['id'];?>"><i class="fas fa-trash-alt"></i></a>
-                        </td>
+                        <td><?php echo $item['n_name'];?></td>
+                        <td><?php echo $item['chap'];?></td>
+                        <td><p><?php echo nl2br($item['chapter_content'])?></p></td>
+                        <td><a href="update_chapter.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-edit"></i></a></td>
+                        <td><a href="delete_chapter.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-trash-alt"></i></a></td>
                     </tr>
                 <?php } ?>
             </table>

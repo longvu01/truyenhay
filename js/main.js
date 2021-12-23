@@ -1,3 +1,4 @@
+'use strict';
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -25,7 +26,7 @@ menuBar.addEventListener("click", function() {
 
 if(btnDel) {
     btnDel.addEventListener('click', function(e) {
-        let isDel = confirm('Bạn muốn xóa sản phẩm này?')
+        let isDel = confirm('Bạn muốn xóa truyện này?')
         if(!isDel) {
             e.preventDefault()
         }

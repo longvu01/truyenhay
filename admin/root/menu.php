@@ -1,7 +1,7 @@
 <?php
-include("cdb.php");
+include("../cdb.php");
 // Get id and back to last record from table
-$sql = 'SELECT * FROM grab_content ORDER BY id DESC LIMIT 1';
+$sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
 $resultLast = mysqli_query($conn, $sql);
 $item = mysqli_fetch_array($resultLast);
 mysqli_close($conn);
@@ -32,13 +32,19 @@ mysqli_close($conn);
                 </div>
             </div>
             <div class="menu__right">
-                    <a href= "index.php" class="menu__right--item">Thêm<i class="fas fa-plus"></i></li>
-                    <a href= "search.php" class="menu__right--item">Tìm kiếm<i class="fas fa-search"></i></a>
-                    <a href= "update.php?id=<?php echo $item['id'];?>" class="menu__right--item">Sửa<i class="fas fa-edit"></i></a>
-                    <a href= "delete.php?id=<?php echo $item['id'];?>" class="menu__right--item">Xóa<i class="fas fa-trash"></i></a>
+                <p>Thể loại</p>
+                <a href= "custom_category.php" class="menu__right--item">Tùy chỉnh thể loại<i class="fas fa-plus"></i></a>
+                <p>Truyện</p>
+                <a href= "index.php" class="menu__right--item">Thêm truyện<i class="fas fa-plus"></i></a>
+                <a href= "search.php" class="menu__right--item">Tìm kiếm truyện<i class="fas fa-search"></i></a>
+                <a href= "update.php?id=<?php echo $item['id'];?>" class="menu__right--item">Sửa truyện<i class="fas fa-edit"></i></a>
+                <a href= "delete.php?id=<?php echo $item['id'];?>" class="menu__right--item">Xóa truyện<i class="fas fa-trash"></i></a>
+                <p>Chương truyện</p>
+                <a href= "insert_chapter.php" class="menu__right--item">Thêm chương<i class="fas fa-plus"></i></a>
+                <a href= "search_chapter.php" class="menu__right--item">Tìm chương<i class="fas fa-plus"></i></a>
             </div>
         </div>
-
+        
         <div class="menu__bottom">
             <div class="admin__info">
                 <a href="#" class="admin_name">Administrator</a>

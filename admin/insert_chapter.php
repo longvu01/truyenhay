@@ -1,8 +1,10 @@
 <?php
     require_once("../cdb.php");
 
-    $sql = "select * from categories";
-    $cates = mysqli_query($conn, $sql);
+    $user_id = 1;
+
+    $sql = "select * from novel where user_id = '$user_id'";
+    $novels = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm truyện</title>
+    <title>Thêm chương</title>
     <link rel="stylesheet" href="../css/reset1.css">
     <link rel="stylesheet" href="../css/base1.css">
     <link rel="stylesheet" href="../css/style1.css">
@@ -28,45 +30,29 @@
     
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" method="POST" enctype="multipart/form-data" action="process_insert.php">
-            <h1 class= "form__title">Thêm truyện</h1>
+        <form class="form form__process active" method="POST" enctype="multipart/form-data" action="process_insert_chapter.php">
+            <h1 class= "form__title">Thêm chương</h1>
+
             <div class = "form__process--top">
                 <div class="form-group">
-                    <label>Thể loại</label>
-                    <select name="category_id">
-                        <option value="" hidden>Chọn thể loại</option>
-                        <?php foreach ($cates as $cate) {?>
-                            <option value="<?php echo $cate["id"]?>">
-                                <?php echo $cate["category_name"]?>
-                            </option>
-                        <?php } ?>
+                    <label>Chọn truyện của bạn</label>
+                    <select name="novel_id">
+                        <option value="" hidden>Chọn truyện</option>
+                            <?php foreach ($novels as $novel) {?>
+                                <option value="<?php echo $novel["id"]?>">
+                                    <?php echo $novel["title"]?>
+                                </option>
+                            <?php } ?>
                     </select>
                 </div>
             </div>
-            <!-- User id qua session -->
-            <input name="user_id" type = "hidden" value = "1"/>
-            <!--  -->
+            
             <div class="form-group">
-                <label>Tác giả</label>
-                <input name="author" />
+                <label>Nội dung chương</label>
+                <textarea name="chapter_content" id="" cols="30" rows="50"></textarea>
             </div>
 
-            <div class="form-group">
-                <label>Tiêu đề</label>
-                <input name="title"/>
-            </div>
-
-            <div class="form-group">
-                <label>Ảnh</label>
-                <input name="img_link" type = "file"/>
-            </div>
-
-            <div class="form-group">
-                <label>Xem trước/ mô tả</label>
-                <textarea name="pre_view" id="" cols="30" rows="10"></textarea>
-            </div>
-
-            <button class="btn" type="submit" name="submit">Thêm truyện</button>
+            <button class="btn" type="submit" name="submit">Thêm chương mới</button>
         </form>
     </div>
 
