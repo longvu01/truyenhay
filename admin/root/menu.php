@@ -39,10 +39,12 @@ mysqli_close($conn);
                 <a href= "search.php" class="menu__right--item">Tìm kiếm truyện<i class="fas fa-search"></i></a>
                 <a href= "update.php?id=<?php echo $item['id'];?>" class="menu__right--item">Sửa truyện<i class="fas fa-edit"></i></a>
                 <a href= "delete.php?id=<?php echo $item['id'];?>" class="menu__right--item">Xóa truyện<i class="fas fa-trash"></i></a>
-                <p>Thêm chương</p>
+                <p>Chương truyện</p>
+                <a href= "insert_chapter.php" class="menu__right--item">Thêm chương<i class="fas fa-plus"></i></a>
+                <a href= "search_chapter.php" class="menu__right--item">Tìm chương<i class="fas fa-plus"></i></a>
             </div>
         </div>
-
+        
         <div class="menu__bottom">
             <div class="admin__info">
                 <a href="#" class="admin_name">Administrator</a>

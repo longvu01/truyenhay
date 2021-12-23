@@ -74,9 +74,10 @@
 
 .menu__right p {
     color: rgb(76, 211, 49);
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-style: italic;
     cursor: default;
+    text-transform: uppercase;
 }
 
 .menu__right {
@@ -244,6 +245,10 @@
     margin-bottom: 20px;
 }
 
+.form__title--large {
+    font-size: 4rem;
+}
+
 table {
     width: 100%;
 }
@@ -263,7 +268,17 @@ table {
     text-align: center;
 }
 .form__process td img {
-    height: 100px;
+    max-height: 300px;
+    background-size: cover;
+}
+.form__process td p {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    text-align: left;
 }
 
 .form__process th {
