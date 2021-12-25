@@ -10,8 +10,7 @@ if(empty($_POST['id']) ) {
     echo"<script>window.location = 'update.php?id='$id'</script>";
 }
 
-$id = $_POST['id'];
-$category_id = $_POST['category_id'];
+// Xử lý upload ảnh
 $img_link_new = $_FILES['img_link_new'];
 if($img_link_new['size'] > 0) {
     $folder = '../photos/' ;
@@ -23,10 +22,24 @@ if($img_link_new['size'] > 0) {
     $file_name = $_POST['img_link_old'];
 }
 
-$category_id = $_POST['category_id'];
-$title = $_POST['title'];
-$status = $_POST['status'];
-$pre_view = $_POST['pre_view'];
+$id = addslashes($_POST['id']);
+$category_id = addslashes($_POST['category_id']);
+$status = addslashes($_POST['status']);
+$pre_view = addslashes($_POST['pre_view']);
+
+// Địa chỉ điều hướng quay lại khi trùng tên truyện hoặc sửa thông tin thành công
+$location = "window.location = 'update.php?id=$id'";
+$title = addslashes($_POST['title']);
+$sql = "select count(*) from novel where title = '$title' and id != '$id'";
+$result = mysqli_query($conn, $sql);
+$number_rows = mysqli_fetch_array($result)['count(*)'];
+// Nếu đã tồn tại tên truyện thì thông báo và điều hướng quay lại
+if($number_rows == 1) {
+    echo '<script>alert("Tên truyện này có người đặt rùi!")</script>';
+    echo"<script>$location</script>";
+    exit;
+}
+//
 
 $sql = "update novel set
 category_id = '$category_id',
@@ -40,7 +53,6 @@ id = $id";
 // die($sql);
 
 mysqli_query($conn, $sql);
-$location = "window.location = 'update.php?id=$id'";
 echo '<script>alert("✅Bạn đã sửa thông tin truyện thành công!")</script>';
 echo"<script>$location</script>";
 mysqli_close($conn);

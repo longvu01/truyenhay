@@ -1,8 +1,8 @@
 <?php
 require_once("../cdb.php");
 
-$chap_id = $_POST['chap_id'];
-$novel_title = $_POST['novel_title'];
+$chap_id = addslashes($_POST['chap_id']);
+$novel_title = addslashes($_POST['novel_title']);
 
 // Cập nhật lại tổng số chap trong bảng novel tương ứng với chap_id
 $sql = "update novel 

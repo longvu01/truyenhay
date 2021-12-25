@@ -1,11 +1,22 @@
 <?php
     require_once("../cdb.php");
     if(isset($_POST['category_name'])) {
-        $category_name = $_POST['category_name'];
+        $location = "window.location = 'custom_category.php'";
+
+        $category_name = addslashes($_POST['category_name']);
+        $sql = "select count(*) from categories where category_name = '$category_name'";
+        $result = mysqli_query($conn, $sql);
+        $number_rows = mysqli_fetch_array($result)['count(*)'];
+        // Nếu đã tồn tại tên thể loại thì thông báo và điều hướng quay lại
+        if($number_rows == 1) {
+            echo '<script>alert("Thể loại bạn thêm đã tồn tại!")</script>';
+            echo"<script>$location</script>";
+            die();
+        }
+        
         $sql = "insert into categories (category_name) values ('$category_name')";
         // die($sql);
         mysqli_query($conn, $sql);
-        $location = "window.location = 'custom_category.php'";
         echo '<script>alert("Bạn đã thêm thể loại thành công!")</script>';
         echo"<script>$location</script>";
     }
