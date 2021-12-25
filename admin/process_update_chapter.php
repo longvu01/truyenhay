@@ -6,9 +6,9 @@ if(empty($_POST['chap_id']) ) {
     echo"<script>window.location = 'search_chapter.php'</script>";
 }
 // die();
-$chap_id = $_POST['chap_id'];
-$chapter_content = $_POST['chapter_content'];
-$novel_title = $_POST['novel_title'];
+$chap_id = addslashes($_POST['chap_id']);
+$chapter_content = addslashes($_POST['chapter_content']);
+$novel_title = addslashes($_POST['novel_title']);
 
 $sql = "update chapter set
 chapter_content = '$chapter_content'

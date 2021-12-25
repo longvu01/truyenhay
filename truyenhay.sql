@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 23, 2021 at 06:01 AM
+-- Generation Time: Dec 25, 2021 at 10:12 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.21
 
@@ -33,18 +33,19 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `category_name` (`category_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `category_name`) VALUES
-(1, 'Kiếm hiệp'),
-(2, 'Xuyên không'),
+(1, 'Kiếm hiệpp'),
 (3, 'Ngôn tình'),
-(4, 'Tiên hiệp');
+(4, 'Tiên hiệp'),
+(2, 'Xuyên không');
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,15 @@ CREATE TABLE IF NOT EXISTS `chapter` (
   `chap` int(11) NOT NULL,
   `chapter_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`chap_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chapter`
+--
+
+INSERT INTO `chapter` (`chap_id`, `novel_id`, `chap`, `chapter_content`) VALUES
+(1, 2, 1, 'chuong 1'),
+(2, 3, 1, '2');
 
 -- --------------------------------------------------------
 
@@ -97,17 +106,22 @@ CREATE TABLE IF NOT EXISTS `novel` (
   `pre_view` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `view_count` int(11) NOT NULL DEFAULT '0',
   `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `novel`
 --
 
 INSERT INTO `novel` (`id`, `user_id`, `category_id`, `title`, `status`, `author`, `img_link`, `total_chapters`, `pre_view`, `view_count`, `create_at`) VALUES
-(2, 1, 4, 'dldl', 'Chưa hoàn thành', 'dgtt', '1640141735.jpg', 0, 'Một đại lục không hề yên bình, một cuộc sống đầy hiểm nguy, phiêu lưu nhưng cũng không kém phần lãng mạn. tình yêu, thù hận, trách nhiệm… Tiếp bước những tiền bối đi trước, Hoắc Vũ Hạo và đời sau sử lai khắc thất quái, bằng niềm tin nhiệt huyết tuổi trẻ đ', 0, '2021-12-22 09:55:35'),
-(3, 1, 3, 'MÊ VỢ KHÔNG LỐI VỀ', 'Chưa hoàn thành', 'Chiêu Tài Tiến Bảo', '1640143150.jpg', 0, 'Một cuộc giao dịch, cô mang thai con của người lạ, mang bụng bầu gả cho người đàn ông đã đính ước từ nhỏ. Vốn cho rằng chỉ là một cuộc giao dịch, lại dây dưa thứ tình cảm không nên có trong cuộc hôn nhân này. Mười tháng hoài thai sắp sinh, một tờ đơn ly hôn trên đất, cô mới hoàn toàn tình ngộ. Sau này anh ta nói \"Bà xã về đi, người anh yêu luôn là em\"', 0, '2021-12-22 10:19:10'),
-(8, 1, 2, 'hi', 'Chưa hoàn thành', 'NNL', '1640228500.jpg', 0, 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccccccccccccccccccccccccccccccccccc', 0, '2021-12-23 10:01:40');
+(2, 1, 4, 'dldl', 'Chưa hoàn thành', 'dgtt', '1640141735.jpg', 1, 'Một đại lục không hề yên bình, một cuộc sống đầy hiểm nguy, phiêu lưu nhưng cũng không kém phần lãng mạn. tình yêu, thù hận, trách nhiệm… Tiếp bước những tiền bối đi trước, Hoắc Vũ Hạo và đời sau sử lai khắc thất quái, bằng niềm tin nhiệt huyết tuổi trẻ đ', 0, '2021-12-22 09:55:35'),
+(3, 1, 3, 'MÊ VỢ KHÔNG LỐI VỀ', 'Chưa hoàn thành', 'Chiêu Tài Tiến Bảo', '1640143150.jpg', 1, 'Một cuộc giao dịch, cô mang thai con của người lạ, mang bụng bầu gả cho người đàn ông đã đính ước từ nhỏ. Vốn cho rằng chỉ là một cuộc giao dịch, lại dây dưa thứ tình cảm không nên có trong cuộc hôn nhân này. Mười tháng hoài thai sắp sinh, một tờ đơn ly hôn trên đất, cô mới hoàn toàn tình ngộ. Sau này anh ta nói \"Bà xã về đi, người anh yêu luôn là em\"', 0, '2021-12-22 10:19:10'),
+(8, 1, 2, 'wjbuu', 'Chưa hoàn thành', 'NNL', '1640228500.jpg', 0, 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccccccccccccccccccccccccccccccccccccccc', 0, '2021-12-23 10:01:40'),
+(15, 1, 4, '123', 'Chưa hoàn thành', '123', '1640318684.jpg', 0, '123', 0, '2021-12-24 11:04:44'),
+(16, 1, 1, '1', 'Chưa hoàn thành', '1', '1640318759.jpg', 0, '11', 0, '2021-12-24 11:05:59'),
+(17, 1, 3, '2', 'Chưa hoàn thành', '2', '1640354979.jpg', 0, '2', 0, '2021-12-24 21:09:39'),
+(18, 1, 1, 'g', 'Chưa hoàn thành', '2', '1640355016.3)_ (9)', 0, 'gb', 0, '2021-12-24 21:10:16');
 
 -- --------------------------------------------------------
 
@@ -140,7 +154,10 @@ CREATE TABLE IF NOT EXISTS `staff` (
   `pass_wd` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`id`)
+  `token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `phone` (`phone`,`email`),
+  UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -156,15 +173,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `gender` bit(1) NOT NULL DEFAULT b'1',
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avt_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name` (`user_name`,`email`),
+  UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user_name`, `gender`, `email`, `avt_link`) VALUES
-(1, 'Nam Long', b'0', 'nnl@gmail.com', '');
+INSERT INTO `user` (`id`, `user_name`, `gender`, `email`, `avt_link`, `token`) VALUES
+(1, 'Nam Long', b'0', 'nnl@gmail.com', '', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

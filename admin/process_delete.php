@@ -1,7 +1,7 @@
 <?php
 require_once("../cdb.php");
 
-$id = $_POST['id'];
+$id = addslashes($_POST['id']);
 
 $sql = "delete from novel where id = '$id'";
 

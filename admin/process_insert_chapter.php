@@ -4,13 +4,13 @@ require_once("../cdb.php");
 // Back to home page when data is empty
 $location = "window.location = 'insert_chapter.php'";
 //
-// if(empty($_POST['novel_id'])) {
+// if(empty(addslashes(addslashes($_POST['novel_id'])))) {
 //     echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
 //     echo"<script>$location</script>";
 // }
 // die();
-$novel_id = $_POST['novel_id'];
-$chapter_content = $_POST['chapter_content'];
+$novel_id = addslashes($_POST['novel_id']);
+$chapter_content = addslashes($_POST['chapter_content']);
 
 $sql = "SELECT * FROM chapter where novel_id = $novel_id ORDER BY chap DESC LIMIT 1";
 // die($sql);
