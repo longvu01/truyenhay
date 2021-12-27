@@ -93,7 +93,7 @@
                         <td><?php echo $item['author'];?></td>
                         <td><?php echo $item['status']?></td>
                         <td><?php echo $item['total_chapters'];?></td>
-                        <td><?php echo nl2br($item['pre_view']);?></td>
+                        <td><p><?php echo nl2br($item['pre_view']);?></p></td>
                         <td><?php echo $item['view_count'];?></td>
                         <td>
                             <a href="insert_chapter.php"><i class="far fa-plus-square"></i></a>

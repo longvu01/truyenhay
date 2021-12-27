@@ -269,14 +269,15 @@ table {
 
 .form__process th,
 .form__process td {
-    padding: 4px;
+    padding: 12px;
     font-size: 1.4rem;
     line-height: 1.4;
     text-align: center;
+    vertical-align: middle;
 }
 
 .form__process td img {
-    max-height: 150px;
+    max-height: 350px;
     background-size: cover;
 }
 .form__process td p {
