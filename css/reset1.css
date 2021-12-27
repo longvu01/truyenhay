@@ -125,6 +125,10 @@ table {
     border-spacing: 0;
 }
 
+* {
+    scroll-behavior: smooth;
+}
+
 *,
 *:before,
 *:after {
