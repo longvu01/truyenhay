@@ -25,6 +25,7 @@ if($img_link_new['size'] > 0) {
 $id = addslashes($_POST['id']);
 $category_id = addslashes($_POST['category_id']);
 $status = addslashes($_POST['status']);
+$author = addslashes($_POST['author']);
 $pre_view = addslashes($_POST['pre_view']);
 
 // Địa chỉ điều hướng quay lại khi trùng tên truyện hoặc sửa thông tin thành công
@@ -45,6 +46,7 @@ $sql = "update novel set
 category_id = '$category_id',
 title = '$title',
 status = '$status',
+author = '$author',
 img_link = '$file_name',
 pre_view = '$pre_view'
 where

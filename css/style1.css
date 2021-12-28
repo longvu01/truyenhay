@@ -253,6 +253,13 @@ table {
     width: 100%;
 }
 
+.form__process td i {
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgb(248, 150, 166);
+    padding: 8px;
+}
+
 .form__process table,
 .form__process th,
 .form__process td {
@@ -262,13 +269,15 @@ table {
 
 .form__process th,
 .form__process td {
-    padding: 4px;
-    font-size: 1.3rem;
+    padding: 12px;
+    font-size: 1.4rem;
     line-height: 1.4;
     text-align: center;
+    vertical-align: middle;
 }
+
 .form__process td img {
-    max-height: 300px;
+    max-height: 350px;
     background-size: cover;
 }
 .form__process td p {
@@ -282,8 +291,8 @@ table {
 }
 
 .form__process th {
-    font-size: 2rem;
-    color: var(--red-color);
+    font-size: 2.2rem;
+    min-width: 70px;
 }
 
 .form__process--top {

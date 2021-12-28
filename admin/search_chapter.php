@@ -31,6 +31,7 @@
     from chapter 
     join novel on chapter.novel_id = novel.id
     where novel.title like '%$search%'
+    or chapter_content like '%$search%'
     and user_id = '$user_id'
     order by novel.id, chap
     limit $nop offset $offset";

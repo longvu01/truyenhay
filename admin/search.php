@@ -29,6 +29,9 @@
     from novel 
     join categories on novel.category_id = categories.id
     where novel.title like '%$search%' 
+    or category_name like '%$search%'
+    or author like '%$search%'
+    or pre_view like '%$search%' 
     order by novel.id
     limit $nop offset $offset";
     // die($sql);
@@ -75,6 +78,7 @@
                     <th>Tổng số chương</th>
                     <th>Xem trước</th>
                     <th>Lượt xem</th>
+                    <th>Thêm chương</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </tr>
@@ -89,8 +93,11 @@
                         <td><?php echo $item['author'];?></td>
                         <td><?php echo $item['status']?></td>
                         <td><?php echo $item['total_chapters'];?></td>
-                        <td><?php echo $item['pre_view'];?></td>
+                        <td><p><?php echo nl2br($item['pre_view']);?></p></td>
                         <td><?php echo $item['view_count'];?></td>
+                        <td>
+                            <a href="insert_chapter.php"><i class="far fa-plus-square"></i></a>
+                        </td>
                         <td>
                             <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
                         </td>
