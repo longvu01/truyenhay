@@ -1,5 +1,5 @@
 <?php
-    require("../cdb.php");
+    require("../../cdb.php");
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
@@ -48,9 +48,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tìm chương</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,8 +59,8 @@
 </head>
 <body>
     
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <!-- SEARCH -->
@@ -83,8 +83,8 @@
                         <td><?php echo $item['n_name'];?></td>
                         <td><?php echo $item['chap'];?></td>
                         <td><p><?php echo nl2br($item['chapter_content'])?></p></td>
-                        <td><a href="update_chapter.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-edit"></i></a></td>
-                        <td><a href="delete_chapter.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-trash-alt"></i></a></td>
+                        <td><a href="update.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-edit"></i></a></td>
+                        <td><a href="delete.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-trash-alt"></i></a></td>
                     </tr>
                 <?php } ?>
             </table>
@@ -102,9 +102,9 @@
 
     <footer class="footer">
         <p class="footer__text">K1 - J2 School</p>
-        <img src="../img/j2team.png" alt="">
+        <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>

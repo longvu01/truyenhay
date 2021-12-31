@@ -1,6 +1,6 @@
 <?php
-require_once("../cdb.php");
-$location = "window.location = 'custom_category.php'";
+require_once("../../cdb.php");
+$location = "window.location = 'index.php'";
 
 $id = $_GET['id'];
 

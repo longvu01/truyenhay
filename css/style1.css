@@ -363,3 +363,56 @@ table {
     left: 50%;
     transform: translate(-54%, -50%);
 }
+
+/* Admin page */
+.admin__page {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        to right top,
+        rgb(231, 163, 216),
+        rgb(56, 181, 197)
+    );
+    text-align: center;
+}
+
+.admin__page h1 {
+    padding: 20vh 0 10vh;
+    font-size: 6rem;
+    color: #fff;
+}
+
+.admin__page ul {
+    max-width: 70vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px;
+}
+
+.admin__page li {
+    background: linear-gradient(
+        to left top,
+        rgb(183, 0, 255),
+        rgb(255, 230, 0)
+    );
+    border-radius: 12px;
+    width: 20vw;
+}
+
+.admin__page a:hover {
+    background: linear-gradient(
+        to right top,
+        rgb(211, 43, 85),
+        rgb(197, 99, 120)
+    );
+    color: #000;
+}
+
+.admin__page a {
+    border-radius: inherit;
+    display: block;
+    font-size: 3rem;
+    color: #fff;
+    padding: 100px 30px;
+}

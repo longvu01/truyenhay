@@ -1,5 +1,5 @@
 <?php
-require_once("../cdb.php");
+require_once("../../cdb.php");
 
 $id = addslashes($_POST['id']);
 

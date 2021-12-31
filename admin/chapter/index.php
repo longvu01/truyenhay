@@ -1,5 +1,5 @@
 <?php
-    require_once("../cdb.php");
+    require_once("../../cdb.php");
 
     $user_id = 1;
 
@@ -14,9 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm chương</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,12 +25,12 @@
 </head>
 <body>
 
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require_once ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/menu.php'); ?>
     
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" method="POST" enctype="multipart/form-data" action="process_insert_chapter.php">
+        <form class="form form__process active" method="POST" enctype="multipart/form-data" action="process_insert.php">
             <h1 class= "form__title">Thêm chương</h1>
 
             <div class = "form__process--top">
@@ -58,9 +58,9 @@
 
     <footer class="footer">
         <p class="footer__text">K1 - J2 School</p>
-        <img src="../img/j2team.png" alt="">
+        <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>
