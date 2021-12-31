@@ -1,5 +1,5 @@
 <?php
-    require("../cdb.php");
+    require("../../cdb.php");
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
@@ -45,9 +45,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tìm kiếm truyện</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,8 +56,8 @@
 </head>
 <body>
     
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <!-- SEARCH -->
@@ -88,7 +88,7 @@
                         <td><?php echo $item['c_name'];?></td>
                         <td><?php echo $item['title'];?></td>
                         <td>
-                            <img src="../photos/<?php echo $item['img_link']?>">
+                            <img src="../../photos/<?php echo $item['img_link']?>">
                         </td>
                         <td><?php echo $item['author'];?></td>
                         <td><?php echo $item['status']?></td>
@@ -121,9 +121,9 @@
 
     <footer class="footer">
         <p class="footer__text">K1 - J2 School</p>
-        <img src="../img/j2team.png" alt="">
+        <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>

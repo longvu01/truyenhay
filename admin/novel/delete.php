@@ -1,9 +1,9 @@
 <?php
-    require_once("../cdb.php");
+    require_once("../../cdb.php");
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
     if ($id < 1) {
         echo '<script>alert("Chưa có truyện nào!")</script>';
-        echo"<script>window.location = 'custom_category.php'</script>";
+        echo"<script>window.location = '../category/index.php'</script>";
         return ;
     }
 
@@ -25,9 +25,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xóa truyện</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +36,8 @@
 </head>
 <body>
 
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require_once ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_delete.php">
@@ -73,7 +73,7 @@
 
             <div class="form-group">
                 <label>Ảnh</label>
-                <image src="../photos/<?php echo $result["img_link"]?>" width="300" disabled/>
+                <image src="../../photos/<?php echo $result["img_link"]?>" width="300" disabled/>
             </div>
     
             <div class="form-group">
@@ -97,9 +97,9 @@
 
     <footer class="footer">
         <p class="footer__text">K1 - J2 School</p>
-        <img src="../img/j2team.png" alt="">
+        <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>

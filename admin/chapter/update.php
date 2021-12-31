@@ -1,11 +1,11 @@
 <?php
-require_once("../cdb.php");
+require_once("../../cdb.php");
 
 // $id = $_GET['id'];
 $chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
 if ($chap_id < 1) {
     echo '<script>alert("Truyện chưa có chương nào!")</script>';
-    echo"<script>window.location = 'search_chapter.php'</script>";
+    echo"<script>window.location = 'search.php'</script>";
     return ;
 }
 
@@ -43,9 +43,9 @@ mysqli_close($conn);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa truyện</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,30 +54,30 @@ mysqli_close($conn);
 </head>
 <body>
 
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require_once ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_delete_chapter.php">
+        <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_update.php">
             <h1 class= "form__title form__title--large">Truyện: <?php echo $novel_title?></h1>
-            <h2 class= "form__title">Xóa chương <?php echo $result["chap"]?></h1>
+            <h2 class= "form__title">Sửa chương <?php echo $result["chap"]?></h1>
             <input type="hidden" name="chap_id" value="<?php echo $chap_id?>"/>
             <input type="hidden" name="novel_title" value="<?php echo $novel_title?>"/>
 
             <div class="form-group">
                 <label>Nội dung</label>
-                <textarea id="" cols="30" rows="50" disabled><?php echo $result["chapter_content"]?></textarea>
+                <textarea name="chapter_content" id="" cols="30" rows="50"><?php echo $result["chapter_content"]?></textarea>
             </div>
 
-            <button type="submit" name="submit">Xóa chương</button>
+            <button type="submit" name="submit">Sửa nội dung chương</button>
         </form>
     </div>
 
     <footer class="footer">
         <p class="footer__text">K1 - J2 School</p>
-        <img src="../img/j2team.png" alt="">
+        <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once("../cdb.php");
+require_once("../../cdb.php");
 
 $chap_id = addslashes($_POST['chap_id']);
 $novel_title = addslashes($_POST['novel_title']);
@@ -16,7 +16,7 @@ $sql = "delete from chapter where chap_id = '$chap_id'";
 // die($sql);
 mysqli_query($conn, $sql);
 
-$location = "window.location = 'search_chapter.php?search=$novel_title'";
+$location = "window.location = 'search.php?search=$novel_title'";
 echo '<script>alert("Bạn đã xoá chương thành công!")</script>';
 echo"<script>$location</script>";
 mysqli_close($conn);

@@ -1,9 +1,9 @@
 <?php
-require_once("../cdb.php");
+require_once("../../cdb.php");
 // Get id and back to last record from table when data is empty
 if(empty($_POST['chap_id']) ) {
     echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-    echo"<script>window.location = 'search_chapter.php'</script>";
+    echo"<script>window.location = 'search.php'</script>";
 }
 // die();
 $chap_id = addslashes($_POST['chap_id']);
@@ -18,7 +18,7 @@ chap_id = $chap_id";
 // die($sql);
 
 mysqli_query($conn, $sql);
-$location = "window.location = 'search_chapter.php?search=$novel_title'";
+$location = "window.location = 'search.php?search=$novel_title'";
 echo '<script>alert("✅Bạn đã sửa thông tin chương thành công!")</script>';
 echo "<script>$location</script>";
 mysqli_close($conn);

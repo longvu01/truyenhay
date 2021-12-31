@@ -1,5 +1,5 @@
 <?php
-require_once("../cdb.php");
+require_once("../../cdb.php");
 
 // $id = $_GET['id'];
 $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
@@ -40,9 +40,9 @@ mysqli_close($conn);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa truyện</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,8 +51,8 @@ mysqli_close($conn);
 </head>
 <body>
 
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require_once ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_update.php">
@@ -85,7 +85,7 @@ mysqli_close($conn);
                 <br>
                 <br>
                 <label>Hoặc vẫn giữ ảnh cũ</label>
-                <img src="../photos/<?php echo $result["img_link"]?>" width="200px"/>
+                <img src="../../photos/<?php echo $result["img_link"]?>" width="200px"/>
                 <input type="hidden" name="img_link_old" value="<?php echo $result["img_link"]?>"/>
             </div>
 
@@ -110,9 +110,9 @@ mysqli_close($conn);
 
     <footer class="footer">
         <p class="footer__text">K1 - J2 School</p>
-        <img src="../img/j2team.png" alt="">
+        <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>

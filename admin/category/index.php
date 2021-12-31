@@ -1,7 +1,7 @@
 <?php
-    require_once("../cdb.php");
+    require_once("../../cdb.php");
     if(isset($_POST['category_name'])) {
-        $location = "window.location = 'custom_category.php'";
+        $location = "window.location = 'index.php'";
 
         $category_name = addslashes($_POST['category_name']);
         $sql = "select count(*) from categories where category_name = '$category_name'";
@@ -33,9 +33,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tùy chỉnh thể loại</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../../css/reset1.css">
+    <link rel="stylesheet" href="../../css/base1.css">
+    <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,8 +44,8 @@
 </head>
 <body>
 
-    <?php require_once ('root/header_admin.php'); ?>
-    <?php require_once ('root/menu.php'); ?>
+    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/menu.php'); ?>
     
     <div class="wrapper">
     <!-- Form -->
@@ -69,7 +69,7 @@
                 </tr>
                 <?php foreach ($cates as $cate) {?>
                     <tr>
-                        <form class="form form__process" method="POST" action="update_category.php">
+                        <form class="form form__process" method="POST" action="update.php">
                             <td>
                                 <input type="hidden" name="id" value="<?php echo $cate["id"]?>"/>
                                 <input class = "category__name-input" name="category_name" value="<?php echo $cate["category_name"]?>"/>
@@ -80,7 +80,7 @@
                             </td>
 
                             <td>
-                                <a href="delete_category.php?id=<?php echo $cate['id'];?>"><i class="fas fa-trash-alt"></i></a>
+                                <a href="delete.php?id=<?php echo $cate['id'];?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </form>
                     </tr>
@@ -90,6 +90,6 @@
         
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../../js/main.js"></script>
 </body>
 </html>
