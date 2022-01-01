@@ -2,12 +2,12 @@
 require_once("../../cdb.php");
 
 // $id = $_GET['id'];
-$chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
-if ($chap_id < 1) {
-    echo '<script>alert("Truyện chưa có chương nào!")</script>';
-    echo"<script>window.location = 'search.php'</script>";
-    return ;
-}
+// $chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
+// if ($chap_id < 1) {
+//     echo '<script>alert("Truyện chưa có chương nào!")</script>';
+//     echo"<script>window.location = 'search.php'</script>";
+//     return ;
+// }
 
 $location = "window.location = 'search_chapter.php'";
 // if(empty($_GET['chap_id']) || ($chap_id < 1)) {

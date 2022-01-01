@@ -6,7 +6,7 @@
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
     if ($id < 1) {
         echo '<script>alert("Chưa có truyện nào!")</script>';
-        echo"<script>window.location = 'custom_category.php'</script>";
+        echo"<script>window.location = 'index.php'</script>";
         return ;
     }
 

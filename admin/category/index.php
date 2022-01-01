@@ -4,7 +4,7 @@
 
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../' </script>";
+        echo"<script>window.location = '../../' </script>";
         exit;
     }
 

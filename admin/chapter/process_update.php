@@ -2,9 +2,9 @@
     session_start();
     require_once("../../cdb.php");
 
-    if(empty($_SESSION['id']) ) {
-        echo"<script>window.location = '../../'</script>";
-    }
+    // if(empty($_SESSION['id']) ) {
+    //     echo"<script>window.location = '../../'</script>";
+    // }
 
     // Get id and back to last record from table when data is empty
     if(empty($_POST['chap_id']) ) {

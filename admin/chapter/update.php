@@ -20,10 +20,10 @@
     
     if(isset($ss_user_id)) {
         if($user_id != $ss_user_id) {
-            echo"<script>window.location = 'search.php'</script>";
+            echo"<script>window.location = '../../'</script>";
         }
     } else {
-        echo"<script>window.location = 'search.php'</script>";
+        echo"<script>window.location = '../../'</script>";
     }
 
     //-------------------------
