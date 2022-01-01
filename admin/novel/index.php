@@ -1,8 +1,11 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
 
     $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
+
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>

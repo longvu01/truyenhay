@@ -260,6 +260,10 @@ table {
     padding: 8px;
 }
 
+.form__process .verify i {
+    color: rgb(33, 179, 33);
+}
+
 .form__process table,
 .form__process th,
 .form__process td {

@@ -1,22 +1,29 @@
 <?php
-require_once("../../cdb.php");
+    session_start();
+    require_once("../../cdb.php");
 
-$id = addslashes($_POST['id']);
+    $role = 1;
+    if($role != 1) {
+        echo"<script>window.location = '../' </script>";
+        exit;
+    }
 
-$sql = "delete from novel where id = '$id'";
+    $id = addslashes($_POST['id']);
 
-// die($sql);
+    $sql = "delete from novel where id = '$id'";
 
-mysqli_query($conn, $sql);
+    // die($sql);
 
-// Get id and back to last record from table
-$sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
-$resultLast = mysqli_query($conn, $sql);
-$item = mysqli_fetch_array($resultLast);
-$id = $item['id'];
-$location = "window.location = 'search.php'";
+    mysqli_query($conn, $sql);
 
-echo '<script>alert("Bạn đã xoá truyện thành công!")</script>';
-echo"<script>$location</script>";
-mysqli_close($conn);
+    // Get id and back to last record from table
+    $sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
+    $resultLast = mysqli_query($conn, $sql);
+    $item = mysqli_fetch_array($resultLast);
+    $id = $item['id'];
+    $location = "window.location = 'search.php'";
+
+    echo '<script>alert("Bạn đã xoá truyện thành công!")</script>';
+    echo"<script>$location</script>";
+    mysqli_close($conn);
 ?>

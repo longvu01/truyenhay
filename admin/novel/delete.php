@@ -1,5 +1,13 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
+
+    $role = 1;
+    if($role != 1) {
+        echo"<script>window.location = '../' </script>";
+        exit;
+    }
+
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
     if ($id < 1) {
         echo '<script>alert("Chưa có truyện nào!")</script>';
