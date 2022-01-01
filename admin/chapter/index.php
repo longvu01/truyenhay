@@ -1,10 +1,13 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
 
     $user_id = 1;
 
     $sql = "select * from novel where user_id = '$user_id'";
     $novels = mysqli_query($conn, $sql);
+
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>

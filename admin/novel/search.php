@@ -1,5 +1,8 @@
 <?php
+    session_start();
     require("../../cdb.php");
+
+    $role = 1;
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
@@ -36,6 +39,8 @@
     limit $nop offset $offset";
     // die($sql);
     $result = mysqli_query($conn, $sql);
+
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -69,41 +74,59 @@
             </div>
             <table >
                 <tr>
-                    <th>Id</th><!--  -->
                     <th>Tên thể loại</th>
                     <th>Tiêu đề</th>
                     <th>Ảnh</th>
-                    <th>Tác giả</th>
                     <th>Trạng thái</th>
                     <th>Tổng số chương</th>
                     <th>Xem trước</th>
-                    <th>Lượt xem</th>
-                    <th>Thêm chương</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
+                    <?php if($role == 1) { ?>
+                        <th>Tác giả</th>
+                        <th>Id truyện</th><!--  -->
+                        <th>Xem, Duyệt</th><!--  -->
+                        <th>Xóa</th>
+                    <?php } else {?>
+                            <th>Lượt xem</th>
+                            <th>Duyệt</th>
+                            <th>Thêm chương</th>
+                            <th>Sửa</th>
+                    <?php } ?>
                 </tr>
                 <?php foreach ($result as $item) {?>
                     <tr>
-                        <td><?php echo $item['id'];?></td>
                         <td><?php echo $item['c_name'];?></td>
                         <td><?php echo $item['title'];?></td>
                         <td>
                             <img src="../../photos/<?php echo $item['img_link']?>">
                         </td>
-                        <td><?php echo $item['author'];?></td>
                         <td><?php echo $item['status']?></td>
                         <td><?php echo $item['total_chapters'];?></td>
                         <td><p><?php echo nl2br($item['pre_view']);?></p></td>
-                        <td><?php echo $item['view_count'];?></td>
-                        <td>
-                            <a href="insert_chapter.php"><i class="far fa-plus-square"></i></a>
-                        </td>
-                        <td>
-                            <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
-                        </td>
-                        <td>
-                            <a href="delete.php?id=<?php echo $item['id'];?>"><i class="fas fa-trash-alt"></i></a>
-                        </td>
+                        <?php if($role == 1) { ?>
+                            <td><?php echo $item['author'] ?></td>
+                            <td><?php echo $item['id'];?></td>
+                            <td>
+                                <?php if($item['verify'] == 0) { ?>
+                                    <a class="verify" href="view.php?id=<?php echo $item['id'];?>"><i class="fas fa-check-square"></i></a>
+                                <?php } else {?>
+                                    Đã duyệt
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <a href="delete.php?id=<?php echo $item['id'];?>"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        <?php } else {?>
+                            <td><?php echo $item['view_count'];?></td>
+                            <td>
+                                <?php echo $item['verify'] == 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅' ?>
+                            </td>
+                            <td>
+                                <a href="insert_chapter.php"><i class="far fa-plus-square"></i></a>
+                            </td>
+                            <td>
+                                <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
             </table>

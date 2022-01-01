@@ -1,11 +1,16 @@
 <?php
-    require("../../cdb.php");
+    session_start();
+    require_once("../../cdb.php");
+
+    // if(empty($_SESSION['id']) ) {
+    //     echo"<script>window.location = '../../'</script>";
+    // }
+
+    $role = 0;
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
-    // if(isset($_GET['page'])){
-    //     $p = $_GET['page'];
-    // }
+    
     $search = "";
     if(isset($_GET['search'])){
         $search = $_GET['search'];
@@ -37,8 +42,8 @@
     limit $nop offset $offset";
     // die($sql);
     $result = mysqli_query($conn, $sql);
-
     
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -75,16 +80,36 @@
                     <th>Tên truyện</th>
                     <th>Chương</th>
                     <th>Nội dung</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
+                    <?php if($role == 1) { ?>
+                        <th>Xem, Duyệt</th>
+                        <th>Xóa</th>
+                        <?php } else {?>
+                        <th>Duyệt</th>
+                        <th>Sửa</th>
+                        <th>Xóa</th>
+                    <?php } ?>
                 </tr>
                 <?php foreach ($result as $item) {?>
                     <tr>
                         <td><?php echo $item['n_name'];?></td>
                         <td><?php echo $item['chap'];?></td>
                         <td><p><?php echo nl2br($item['chapter_content'])?></p></td>
-                        <td><a href="update.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-edit"></i></a></td>
-                        <td><a href="delete.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-trash-alt"></i></a></td>
+                        <?php if($role == 1) { ?>
+                            <td>
+                                <?php if($item['verify'] == 0) { ?>
+                                    <a class="verify" href="view.php?chap_id=<?php echo $item['chap_id']?>"><i class="fas fa-check-square"></i></a>
+                                <?php } else {?>
+                                    Đã duyệt
+                                <?php } ?>
+                            </td>
+                            <td><a href="delete.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-trash-alt"></i></a></td>
+                        <?php } else {?>
+                            <td>
+                                <?php echo $item['verify'] == 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅' ?>
+                            </td>
+                            <td><a href="update.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="delete.php?chap_id=<?php echo $item['chap_id'];?>"><i class="fas fa-trash-alt"></i></a></td>
+                        <?php } ?>
                     </tr>
                 <?php } ?>
             </table>

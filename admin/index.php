@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once("../cdb.php");
     $role = 1
 ?>

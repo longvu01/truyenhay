@@ -1,40 +1,64 @@
 <?php
-require_once("../../cdb.php");
+    session_start();
+    require_once("../../cdb.php");
 
-// $id = $_GET['id'];
-$chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
-if ($chap_id < 1) {
-    echo '<script>alert("Truyện chưa có chương nào!")</script>';
-    echo"<script>window.location = 'search.php'</script>";
-    return ;
-}
+    // session user id
+    $ss_user_id = 1;
+    
+    $chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
+    // Nếu đúng là tác giả thì được phép chỉnh sửa
+    $sql = "SELECT user.id FROM chapter
+    join novel 
+    on chapter.novel_id = novel.id
+    join user
+    ON novel.user_id = user.id
+    where chapter.chap_id = '$chap_id'";
 
-$location = "window.location = 'search_chapter.php'";
-// if(empty($_GET['chap_id']) || ($chap_id < 1)) {
-//     echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-//     echo"<script>$location</script>";
-// }
+    $sql_result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($sql_result);
+    $user_id = $row['id'];
+    
+    if(isset($ss_user_id)) {
+        if($user_id != $ss_user_id) {
+            echo"<script>window.location = 'search.php'</script>";
+        }
+    } else {
+        echo"<script>window.location = 'search.php'</script>";
+    }
 
-$sql = "select * from chapter where chap_id = '$chap_id'";
-// die($sql);
-$sql_result = mysqli_query($conn, $sql);
-$number_rows = mysqli_num_rows($sql_result);
-if($number_rows != 1) {
-    echo '<script>alert("❌Không tìm thấy chương theo mã này!")</script>';
-    echo"<script>$location</script>";
-}
+    //-------------------------
+    if ($chap_id < 1) {
+        echo '<script>alert("Truyện chưa có chương nào!")</script>';
+        echo"<script>window.location = 'search.php'</script>";
+        return ;
+    }
 
-$result = mysqli_fetch_array($sql_result);
+    $location = "window.location = 'search_chapter.php'";
+    // if(empty($_GET['chap_id']) || ($chap_id < 1)) {
+    //     echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
+    //     echo"<script>$location</script>";
+    // }
 
-$sql = "SELECT title FROM novel 
-join chapter
-on novel.id = chapter.novel_id
-where chap_id = '$chap_id'";
-$result_novel = mysqli_query($conn, $sql);
-$novel = mysqli_fetch_array($result_novel);
-$novel_title = $novel['title'];
+    $sql = "select * from chapter where chap_id = '$chap_id'";
+    // die($sql);
+    $sql_result = mysqli_query($conn, $sql);
+    $number_rows = mysqli_num_rows($sql_result);
+    if($number_rows != 1) {
+        echo '<script>alert("❌Không tìm thấy chương theo mã này!")</script>';
+        echo"<script>$location</script>";
+    }
 
-mysqli_close($conn);
+    $result = mysqli_fetch_array($sql_result);
+
+    $sql = "SELECT title FROM novel 
+    join chapter
+    on novel.id = chapter.novel_id
+    where chap_id = '$chap_id'";
+    $result_novel = mysqli_query($conn, $sql);
+    $novel = mysqli_fetch_array($result_novel);
+    $novel_title = $novel['title'];
+    
+    mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +66,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa truyện</title>
+    <title>Chỉnh sửa chương</title>
     <link rel="stylesheet" href="../../css/reset1.css">
     <link rel="stylesheet" href="../../css/base1.css">
     <link rel="stylesheet" href="../../css/style1.css">

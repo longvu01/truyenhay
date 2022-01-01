@@ -1,40 +1,63 @@
 <?php
-require_once("../../cdb.php");
+    session_start();
+    require_once("../../cdb.php");
 
-// $id = $_GET['id'];
-$chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
-if ($chap_id < 1) {
-    echo '<script>alert("Truyện chưa có chương nào!")</script>';
-    echo"<script>window.location = 'search_chapter.php'</script>";
-    return ;
-}
+    // session user id
+    $ss_user_id = 1;
 
-$location = "window.location = 'search_chapter.php'";
-// if(empty($_GET['chap_id']) || ($chap_id < 1)) {
-//     echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-//     echo"<script>$location</script>";
-// }
+    $chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
+    // Nếu đúng là tác giả/ admin thì được phép xóa
+    $sql = "SELECT user.id FROM chapter
+    join novel 
+    on chapter.novel_id = novel.id
+    join user
+    ON novel.user_id = user.id
+    where chapter.chap_id = '$chap_id'";
 
-$sql = "select * from chapter where chap_id = '$chap_id'";
-// die($sql);
-$sql_result = mysqli_query($conn, $sql);
-$number_rows = mysqli_num_rows($sql_result);
-if($number_rows != 1) {
-    echo '<script>alert("❌Không tìm thấy chương theo mã này!")</script>';
-    echo"<script>$location</script>";
-}
+    $sql_result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($sql_result);
+    $user_id = $row['id'];
+    
+    if(isset($ss_user_id)) {
+        if($user_id != $ss_user_id) {
+            echo"<script>window.location = '../../'</script>";
+        }
+    } else {
+        echo"<script>window.location = '../../'</script>";
+    }
 
-$result = mysqli_fetch_array($sql_result);
+    if ($chap_id < 1) {
+        echo '<script>alert("Truyện chưa có chương nào!")</script>';
+        echo"<script>window.location = 'search_chapter.php'</script>";
+        return ;
+    }
 
-$sql = "SELECT title FROM novel 
-join chapter
-on novel.id = chapter.novel_id
-where chap_id = '$chap_id'";
-$result_novel = mysqli_query($conn, $sql);
-$novel = mysqli_fetch_array($result_novel);
-$novel_title = $novel['title'];
+    $location = "window.location = 'search_chapter.php'";
+    // if(empty($_GET['chap_id']) || ($chap_id < 1)) {
+    //     echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
+    //     echo"<script>$location</script>";
+    // }
 
-mysqli_close($conn);
+    $sql = "select * from chapter where chap_id = '$chap_id'";
+    // die($sql);
+    $sql_result = mysqli_query($conn, $sql);
+    $number_rows = mysqli_num_rows($sql_result);
+    if($number_rows != 1) {
+        echo '<script>alert("❌Không tìm thấy chương theo mã này!")</script>';
+        echo"<script>$location</script>";
+    }
+
+    $result = mysqli_fetch_array($sql_result);
+
+    $sql = "SELECT title FROM novel 
+    join chapter
+    on novel.id = chapter.novel_id
+    where chap_id = '$chap_id'";
+    $result_novel = mysqli_query($conn, $sql);
+    $novel = mysqli_fetch_array($result_novel);
+    $novel_title = $novel['title'];
+
+    mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

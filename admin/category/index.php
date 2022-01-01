@@ -1,5 +1,13 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
+
+    $role = 1;
+    if($role != 1) {
+        echo"<script>window.location = '../' </script>";
+        exit;
+    }
+
     if(isset($_POST['category_name'])) {
         $location = "window.location = 'index.php'";
 
@@ -24,6 +32,7 @@
     $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
 
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +58,7 @@
     
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" method="POST" enctype="multipart/form-data">
+        <form class="form form__process active" method="POST">
             <h1 class= "form__title">Tùy chỉnh thể loại</h1>
             <div class="form-group">
                 <label>Thể loại mới</label>
@@ -69,7 +78,7 @@
                 </tr>
                 <?php foreach ($cates as $cate) {?>
                     <tr>
-                        <form class="form form__process" method="POST" action="update.php">
+                        <form class="form form__process" method="POST" action="process_update.php">
                             <td>
                                 <input type="hidden" name="id" value="<?php echo $cate["id"]?>"/>
                                 <input class = "category__name-input" name="category_name" value="<?php echo $cate["category_name"]?>"/>
@@ -80,7 +89,7 @@
                             </td>
 
                             <td>
-                                <a href="delete.php?id=<?php echo $cate['id'];?>"><i class="fas fa-trash-alt"></i></a>
+                                <a href="process_delete.php?id=<?php echo $cate['id'];?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </form>
                     </tr>

@@ -1,37 +1,38 @@
 <?php
-require_once("../../cdb.php");
+    session_start();
+    require_once("../../cdb.php");
 
-// $id = $_GET['id'];
-$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
-if ($id < 1) {
-    echo '<script>alert("Chưa có truyện nào!")</script>';
-    echo"<script>window.location = 'custom_category.php'</script>";
-    return ;
-}
+    // $id = $_GET['id'];
+    $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
+    if ($id < 1) {
+        echo '<script>alert("Chưa có truyện nào!")</script>';
+        echo"<script>window.location = 'custom_category.php'</script>";
+        return ;
+    }
 
-$location = "window.location = 'index.php'";
-if(empty($_GET['id']) || ($id < 1)) {
-    echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-    echo"<script>$location</script>";
-}
+    $location = "window.location = 'index.php'";
+    if(empty($_GET['id']) || ($id < 1)) {
+        echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
+        echo"<script>$location</script>";
+    }
 
-$sql = "select * from novel where id = '$id'";
+    $sql = "select * from novel where id = '$id'";
 
-$sql_result = mysqli_query($conn, $sql);
-$number_rows = mysqli_num_rows($sql_result);
-if($number_rows != 1) {
-    echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
-    echo"<script>$location</script>";
-}
+    $sql_result = mysqli_query($conn, $sql);
+    $number_rows = mysqli_num_rows($sql_result);
+    if($number_rows != 1) {
+        echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
+        echo"<script>$location</script>";
+    }
 
-$result = mysqli_fetch_array($sql_result);
+    $result = mysqli_fetch_array($sql_result);
 
-$sql = "select * from categories";
-$cates = mysqli_query($conn, $sql);
+    $sql = "select * from categories";
+    $cates = mysqli_query($conn, $sql);
 
 
 
-mysqli_close($conn);
+    mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

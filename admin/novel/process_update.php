@@ -48,7 +48,8 @@ title = '$title',
 status = '$status',
 author = '$author',
 img_link = '$file_name',
-pre_view = '$pre_view'
+pre_view = '$pre_view',
+verify = 0
 where
 id = $id";
 
