@@ -1,11 +1,13 @@
 <?php
     session_start();
     require_once("../../cdb.php");
+    require_once("../root/check_permission.php");
 
+    // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../../' </script>";
-        exit;
+        echo"<script>window.location = '../' </script>";
+        die();
     }
 
     if(isset($_POST['category_name'])) {
@@ -25,8 +27,8 @@
         $sql = "insert into categories (category_name) values ('$category_name')";
         // die($sql);
         mysqli_query($conn, $sql);
-        echo '<script>alert("Bạn đã thêm thể loại thành công!")</script>';
-        echo"<script>$location</script>";
+        echo "<script>alert('Bạn đã thêm thể loại thành công!')</script>";
+        echo "<script>$location</script>";
     }
 
     $sql = "select * from categories";

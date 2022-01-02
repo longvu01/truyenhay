@@ -1,11 +1,9 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-
-    // if(empty($_SESSION['id']) ) {
-    //     echo"<script>window.location = '../../'</script>";
-    // }
-
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
     $role = 0;
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
@@ -117,7 +115,7 @@
             <br/>
         </form>
         <div class="pagination">
-            <?php for($i = 1; $i <= $total_page; $i++) { ?>
+            <?php for($i = 1; $i <= $total_page; ++$i) { ?>
                 <a href="?p=<?php echo $i ?><?php if($search) echo '&search=' . $search ?>">
                     <?php echo $i ?>
                 </a>

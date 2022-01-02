@@ -1,36 +1,34 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
         echo"<script>window.location = '../' </script>";
-        exit;
+        die();
     }
 
-    // $id = $_GET['id'];
-    $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
-    if ($id < 1) {
-        echo '<script>alert("Chưa có truyện nào!")</script>';
-        echo"<script>window.location = 'index.php'</script>";
-        return ;
-    }
-
+    // Truyền mã không hợp lệ
     $location = "window.location = 'index.php'";
-    if(empty($_GET['id']) || ($id < 1)) {
+    if(empty($_GET['id']) || ($_GET['id'] < 1)) {
         echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
         echo"<script>$location</script>";
+        die();
     }
-
+    
+    $id = addslashes($_GET["id"]);
+    // Không tìm được truyện theo mã
     $sql = "select * from novel where id = '$id'";
-
     $sql_result = mysqli_query($conn, $sql);
     $number_rows = mysqli_num_rows($sql_result);
     if($number_rows != 1) {
         echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
         echo"<script>$location</script>";
+        die();
     }
-
+    // ----------------------------------------------------------------
     $result = mysqli_fetch_array($sql_result);
 
     $sql = "select category_name

@@ -1,14 +1,14 @@
 <?php
     session_start();
-    require("../../cdb.php");
-
+    require_once("../../cdb.php");
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
     $role = 1;
 
     $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
 	if ($p < 1) $p = 1;
-    // if(isset($_GET['page'])){
-    //     $p = $_GET['page'];
-    // }
+    
     $search = "";
     if(isset($_GET['search'])){
         $search = $_GET['search'];
@@ -62,7 +62,7 @@
 <body>
     
     <?php require_once ('../root/header_admin.php'); ?>
-    <?php require ('../root/menu.php'); ?>
+    <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
         <!-- SEARCH -->

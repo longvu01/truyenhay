@@ -1,11 +1,16 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-    // session user id
-    $ss_user_id = 1;
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
+    $role = 1;
+    // Session user id
+    // $ss_user_id = $_SESSION['id'];
+    $ss_user_id = 2;
 
     if(empty($_POST['chap_id']) ) {
-        echo"<script>window.location = '../../'</script>";
+        echo"<script>window.location = 'index.php'</script>";
     }
     $chap_id = addslashes($_POST['chap_id']);
     // Nếu đúng là tác giả/ admin thì được phép xóa
@@ -21,19 +26,19 @@
     $user_id = $row['id'];
     
     if(isset($ss_user_id)) {
-        if($user_id != $ss_user_id) {
-            echo"<script>window.location = '../../'</script>";
+        if($user_id != $ss_user_id && $role != 1) {
+            echo"<script>window.location = 'index.php'</script>";
         }
     } else {
-        echo"<script>window.location = '../../'</script>";
+        echo"<script>window.location = 'index.php'</script>";
     }
 
     if ($chap_id < 1) {
         echo '<script>alert("Truyện chưa có chương nào!")</script>';
         echo"<script>window.location = 'search_chapter.php'</script>";
-        return ;
+        die();
     }
-
+    // ----------------------------------------------------------------
     $novel_title = addslashes($_POST['novel_title']);
 
     // Cập nhật lại tổng số chap trong bảng novel tương ứng với chap_id
@@ -45,7 +50,7 @@
 
     // Xóa chương tương ứng với chap_id
     $sql = "delete from chapter where chap_id = '$chap_id'";
-    die($sql);
+    // die($sql);
     mysqli_query($conn, $sql);
 
     $location = "window.location = 'search.php?search=$novel_title'";

@@ -1,10 +1,12 @@
 <?php
-include("../../cdb.php");
-// Get id and back to last record from table
-$sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
-$resultLast = mysqli_query($conn, $sql);
-$item = mysqli_fetch_array($resultLast);
-mysqli_close($conn);
+    include("../../cdb.php");
+    // Kiểm tra quyền, dữ liệu
+    // ----------------------------------------------------------------
+    $sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
+    $resultLast = mysqli_query($conn, $sql);
+    $item = mysqli_fetch_array($resultLast);
+
+    mysqli_close($conn);
 ?>
 <div class="menu">
         <div class="menu__header">
@@ -28,20 +30,28 @@ mysqli_close($conn);
                 </div>
                 <div>
                     <a href="#"><i class="fas fa-sign-out-alt"></i></a>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
             </div>
             <div class="menu__right">
-                <p>Thể loại</p>
-                <a href= "../category/index.php" class="menu__right--item">Tùy chỉnh thể loại<i class="fas fa-plus"></i></a>
-                <p>Truyện</p>
-                <a href= "../novel/index.php" class="menu__right--item">Thêm truyện<i class="fas fa-plus"></i></a>
-                <a href= "../novel/search.php" class="menu__right--item">Tìm kiếm truyện<i class="fas fa-search"></i></a>
-                <a href= "../novel/update.php?id=<?php echo $item['id'];?>" class="menu__right--item">Sửa truyện<i class="fas fa-edit"></i></a>
-                <a href= "../novel/delete.php?id=<?php echo $item['id'];?>" class="menu__right--item">Xóa truyện<i class="fas fa-trash"></i></a>
-                <p>Chương truyện</p>
-                <a href= "../chapter/index.php" class="menu__right--item">Thêm chương<i class="fas fa-plus"></i></a>
-                <a href= "../chapter/search.php" class="menu__right--item">Tìm chương<i class="fas fa-plus"></i></a>
+                <?php if($role == 1) { ?>
+                    <p>Thể loại</p>
+                        <a href= "../category/index.php" class="menu__right--item">Tùy chỉnh thể loại<i class="fas fa-plus"></i></a>
+                    <p>Truyện</p>
+                        <a href= "../novel/index.php" class="menu__right--item">Thêm truyện<i class="fas fa-plus"></i></a>
+                        <a href= "../novel/search.php" class="menu__right--item">Tìm kiếm truyện<i class="fas fa-search"></i></a>
+                        <a href= "../novel/delete.php?id=<?php echo $item['id'];?>" class="menu__right--item">Xóa truyện<i class="fas fa-trash"></i></a>
+                        <p>Chương truyện</p>
+                        <a href= "../chapter/index.php" class="menu__right--item">Thêm chương<i class="fas fa-plus"></i></a>
+                        <a href= "../chapter/search.php" class="menu__right--item">Tìm chương<i class="fas fa-plus"></i></a>
+                <?php } else { ?>
+                    <p>Truyện</p>
+                        <a href= "../novel/index.php" class="menu__right--item">Thêm truyện<i class="fas fa-plus"></i></a>
+                        <a href= "../novel/search.php" class="menu__right--item">Tìm kiếm truyện<i class="fas fa-search"></i></a>
+                        <a href= "../novel/update.php?id=<?php echo $item['id'];?>" class="menu__right--item">Sửa truyện<i class="fas fa-edit"></i></a>
+                    <p>Chương truyện</p>
+                        <a href= "../chapter/index.php" class="menu__right--item">Thêm chương<i class="fas fa-plus"></i></a>
+                        <a href= "../chapter/search.php" class="menu__right--item">Tìm chương<i class="fas fa-plus"></i></a>
+                <?php } ?>
             </div>
         </div>
         

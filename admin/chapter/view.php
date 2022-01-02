@@ -1,40 +1,45 @@
 <?php
-require_once("../../cdb.php");
+    require_once("../../cdb.php");
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
+    $role = 1;
+    if($role != 1) {
+        echo "<script>window.location = 'index.php' </script>";
+        die();
+    }
+    
+    $location = "window.location = 'search.php'";
+    
+    if(empty($_GET['chap_id']) || ($_GET["chap_id"] < 1)) {
+        echo "<script>alert('❌Phải truyền mã hợp lệ để chỉnh sửa!')</script>";
+        echo "<script>$location</script>";
+        die();
+    }
 
-// $id = $_GET['id'];
-// $chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
-// if ($chap_id < 1) {
-//     echo '<script>alert("Truyện chưa có chương nào!")</script>';
-//     echo"<script>window.location = 'search.php'</script>";
-//     return ;
-// }
+    $chap_id = addslashes($_GET["chap_id"]);
+    
+    $sql = "select * from chapter where chap_id = '$chap_id'";
+    // die($sql);
+    $sql_result = mysqli_query($conn, $sql);
+    $number_rows = mysqli_num_rows($sql_result);
+    if($number_rows != 1) {
+        echo "<script>alert('❌Không tìm thấy chương theo mã này!')</script>";
+        echo "<script>$location</script>";
+        die();
+    }
+    // ----------------------------------------------------------------
+    $result = mysqli_fetch_array($sql_result);
 
-$location = "window.location = 'search_chapter.php'";
-// if(empty($_GET['chap_id']) || ($chap_id < 1)) {
-//     echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-//     echo"<script>$location</script>";
-// }
+    $sql = "SELECT title FROM novel 
+    join chapter
+    on novel.id = chapter.novel_id
+    where chap_id = '$chap_id'";
+    $result_novel = mysqli_query($conn, $sql);
+    $novel = mysqli_fetch_array($result_novel);
+    $novel_title = $novel['title'];
 
-$sql = "select * from chapter where chap_id = '$chap_id'";
-// die($sql);
-$sql_result = mysqli_query($conn, $sql);
-$number_rows = mysqli_num_rows($sql_result);
-if($number_rows != 1) {
-    echo '<script>alert("❌Không tìm thấy chương theo mã này!")</script>';
-    echo"<script>$location</script>";
-}
-
-$result = mysqli_fetch_array($sql_result);
-
-$sql = "SELECT title FROM novel 
-join chapter
-on novel.id = chapter.novel_id
-where chap_id = '$chap_id'";
-$result_novel = mysqli_query($conn, $sql);
-$novel = mysqli_fetch_array($result_novel);
-$novel_title = $novel['title'];
-
-mysqli_close($conn);
+    mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

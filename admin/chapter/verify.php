@@ -1,23 +1,28 @@
 <?php
     require_once("../../cdb.php");
-    // Get id and back to last record from table when data is empty
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
+    $role = 1;
+    if($role != 1) {
+        echo "<script>window.location = 'index.php' </script>";
+        die();
+    }
+    
     $location = "window.location = 'search.php'";
     if(empty($_POST['chap_id']) ) {
-        $sql = 'SELECT * FROM chapter ORDER BY chap_id DESC LIMIT 1';
-        $resultLast = mysqli_query($conn, $sql);
-        $item = mysqli_fetch_array($resultLast);
-        $id = $item['id'];
         echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-        echo"<script>$location</script>";
+        echo "<script>$location</script>";
+        die();
     }
-
+   // ----------------------------------------------------------------
     $chap_id = addslashes($_POST['chap_id']);
     $sql = "update chapter set verify = 1 where chap_id = $chap_id";
 
-    // die($sql);
-
     mysqli_query($conn, $sql);
-    echo '<script>alert("✅Bạn đã duyệt chương này!")</script>';
+
+    // Thông báo và điều hướng quay lại
+    echo '<script>alert("Bạn đã duyệt chương thành công ✅")</script>';
     echo"<script>$location</script>";
     mysqli_close($conn);
 ?>

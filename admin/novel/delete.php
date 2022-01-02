@@ -1,20 +1,30 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../' </script>";
-        exit;
+        echo "<script>window.location = 'index.php' </script>";
+        die();
+    }
+
+    $location = "window.location = 'index.php'";
+
+    if(empty($_GET['id']) ) {
+        echo "<script>alert('❌Yêu cầu không hợp lệ!')</script>";
+        echo "<script>$location</script>";
+        die();
     }
 
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
     if ($id < 1) {
-        echo '<script>alert("Chưa có truyện nào!")</script>';
-        echo"<script>window.location = '../category/index.php'</script>";
-        return ;
+        echo "<script>alert('Chưa có truyện nào!')</script>";
+        echo "<script>window.location = 'index.php' </script>";
+        die();
     }
-
+    // ----------------------------------------------------------------
     $sql = "select * from novel where id = $id";
 
     $sql_result = mysqli_query($conn, $sql);

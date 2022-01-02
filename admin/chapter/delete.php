@@ -1,11 +1,22 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-
-    // session user id
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
+    $role = 0;
+    // Session user id
+    // $ss_user_id = $_SESSION['id'];
     $ss_user_id = 1;
+    
+    $location = "window.location = 'index.php'";
 
-    $chap_id = isset($_REQUEST["chap_id"]) ? $_REQUEST["chap_id"] : 1;
+    if(empty($_GET['chap_id']) || $_GET['chap_id'] < 1) {
+        echo "<script>alert('❌Phải truyền mã hợp lệ để chỉnh sửa!')</script>";
+        echo "<script>$location</script>";
+    }
+
+    $chap_id = addslashes($_GET["chap_id"]);
     // Nếu đúng là tác giả/ admin thì được phép xóa
     $sql = "SELECT user.id FROM chapter
     join novel 
@@ -19,40 +30,28 @@
     $user_id = $row['id'];
     
     if(isset($ss_user_id)) {
-        if($user_id != $ss_user_id) {
-            echo"<script>window.location = '../../'</script>";
+        if($user_id != $ss_user_id && $role != 1) {
+            echo"<script>window.location = 'index.php'</script>";
         }
     } else {
-        echo"<script>window.location = '../../'</script>";
+        echo"<script>window.location = 'index.php'</script>";
     }
-
-    if ($chap_id < 1) {
-        echo '<script>alert("Truyện chưa có chương nào!")</script>';
-        echo"<script>window.location = 'search_chapter.php'</script>";
-        return ;
-    }
-
-    $location = "window.location = 'search_chapter.php'";
-    // if(empty($_GET['chap_id']) || ($chap_id < 1)) {
-    //     echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-    //     echo"<script>$location</script>";
-    // }
 
     $sql = "select * from chapter where chap_id = '$chap_id'";
-    // die($sql);
+    
     $sql_result = mysqli_query($conn, $sql);
     $number_rows = mysqli_num_rows($sql_result);
     if($number_rows != 1) {
         echo '<script>alert("❌Không tìm thấy chương theo mã này!")</script>';
         echo"<script>$location</script>";
     }
-
     $result = mysqli_fetch_array($sql_result);
 
     $sql = "SELECT title FROM novel 
     join chapter
     on novel.id = chapter.novel_id
     where chap_id = '$chap_id'";
+
     $result_novel = mysqli_query($conn, $sql);
     $novel = mysqli_fetch_array($result_novel);
     $novel_title = $novel['title'];

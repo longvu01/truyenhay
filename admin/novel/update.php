@@ -1,36 +1,52 @@
 <?php
     session_start();
     require_once("../../cdb.php");
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
+    // $ss_user_id = $_SESSION['id'];
+    $ss_user_id = 1;
+    $role = 0;
 
-    // $id = $_GET['id'];
-    $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
-    if ($id < 1) {
-        echo '<script>alert("Chưa có truyện nào!")</script>';
-        echo"<script>window.location = 'index.php'</script>";
-        return ;
+    $id = addslashes($_GET["id"]);
+    // Nếu đúng là tác giả thì được phép sửa
+    $sql = "SELECT user.id FROM novel
+    join user
+    ON novel.user_id = user.id
+    where novel.id = '$id'";
+    $sql_result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($sql_result);
+    $user_id = $row['id'];
+
+    if($user_id != $ss_user_id) {
+        echo "<script>window.location = 'index.php' </script>";
+    } else if ($role != 0) {
+        echo "<script>alert('Bạn không thể sửa truyện của người dùng!')</script>";
+        echo "<script>window.location = 'index.php' </script>";
     }
 
+    // Truyền mã không hợp lệ
     $location = "window.location = 'index.php'";
-    if(empty($_GET['id']) || ($id < 1)) {
+    if(empty($_GET['id']) || ($_GET['id'] < 1)) {
         echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
         echo"<script>$location</script>";
+        die();
     }
 
+    // Không tìm được truyện theo mã
     $sql = "select * from novel where id = '$id'";
-
     $sql_result = mysqli_query($conn, $sql);
     $number_rows = mysqli_num_rows($sql_result);
     if($number_rows != 1) {
         echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
         echo"<script>$location</script>";
+        die();
     }
-
+    // ----------------------------------------------------------------
     $result = mysqli_fetch_array($sql_result);
 
     $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
-
-
 
     mysqli_close($conn);
 ?>
