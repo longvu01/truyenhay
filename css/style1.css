@@ -402,6 +402,7 @@ table {
     );
     border-radius: 12px;
     width: 20vw;
+    transition: background 2s;
 }
 
 .admin__page a:hover {
@@ -410,7 +411,7 @@ table {
         rgb(211, 43, 85),
         rgb(197, 99, 120)
     );
-    color: #000;
+    color: rgb(91, 216, 238);
 }
 
 .admin__page a {

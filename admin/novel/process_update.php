@@ -1,15 +1,14 @@
 <?php
     require_once("../../cdb.php");
-    // Get id and back to last record from table when data is empty
-    if(empty($_POST['id']) ) {
-        $sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
-        $resultLast = mysqli_query($conn, $sql);
-        $item = mysqli_fetch_array($resultLast);
-        $id = $item['id'];
-        echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-        echo"<script>window.location = 'update.php?id='$id'</script>";
-    }
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
 
+    if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['status'])
+    || empty($_POST['author']) || empty($_POST['pre_view'])) {
+        echo "<script>alert('❌Cần điền đầy đủ thông tin!')</script>";
+        echo "<script>window.location = 'search.php'</script>";
+        die();
+    }
     // Xử lý upload ảnh
     $img_link_new = $_FILES['img_link_new'];
     if($img_link_new['size'] > 0) {
@@ -21,7 +20,7 @@
     } else {
         $file_name = $_POST['img_link_old'];
     }
-
+    
     $id = addslashes($_POST['id']);
     $category_id = addslashes($_POST['category_id']);
     $status = addslashes($_POST['status']);
@@ -53,7 +52,7 @@
     where
     id = $id";
 
-    // die($sql);
+    die($sql);
 
     mysqli_query($conn, $sql);
     echo '<script>alert("✅Bạn đã sửa thông tin truyện thành công!")</script>';

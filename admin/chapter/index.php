@@ -1,9 +1,13 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
+    // $role = $_SESSION['role'];
+    $role = 0;
+    // $user_id = $_SESSION['id'];
     $user_id = 1;
-
+    
     $sql = "select * from novel where user_id = '$user_id'";
     $novels = mysqli_query($conn, $sql);
 

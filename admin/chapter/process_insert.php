@@ -1,14 +1,13 @@
 <?php
     require_once("../../cdb.php");
-
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
     // Back to home page when data is empty
-    $location = "window.location = 'index.php'";
-    //
-    // if(empty(addslashes(addslashes($_POST['novel_id'])))) {
-    //     echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-    //     echo"<script>$location</script>";
-    // }
-    // die();
+    if(empty($_POST['novel_id']) || empty($_POST['chapter_content'])) {
+        echo "<script>alert('❌Cần điền đầy đủ thông tin!')</script>";
+        echo "<script>window.location = 'index.php'</script>";
+    }
+
     $novel_id = addslashes($_POST['novel_id']);
     $chapter_content = addslashes($_POST['chapter_content']);
 
@@ -19,12 +18,7 @@
     $result = mysqli_fetch_array($chapter);
     $chap = $result['chap'];
 
-    // if($chap >= 1) {
-    //     $chap++;
-    // } else {
-    //     $chap = 1;
-    // }
-    $chap = ($chap >= 1) ? ++$chap : 1;
+    $chap = $chap >= 1 ? ++$chap : 1;
     $sql = "insert into chapter (novel_id, chap, chapter_content) values ('$novel_id', $chap, '$chapter_content')";
     // die($sql);
     mysqli_query($conn, $sql);
@@ -37,7 +31,7 @@
     mysqli_query($conn, $sql);
 
     // Thông báo và quay lại trang tìm kiếm
-    echo '<script>alert("Bạn đã thêm chương mới thành công!")</script>';
-    echo"<script>$location</script>";
+    echo "<script>alert('Bạn đã thêm chương mới thành công!')</script>";
+    echo "<script>window.location = 'search.php'</script>";
     mysqli_close($conn);
 ?>

@@ -1,15 +1,17 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-
+    // Kiểm tra quyền, dữ liệu
+    require_once("../root/check_permission.php");
     // Back to home page when data is empty
     $location = "window.location = 'index.php'";
     //
-    if(empty(addslashes($_POST['title']))) {
+    if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['author'])
+    || empty($_POST['img_link']) || empty($_POST['pre_view'])) {
         echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
         echo"<script>$location</script>";
     }
-
+    // ----------------------------------------------------------------
     $user_id = addslashes($_POST['user_id']);
     $category_id = addslashes($_POST['category_id']);
     $author = addslashes($_POST['author']);
@@ -35,13 +37,16 @@
     }
 
 
-    $sql = "insert into novel (user_id, category_id, title, author, img_link, pre_view) values ('$user_id', '$category_id', '$title', '$author', '$file_name', '$pre_view')";
+    $sql = "insert into novel 
+    (user_id, category_id, title, author, img_link, pre_view)
+    values 
+    ('$user_id', '$category_id', '$title', '$author', '$file_name', '$pre_view')";
 
     // die($sql);
 
+    // Thông báo và điều hướng đến trang thêm chương mới
     mysqli_query($conn, $sql);
-    $location = "window.location = '../chapter/index.php'";
-    echo '<script>alert("Bạn đã thêm truyện thành công!")</script>';
-    // echo"<script>$location</script>";
+    echo "<script>alert('Bạn đã thêm truyện thành công!')</script>";
+    echo "<script>window.location = '../chapter/index.php'</script>";
     mysqli_close($conn);
 ?>

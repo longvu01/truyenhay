@@ -1,7 +1,12 @@
 <?php
     session_start();
     require_once("../cdb.php");
-    $role = 1
+    // Kiểm tra quyền, dữ liệu
+    // $role = $_SESSION['role'];
+    $role = 1;
+    // if(empty($_SESSION['id']) || empty($_SESSION['role'])) {
+    //     echo"<script>window.location = '../' </script>";
+    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
