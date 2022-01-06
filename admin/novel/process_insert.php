@@ -7,7 +7,7 @@
     $location = "window.location = 'index.php'";
     //
     if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['author'])
-    || empty($_POST['img_link']) || empty($_POST['pre_view'])) {
+    || empty($_FILES['img_link']) || empty($_POST['pre_view'])) {
         echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
         echo"<script>$location</script>";
     }
@@ -33,7 +33,7 @@
     if($number_rows == 1) {
         echo '<script>alert("Tên truyện này có người đặt rùi!")</script>';
         echo"<script>$location</script>";
-        exit;
+        die();
     }
 
 
@@ -43,9 +43,9 @@
     ('$user_id', '$category_id', '$title', '$author', '$file_name', '$pre_view')";
 
     // die($sql);
+    mysqli_query($conn, $sql);
 
     // Thông báo và điều hướng đến trang thêm chương mới
-    mysqli_query($conn, $sql);
     echo "<script>alert('Bạn đã thêm truyện thành công!')</script>";
     echo "<script>window.location = '../chapter/index.php'</script>";
     mysqli_close($conn);

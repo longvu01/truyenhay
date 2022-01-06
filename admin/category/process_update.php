@@ -15,6 +15,11 @@
     if(empty($_POST['id'])) {
         echo "<script>alert('❌Yêu cầu không hợp lệ!')</script>";
         echo "<script>$location</script>";
+        die();
+    } else if (trim($_POST['category_name']) == '') {
+        echo "<script>alert('❌Tên thể loại không được để trống!')</script>";
+        echo "<script>$location</script>";
+        die();
     }
    // ----------------------------------------------------------------
     $id = addslashes($_POST['id']);
@@ -24,7 +29,6 @@
     category_name = '$category_name'
     where
     id = $id";
-
     // die($sql);
     mysqli_query($conn, $sql);
 

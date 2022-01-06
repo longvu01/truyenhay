@@ -6,12 +6,12 @@
     // $role = $_SESSION['role'];
     $role = 1;
 
-    $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
+    $p = isset($_REQUEST["p"]) ? addslashes($_REQUEST["p"]) * 1 : 0;
 	if ($p < 1) $p = 1;
     
     $search = "";
     if(isset($_GET['search'])){
-        $search = $_GET['search'];
+        $search = addslashes($_GET['search']);
     }
 
 	$sql_total_records = "select count(*) from novel where title like '%$search%'";
@@ -24,9 +24,8 @@
 
     $total_page = ceil($total_records / $nop);
     $offset = $nop * ($p - 1);
-
     // sql select and search
-    $sql = "select 
+    $sql = "select
     novel.*,
     categories.category_name as c_name
     from novel 
@@ -134,9 +133,13 @@
             <br/>
         </form>
         <div class="pagination">
-            <?php for($i = 1; $i <= $total_page; $i++) { ?>
+            <?php for($i = 1; $i <= $total_page; ++$i) { ?>
                 <a href="?p=<?php echo $i ?><?php if($search) echo '&search=' . $search ?>">
-                    <?php echo $i ?>
+                    <?php if($i === $p) { ?>
+                        <span><?= $i ?></span>
+                    <?php } else {?>
+                        <?= $i ?>
+                    <?php }?>
                 </a>
             <?php } ?>
         </div>

@@ -327,6 +327,32 @@ table {
     padding: 4px 4px 4px 120px;
 }
 
+.form-control {
+    padding: 8px 12px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    outline: none;
+    font-size: 1.4rem;
+}
+
+.form-control:hover {
+    border-color: #1dbfaf;
+}
+
+.form-group.invalid .form-control {
+    border-color: #f33a58;
+}
+
+.form-group.invalid .form-message {
+    color: #f33a58;
+}
+
+.form-message {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    padding: 4px 0 0;
+}
+
 /* pagination */
 .pagination {
     display: flex;
@@ -334,16 +360,25 @@ table {
 }
 .pagination a {
     font-size: 1.6rem;
-    padding: 6px;
     border: 2px solid #000;
     width: 40px;
     margin: 8px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
 }
+
+.pagination a span {
+    background-color: rgb(219, 103, 122);
+    padding: 6px;
+    text-align: center;
+    width: 100%;
+}
+
 .pagination a:hover {
-    background-color: var(--secondary-color);
+    background-color: rgb(219, 103, 122);
 }
 /* Footer */
 .footer {
@@ -420,4 +455,5 @@ table {
     font-size: 3rem;
     color: #fff;
     padding: 100px 30px;
+    height: 100%;
 }

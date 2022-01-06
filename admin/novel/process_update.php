@@ -52,7 +52,7 @@
     where
     id = $id";
 
-    die($sql);
+    // die($sql);
 
     mysqli_query($conn, $sql);
     echo '<script>alert("✅Bạn đã sửa thông tin truyện thành công!")</script>';

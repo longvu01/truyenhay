@@ -78,9 +78,10 @@
     <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src = "../../js/main.js"></script>
 </head>
 <body>
 
@@ -88,7 +89,7 @@
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_update.php">
+        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="process_update.php">
             <h1 class= "form__title form__title--large">Truyện: <?php echo $novel_title?></h1>
             <h2 class= "form__title">Sửa chương <?php echo $result["chap"]?></h1>
             <input type="hidden" name="chap_id" value="<?php echo $chap_id?>"/>
@@ -96,10 +97,11 @@
 
             <div class="form-group">
                 <label>Nội dung</label>
-                <textarea name="chapter_content" id="" cols="30" rows="50"><?php echo $result["chapter_content"]?></textarea>
+                <textarea name="chapter_content" id="" cols="30" rows="50" placeholder="Nhập nội dung chương" class="form-control" rules="required"><?php echo $result["chapter_content"]?></textarea>
+                <span class="form-message"></span>
             </div>
 
-            <button type="submit" name="submit">Sửa nội dung chương</button>
+            <button type="submit">Sửa nội dung chương</button>
         </form>
     </div>
 
@@ -108,6 +110,9 @@
         <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../../js/main.js"></script>
+    <script src = "../../js/validator.js"></script>
+    <script>
+        const formAdd = new Validator('#form-update')
+    </script>
 </body>
 </html>

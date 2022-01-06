@@ -23,6 +23,14 @@
     mysqli_query($conn, $sql);
 
     echo "<script>alert('✅Bạn đã duyệt truyện này!')</script>";
+
+    require_once '../mail.php';
+    $email = "lelongvu17@gmail.com";
+    $name = "Longg Vũ";
+    $title = "Truyện của bạn đã được duyệt";
+    $content = "Truyện của bạn đã được duyệt, hãy <a href='localhost/truyenhay/admin/chapter/index.php'>quay lại</a> và thêm chương mới nhé";
+    sendMail($email, $name, $title, $content);
+
     echo "<script>$location</script>";
     mysqli_close($conn);
 ?>

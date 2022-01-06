@@ -10,10 +10,10 @@
         echo"<script>window.location = 'index.php' </script>";
         die();
     }
-    // Get id and back to last record from table when data is empty
-    if(empty($_POST['chap_id']) ) {
-        echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-        echo"<script>window.location = 'search.php'</script>";
+    
+    if(empty($_POST['chap_id']) || empty($_POST['chapter_content'])) {
+        echo "<script>alert('❌Cần điền đầy đủ thông tin!')</script>";
+        echo "<script>window.location = 'search.php'</script>";
     }
     // ----------------------------------------------------------------
     $chap_id = addslashes($_POST['chap_id']);
