@@ -1,18 +1,21 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo "<script>window.location = 'index.php' </script>";
+        header('Location: index.php');
         die();
     }
-    
-    $location = "window.location = 'search.php'";
+
     if(empty($_POST['chap_id']) ) {
-        echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-        echo "<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Cần có mã để duyệt!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: search.php');
         die();
     }
    // ----------------------------------------------------------------
@@ -22,7 +25,11 @@
     mysqli_query($conn, $sql);
 
     // Thông báo và điều hướng quay lại
-    echo '<script>alert("Bạn đã duyệt chương thành công ✅")</script>';
-    echo"<script>$location</script>";
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "Bạn đã duyệt chương thành công ✅";
+    $_SESSION['info_type'] = "success";
+
+    header('Location: search.php');
+
     mysqli_close($conn);
 ?>

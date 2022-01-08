@@ -6,12 +6,12 @@
     // $role = $_SESSION['role'];
     $role = 1;
 
-    $p = isset($_REQUEST["p"]) ? $_REQUEST["p"] * 1 : 0;
+    $p = isset($_REQUEST["p"]) ? addslashes($_REQUEST["p"]) * 1 : 0;
 	if ($p < 1) $p = 1;
     
     $search = "";
     if(isset($_GET['search'])){
-        $search = $_GET['search'];
+        $search = addslashes($_GET['search']);
     }
 
 	$sql_total_records = "select count(*) from novel where title like '%$search%'";
@@ -24,9 +24,8 @@
 
     $total_page = ceil($total_records / $nop);
     $offset = $nop * ($p - 1);
-
     // sql select and search
-    $sql = "select 
+    $sql = "select
     novel.*,
     categories.category_name as c_name
     from novel 
@@ -55,11 +54,13 @@
     <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src = "../../js/main.js"></script>
 </head>
 <body>
+    <div id="toast"></div>
     
     <?php require_once ('../root/header_admin.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
@@ -134,9 +135,13 @@
             <br/>
         </form>
         <div class="pagination">
-            <?php for($i = 1; $i <= $total_page; $i++) { ?>
+            <?php for($i = 1; $i <= $total_page; ++$i) { ?>
                 <a href="?p=<?php echo $i ?><?php if($search) echo '&search=' . $search ?>">
-                    <?php echo $i ?>
+                    <?php if($i === $p) { ?>
+                        <span><?= $i ?></span>
+                    <?php } else {?>
+                        <?= $i ?>
+                    <?php }?>
                 </a>
             <?php } ?>
         </div>
@@ -147,6 +152,24 @@
         <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../../js/main.js"></script>
+    <script src = "../../js/toast_msg.js"></script>
+    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
+        <?php 
+            $info_title = $_SESSION['info_title'];
+            $info_message = $_SESSION['info_message'];
+            $info_type = $_SESSION['info_type'];
+
+            unset($_SESSION['info_title']);
+            unset($_SESSION['info_message']);
+            unset($_SESSION['info_type']);
+            
+            echo "<script>showToast({
+                title: '$info_title',
+                message: '$info_message',
+                type: '$info_type',
+                duration: 5000,
+            })</script>";
+        ?>
+    <?php }?> 
 </body>
 </html>

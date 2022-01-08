@@ -6,15 +6,17 @@
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../' </script>";
+        header('Location: index.php');
         die();
     }
 
     // Truyền mã không hợp lệ
-    $location = "window.location = 'index.php'";
     if(empty($_GET['id']) || ($_GET['id'] < 1)) {
-        echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Phải truyền mã hợp lệ để chỉnh sửa!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
         die();
     }
     
@@ -24,8 +26,11 @@
     $sql_result = mysqli_query($conn, $sql);
     $number_rows = mysqli_num_rows($sql_result);
     if($number_rows != 1) {
-        echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Không tìm thấy truyện theo mã này!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
         die();
     }
     // ----------------------------------------------------------------
@@ -54,9 +59,10 @@
     <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src = "../../js/main.js"></script>
 </head>
 <body>
 
@@ -106,7 +112,5 @@
         <p class="footer__text">K1 - J2 School</p>
         <img src="../../img/j2team.png" alt="">
     </footer>
-
-    <script src="../../js/main.js"></script>
 </body>
 </html>

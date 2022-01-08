@@ -1,12 +1,16 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
 
     if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['status'])
     || empty($_POST['author']) || empty($_POST['pre_view'])) {
-        echo "<script>alert('❌Cần điền đầy đủ thông tin!')</script>";
-        echo "<script>window.location = 'search.php'</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Cần điền đầy đủ thông tin!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
         die();
     }
     // Xử lý upload ảnh
@@ -28,16 +32,18 @@
     $pre_view = addslashes($_POST['pre_view']);
 
     // Địa chỉ điều hướng quay lại khi trùng tên truyện hoặc sửa thông tin thành công
-    $location = "window.location = 'update.php?id=$id'";
     $title = addslashes($_POST['title']);
     $sql = "select count(*) from novel where title = '$title' and id != '$id'";
     $result = mysqli_query($conn, $sql);
     $number_rows = mysqli_fetch_array($result)['count(*)'];
     // Nếu đã tồn tại tên truyện thì thông báo và điều hướng quay lại
     if($number_rows == 1) {
-        echo '<script>alert("Tên truyện này có người đặt rùi!")</script>';
-        echo"<script>$location</script>";
-        exit;
+        $_SESSION['info_title'] = "Thông báo!";
+        $_SESSION['info_message'] = "Tên truyện này có người đặt gòi !";
+        $_SESSION['info_type'] = "info";
+
+        header('Location: update.php?id=' . $id);
+        die();
     }
     //
 
@@ -51,11 +57,14 @@
     verify = 0
     where
     id = $id";
-
-    die($sql);
-
+    // die($sql);
     mysqli_query($conn, $sql);
-    echo '<script>alert("✅Bạn đã sửa thông tin truyện thành công!")</script>';
-    echo"<script>$location</script>";
+
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "✅Bạn đã sửa thông tin truyện thành công!";
+    $_SESSION['info_type'] = "success";
+
+    header('Location: search.php');
+
     mysqli_close($conn);
 ?>
