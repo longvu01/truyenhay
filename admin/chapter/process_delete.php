@@ -5,14 +5,18 @@
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 1;
-    // Session user id
-    // $ss_user_id = $_SESSION['id'];
-    $ss_user_id = 2;
 
+    // Nếu k truyền chap_id
     if(empty($_POST['chap_id']) ) {
-        echo"<script>window.location = 'index.php'</script>";
+        header('Location: index.php');
+        die();
     }
+
     $chap_id = addslashes($_POST['chap_id']);
+    if ($chap_id < 1) {
+        header('Location: search.php');
+        die();
+    }
     // Nếu đúng là tác giả/ admin thì được phép xóa
     $sql = "SELECT user.id FROM chapter
     join novel 
@@ -24,20 +28,20 @@
     $sql_result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($sql_result);
     $user_id = $row['id'];
-    
+    // Session user id
+    // $ss_user_id = $_SESSION['id'];
+    $ss_user_id = 1;
+
     if(isset($ss_user_id)) {
-        if($user_id != $ss_user_id && $role != 1) {
-            echo"<script>window.location = 'index.php'</script>";
+        if($user_id != $ss_user_id || $role != 1) {
+            header('Location: index.php');
+        die();
         }
     } else {
-        echo"<script>window.location = 'index.php'</script>";
-    }
-
-    if ($chap_id < 1) {
-        echo '<script>alert("Truyện chưa có chương nào!")</script>';
-        echo"<script>window.location = 'search_chapter.php'</script>";
+        header('Location: index.php');
         die();
     }
+
     // ----------------------------------------------------------------
     $novel_title = addslashes($_POST['novel_title']);
 
@@ -53,8 +57,11 @@
     // die($sql);
     mysqli_query($conn, $sql);
 
-    $location = "window.location = 'search.php?search=$novel_title'";
-    echo '<script>alert("Bạn đã xoá chương thành công!")</script>';
-    echo"<script>$location</script>";
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "Bạn đã xoá chương thành công!";
+    $_SESSION['info_type'] = "success";
+
+    header('Location: search.php?search=' . $novel_title);
+
     mysqli_close($conn);
 ?>

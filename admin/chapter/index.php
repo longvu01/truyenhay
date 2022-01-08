@@ -32,6 +32,7 @@
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>
+    <div id="toast"></div>
 
     <?php require_once ('../root/header_admin.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
@@ -70,6 +71,24 @@
         <p class="footer__text">K1 - J2 School</p>
         <img src="../../img/j2team.png" alt="">
     </footer>
+
+    <script src = "../../js/toast_msg.js"></script>
+    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
+        <?php 
+            $info_title = $_SESSION['info_title'];
+            $info_message = $_SESSION['info_message'];
+            $info_type = $_SESSION['info_type'];
+            unset($_SESSION['info_title']);
+            unset($_SESSION['info_message']);
+            unset($_SESSION['info_type']);
+            echo "<script>showToast({
+                title: '$info_title',
+                message: '$info_message',
+                type: '$info_type',
+                duration: 5000,
+            })</script>";
+        ?>
+    <?php }?> 
 
     <script src = "../../js/validator.js"></script>
     <script>

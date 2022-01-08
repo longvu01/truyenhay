@@ -4,12 +4,14 @@
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // Back to home page when data is empty
-    $location = "window.location = 'index.php'";
-    //
     if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['author'])
     || empty($_FILES['img_link']) || empty($_POST['pre_view'])) {
-        echo '<script>alert("❌Cần điền đầy đủ thông tin!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Cần điền đầy đủ thông tin!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
+        die();
     }
     // ----------------------------------------------------------------
     $user_id = addslashes($_POST['user_id']);
@@ -31,11 +33,13 @@
     $number_rows = mysqli_fetch_array($result)['count(*)'];
     // Nếu đã tồn tại tên truyện thì thông báo và điều hướng quay lại
     if($number_rows == 1) {
-        echo '<script>alert("Tên truyện này có người đặt rùi!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Thông báo!";
+        $_SESSION['info_message'] = "Tên truyện này có người đặt gòi !";
+        $_SESSION['info_type'] = "info";
+
+        header('Location: index.php');
         die();
     }
-
 
     $sql = "insert into novel 
     (user_id, category_id, title, author, img_link, pre_view)
@@ -46,7 +50,11 @@
     mysqli_query($conn, $sql);
 
     // Thông báo và điều hướng đến trang thêm chương mới
-    echo "<script>alert('Bạn đã thêm truyện thành công!')</script>";
-    echo "<script>window.location = '../chapter/index.php'</script>";
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "Bạn đã thêm truyện thành công!";
+    $_SESSION['info_type'] = "success";
+
+    header('Location: ../chapter/index.php');
+
     mysqli_close($conn);
 ?>

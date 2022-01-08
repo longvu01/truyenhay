@@ -1,11 +1,16 @@
 <?php
+    session_start();
     require_once("../../cdb.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // Back to home page when data is empty
     if(empty($_POST['novel_id']) || empty($_POST['chapter_content'])) {
-        echo "<script>alert('❌Cần điền đầy đủ thông tin!')</script>";
-        echo "<script>window.location = 'index.php'</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Cần điền đầy đủ thông tin!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
+        die();
     }
 
     $novel_id = addslashes($_POST['novel_id']);
@@ -31,7 +36,11 @@
     mysqli_query($conn, $sql);
 
     // Thông báo và quay lại trang tìm kiếm
-    echo "<script>alert('Bạn đã thêm chương mới thành công!')</script>";
-    echo "<script>window.location = 'search.php'</script>";
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "Bạn đã thêm chương mới thành công!";
+    $_SESSION['info_type'] = "success";
+
+    header('Location: index.php');
+
     mysqli_close($conn);
 ?>

@@ -6,13 +6,16 @@
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../' </script>";
+        header('Location: index.php');
         die();
     }
 
     if(empty($_POST['id']) ) {
-        echo '<script>alert("❌Yêu cầu không hợp lệ!")</script>';
-        echo "<script>window.location = 'index.php'</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Yêu cầu không hợp lệ!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
         die();
     }
     
@@ -28,7 +31,11 @@
     mysqli_query($conn, $sql);
     
     // Thông báo và điều hướng quay lại
-    echo "<script>alert('Bạn đã xoá truyện và các chương thành công!')</script>";
-    echo "<script>window.location = 'search.php'</script>";
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "Bạn đã xoá truyện và các chương thành công!";
+    $_SESSION['info_type'] = "success";
+
+    header('Location: search.php');
+
     mysqli_close($conn);
 ?>

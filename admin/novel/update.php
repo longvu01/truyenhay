@@ -19,17 +19,24 @@
     $user_id = $row['id'];
 
     if($user_id != $ss_user_id) {
-        echo "<script>window.location = 'index.php' </script>";
+        header('Location: index.php');
+        die();
     } else if ($role != 0) {
-        echo "<script>alert('Bạn không thể sửa truyện của người dùng!')</script>";
-        echo "<script>window.location = 'index.php' </script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Bạn không thể sửa truyện của người dùng!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
+        die();
     }
 
     // Truyền mã không hợp lệ
-    $location = "window.location = 'index.php'";
     if(empty($_GET['id']) || ($_GET['id'] < 1)) {
-        echo '<script>alert("❌Phải truyền mã hợp lệ để chỉnh sửa!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Phải truyền mã hợp lệ để chỉnh sửa!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: index.php');
         die();
     }
 
@@ -38,8 +45,11 @@
     $sql_result = mysqli_query($conn, $sql);
     $number_rows = mysqli_num_rows($sql_result);
     if($number_rows != 1) {
-        echo '<script>alert("❌Không tìm thấy truyện theo mã này!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Không tìm thấy truyện theo mã này!";
+        $_SESSION['info_type'] = "error";
+        
+        header('Location: index.php');
         die();
     }
     // ----------------------------------------------------------------
@@ -66,8 +76,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/toast_msg.js"></script>
 </head>
 <body>
+    <div id="toast"></div>
 
     <?php require_once ('../root/header_admin.php'); ?>
     <?php require_once ('../root/menu.php'); ?>

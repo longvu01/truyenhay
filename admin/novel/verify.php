@@ -6,14 +6,16 @@
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../' </script>";
+        header('Location: index.php');
         die();
     }
     // Kiểm tra mã hợp lệ
-    $location = "window.location = 'search.php'";
     if(empty($_POST['id']) ) {
-        echo '<script>alert("❌Cần có mã để duyệt!")</script>';
-        echo"<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Cần có mã để duyệt!";
+        $_SESSION['info_type'] = "error";
+
+        header('Location: search.php');
         die();
     }
     // ----------------------------------------------------------------
@@ -22,15 +24,20 @@
 
     mysqli_query($conn, $sql);
 
-    echo "<script>alert('✅Bạn đã duyệt truyện này!')</script>";
+    // require_once '../mail.php';
+    // // $email = $_SESSION['email'];
+    // $email = "lelongvu17@gmail.com";
+    // // $name = $_SESSION['name'];
+    // $name = "Longg Vũ";
+    // $title = "Truyện của bạn đã được duyệt";
+    // $content = "Truyện của bạn đã được duyệt, hãy <a href='localhost/truyenhay/admin/chapter/index.php'>quay lại</a> và thêm chương mới nhé";
+    // sendMail($email, $name, $title, $content);
 
-    require_once '../mail.php';
-    $email = "lelongvu17@gmail.com";
-    $name = "Longg Vũ";
-    $title = "Truyện của bạn đã được duyệt";
-    $content = "Truyện của bạn đã được duyệt, hãy <a href='localhost/truyenhay/admin/chapter/index.php'>quay lại</a> và thêm chương mới nhé";
-    sendMail($email, $name, $title, $content);
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "✅Bạn đã duyệt truyện này";
+    $_SESSION['info_type'] = "success";
 
-    echo "<script>$location</script>";
+    header('Location: search.php');
+    
     mysqli_close($conn);
 ?>

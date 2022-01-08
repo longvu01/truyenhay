@@ -10,27 +10,6 @@
         die();
     }
 
-    if(isset($_POST['category_name'])) {
-        $location = "window.location = 'index.php'";
-
-        $category_name = addslashes($_POST['category_name']);
-        $sql = "select count(*) from categories where category_name = '$category_name'";
-        $result = mysqli_query($conn, $sql);
-        $number_rows = mysqli_fetch_array($result)['count(*)'];
-        // Nếu đã tồn tại tên thể loại thì thông báo và điều hướng quay lại
-        if($number_rows == 1) {
-            echo '<script>alert("Thể loại bạn thêm đã tồn tại!")</script>';
-            echo"<script>$location</script>";
-            die();
-        }
-        
-        $sql = "insert into categories (category_name) values ('$category_name')";
-        // die($sql);
-        mysqli_query($conn, $sql);
-        echo "<script>alert('Bạn đã thêm thể loại thành công!')</script>";
-        echo "<script>$location</script>";
-    }
-
     $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
 
@@ -55,13 +34,14 @@
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>
-
+    <div id="toast"></div>
+    
     <?php require_once ('../root/header_admin.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
 
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" method="POST" id="form-add">
+        <form class="form form__process active" method="POST" id="form-add" action="process_insert.php">
             <h1 class= "form__title">Tùy chỉnh thể loại</h1>
             <div class="form-group">
                 <label>Thể loại mới</label>
@@ -69,7 +49,7 @@
                 <span class="form-message"></span>
             </div>
 
-            <button class="btn" type="submit" name="submit">Thêm thể loại</button>
+            <button class="btn" type="submit">Thêm thể loại</button>
         </form>
         <!-- Search -->
         <div class="form form__process">
@@ -106,6 +86,24 @@
 
     </div>
 
+    <script src = "../../js/toast_msg.js"></script>
+    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
+        <?php 
+            $info_title = $_SESSION['info_title'];
+            $info_message = $_SESSION['info_message'];
+            $info_type = $_SESSION['info_type'];
+            unset($_SESSION['info_title']);
+            unset($_SESSION['info_message']);
+            unset($_SESSION['info_type']);
+            echo "<script>showToast({
+                title: '$info_title',
+                message: '$info_message',
+                type: '$info_type',
+                duration: 5000,
+            })</script>";
+        ?>
+    <?php }?>  
+
     <script src = "../../js/validator.js"></script>
     <script>
         const formAdd = new Validator('#form-add')
@@ -119,6 +117,12 @@
                 function showError() {
                     errorElement.textContent = 'Vui lòng nhập trường này'
                     formGroup.classList.add('invalid')
+                    showToast({
+                        title: 'Thiếu thông tin!',
+                        message: 'Bạn cần nhập đủ các trường',
+                        type: 'warning',
+                        duration: 5000,
+                    });
                 }
                 function clearError() {
                     errorElement.textContent = ''

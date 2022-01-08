@@ -54,11 +54,13 @@
     <link rel="stylesheet" href="../../css/style1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src = "../../js/main.js"></script>
 </head>
 <body>
+    <div id="toast"></div>
     
     <?php require_once ('../root/header_admin.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
@@ -150,6 +152,24 @@
         <img src="../../img/j2team.png" alt="">
     </footer>
 
-    <script src="../../js/main.js"></script>
+    <script src = "../../js/toast_msg.js"></script>
+    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
+        <?php 
+            $info_title = $_SESSION['info_title'];
+            $info_message = $_SESSION['info_message'];
+            $info_type = $_SESSION['info_type'];
+
+            unset($_SESSION['info_title']);
+            unset($_SESSION['info_message']);
+            unset($_SESSION['info_type']);
+            
+            echo "<script>showToast({
+                title: '$info_title',
+                message: '$info_message',
+                type: '$info_type',
+                duration: 5000,
+            })</script>";
+        ?>
+    <?php }?> 
 </body>
 </html>

@@ -1,24 +1,15 @@
 <?php
     session_start();
     require_once("../../cdb.php");
-    // Kiểm tra quyền, dữ liệu
-    require_once("../root/check_permission.php");
-    // $role = $_SESSION['role'];
-    $role = 1;
-    if($role != 1) {
-        echo"<script>window.location = '../' </script>";
-        die();
-    }
-
-    $location = "window.location = 'index.php'";
 
     if(empty($_POST['id'])) {
-        echo "<script>alert('❌Yêu cầu không hợp lệ!')</script>";
-        echo "<script>$location</script>";
+        header('Location: index.php');
         die();
     } else if (trim($_POST['category_name']) == '') {
-        echo "<script>alert('❌Tên thể loại không được để trống!')</script>";
-        echo "<script>$location</script>";
+        $_SESSION['info_title'] = "Có lỗi!";
+        $_SESSION['info_message'] = "❌Tên thể loại không được để trống!";
+        $_SESSION['info_type'] = "error";
+        header('Location: index.php');
         die();
     }
    // ----------------------------------------------------------------
@@ -33,7 +24,10 @@
     mysqli_query($conn, $sql);
 
     // Thông báo và điều hướng quay lại
-    echo '<script>alert("✅Bạn đã sửa thể loại thành công!")</script>';
-    echo"<script>$location</script>";
+    $_SESSION['info_title'] = "Thành công!";
+    $_SESSION['info_message'] = "✅Bạn đã sửa thể loại thành công!";
+    $_SESSION['info_type'] = "success";
+    
+    header('Location: index.php');
     mysqli_close($conn);
 ?>
