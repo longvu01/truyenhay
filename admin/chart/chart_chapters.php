@@ -1,0 +1,154 @@
+<?php
+    session_start();
+    require_once("../root/check_permission.php");
+
+    // $role = $_SESSION['role'];
+    $role = 1;
+    if($role != 1) {
+        header('Location: ../.php');
+        exit;
+    }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thống kê chi tiết</title>
+  <link rel="stylesheet" href="./css/chart_details.css">
+  <link rel="stylesheet" href="../../css/reset1.css">
+  <link rel="stylesheet" href="../../css/base1.css">
+  <link rel="stylesheet" href="../../css/style1.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script defer src = "../../js/main.js"></script>
+</head>
+<body>
+  <?php require_once ('../root/header.php'); ?>
+  <?php require_once ('../root/menu.php'); ?>
+  <div class="wrapper">
+    <div class=" form__process">
+        <h1 class= "form__title">Thống kê chương</h1>
+    </div>
+
+    <label for="" class="chart__label">
+      Chọn số ngày thống kê: 
+      <select name="" id="chart__select">
+        <option value="7">7</option>
+        <option value="30" selected>30</option>
+        <option value="60">60</option>
+      </select>
+    </label>
+    
+    <figure class="highcharts-figure">
+      <div id="container"></div>
+    </figure>
+  </div>
+
+  <?php require_once ('../root/footer.php'); ?>
+  
+  <!--  -->
+  <script src = "../../js/jquery-3.6.0.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      let days = 30;
+      if(days != 7 || days != 30 || days != 60) {
+        days = 30;
+      }
+      callAjax(days)
+
+      let chartSelect = $('#chart__select');
+      chartSelect.change(function() {
+        days = (+$(this).val());
+        if(days !== 7 && days !== 30 && days !== 60) {
+          days = 30;
+        }
+        callAjax(days)
+      });
+    })
+    
+    function callAjax(days) {
+      $.ajax({
+        url: 'get_chapter_count.php',
+        dataType: 'json',
+        data: {days}  
+      })
+      .done(function(response) {
+        const arr = Object.values(response[0])
+        const arrDetails = []
+        Object.values(response[1]).forEach((each) => {
+          each.data = Object.values(each.data)
+          arrDetails.push(each)
+        })
+        // Create the chart
+        getChart(arr, arrDetails, days)
+      })
+    }
+
+    function getChart(arr, arrDetails, days) {
+      Highcharts.chart('container', {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          text: `Tổng số chương của những truyện mới được viết ${days} ngày gần đây`
+        },
+        accessibility: {
+          announceNewData: {
+            enabled: true
+          }
+        },
+        xAxis: {
+          type: 'category'
+        },
+        yAxis: {
+          title: {
+            text: 'Tổng chương'
+          }
+
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          series: {
+            borderWidth: 0,
+            dataLabels: {
+              enabled: true,
+              format: '{point.y:f}'
+            }
+          }
+        },
+
+        tooltip: {
+          headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+          pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:f}</b> chương<br/>'
+        },
+
+        series: [
+          {
+            name: "Truyện",
+            colorByPoint: true,
+            data: arr
+          }
+        ],
+
+        drilldown: {
+          series: arrDetails
+        }
+      });
+    }
+
+  </script>
+
+</body>
+</html>

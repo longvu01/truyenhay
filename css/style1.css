@@ -199,6 +199,19 @@
     background-color: yellow;
 }
 
+/* Chart */
+.chart__label {
+    font-size: 2rem;
+    margin: 16px 0 40px 250px;
+    display: block;
+}
+
+.chart__label select {
+    font-size: 1.6rem;
+    outline: 1px solid;
+    padding: 4px;
+}
+
 /*  Form */
 .form__process {
     display: flex;
@@ -384,6 +397,7 @@ table {
 .footer {
     background-color: #050609;
     position: relative;
+    margin-top: auto;
 }
 
 .footer img {

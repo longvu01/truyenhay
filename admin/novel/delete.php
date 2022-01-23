@@ -7,7 +7,7 @@
     $role = 1;
     if($role != 1) {
         header('Location: index.php');
-        die();
+        exit;
     }
 
     // Kiểm tra mã hợp lệ
@@ -17,7 +17,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : 1;
@@ -32,7 +32,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $sql_result = mysqli_query($conn, $sql);
@@ -63,7 +63,7 @@
 </head>
 <body>
 
-    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/header.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
@@ -122,9 +122,6 @@
         </form>
     </div>
 
-    <footer class="footer">
-        <p class="footer__text">K1 - J2 School</p>
-        <img src="../../img/j2team.png" alt="">
-    </footer>
+    <?php require_once ('../root/footer.php'); ?>
 </body>
 </html>

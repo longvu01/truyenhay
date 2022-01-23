@@ -62,7 +62,7 @@
 <body>
     <div id="toast"></div>
     
-    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/header.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
@@ -134,42 +134,12 @@
             <br/>
             <br/>
         </form>
-        <div class="pagination">
-            <?php for($i = 1; $i <= $total_page; ++$i) { ?>
-                <a href="?p=<?php echo $i ?><?php if($search) echo '&search=' . $search ?>">
-                    <?php if($i === $p) { ?>
-                        <span><?= $i ?></span>
-                    <?php } else {?>
-                        <?= $i ?>
-                    <?php }?>
-                </a>
-            <?php } ?>
-        </div>
+        <?php require_once ('../root/pagination.php'); ?>
     </div>
 
-    <footer class="footer">
-        <p class="footer__text">K1 - J2 School</p>
-        <img src="../../img/j2team.png" alt="">
-    </footer>
-
+    <?php require_once ('../root/footer.php'); ?>
+    
     <script src = "../../js/toast_msg.js"></script>
-    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
-        <?php 
-            $info_title = $_SESSION['info_title'];
-            $info_message = $_SESSION['info_message'];
-            $info_type = $_SESSION['info_type'];
-
-            unset($_SESSION['info_title']);
-            unset($_SESSION['info_message']);
-            unset($_SESSION['info_type']);
-            
-            echo "<script>showToast({
-                title: '$info_title',
-                message: '$info_message',
-                type: '$info_type',
-                duration: 5000,
-            })</script>";
-        ?>
-    <?php }?> 
+    <?php require_once ('../root/show_toast.php'); ?>
 </body>
 </html>

@@ -4,13 +4,13 @@
 
     if(empty($_POST['id'])) {
         header('Location: index.php');
-        die();
+        exit;
     } else if (trim($_POST['category_name']) == '') {
         $_SESSION['info_title'] = "Có lỗi!";
         $_SESSION['info_message'] = "❌Tên thể loại không được để trống!";
         $_SESSION['info_type'] = "error";
         header('Location: index.php');
-        die();
+        exit;
     }
    // ----------------------------------------------------------------
     $id = addslashes($_POST['id']);

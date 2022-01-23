@@ -12,7 +12,7 @@
         $_SESSION['info_message'] = "❌Phải truyền mã hợp lệ để xóa!";
         $_SESSION['info_type'] = "error";
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $chap_id = addslashes($_GET["chap_id"]);
@@ -34,11 +34,11 @@
     if(isset($ss_user_id)) {
         if($user_id != $ss_user_id && $role != 1) {
             header('Location: index.php');
-            die();
+            exit;
         }
     } else {
         header('Location: index.php');
-        die();
+        exit;
     }
 
     // Kiểm tra chương tồn tại ?
@@ -51,7 +51,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
     $result = mysqli_fetch_array($sql_result);
 
@@ -86,7 +86,7 @@
 </head>
 <body>
 
-    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/header.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
@@ -105,9 +105,6 @@
         </form>
     </div>
 
-    <footer class="footer">
-        <p class="footer__text">K1 - J2 School</p>
-        <img src="../../img/j2team.png" alt="">
-    </footer>
+    <?php require_once ('../root/footer.php'); ?>
 </body>
 </html>

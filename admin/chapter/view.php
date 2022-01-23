@@ -7,7 +7,7 @@
     $role = 1;
     if($role != 1) {
         header('Location: index.php');
-        die();
+        exit;
     }
     
     if(empty($_GET['chap_id']) || ($_GET["chap_id"] < 1)) {
@@ -16,7 +16,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: search.php');
-        die();
+        exit;
     }
 
     $chap_id = addslashes($_GET["chap_id"]);
@@ -31,7 +31,7 @@
         $_SESSION['info_type'] = "error";
         
         header('Location: search.php');
-        die();
+        exit;
     }
     // ----------------------------------------------------------------
     $result = mysqli_fetch_array($sql_result);
@@ -65,7 +65,7 @@
 </head>
 <body>
 
-    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/header.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
@@ -84,9 +84,6 @@
         </form>
     </div>
 
-    <footer class="footer">
-        <p class="footer__text">K1 - J2 School</p>
-        <img src="../../img/j2team.png" alt="">
-    </footer>
+    <?php require_once ('../root/footer.php'); ?>
 </body>
 </html>

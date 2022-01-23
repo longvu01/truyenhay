@@ -7,7 +7,7 @@
     $role = 1;
     if($role != 1) {
         header('Location: index.php');
-        die();
+        exit;
     }
 
     if(empty($_POST['chap_id']) ) {
@@ -16,7 +16,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: search.php');
-        die();
+        exit;
     }
    // ----------------------------------------------------------------
     $chap_id = addslashes($_POST['chap_id']);

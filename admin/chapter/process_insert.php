@@ -10,7 +10,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $novel_id = addslashes($_POST['novel_id']);

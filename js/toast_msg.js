@@ -14,7 +14,8 @@ function showToast(options) {
     const icon = icons[options.type];
 
     // Time delay animation
-    const delay = options.duration / 1000;
+    const duration = options.duration ?? 5000;
+    const delay = duration / 1000;
 
     // Create new toast element
     const toast = document.createElement('div');
@@ -42,7 +43,7 @@ function showToast(options) {
     // Auto remove toast
     const autoRemove = setTimeout(
       () => toastContainer.removeChild(toast),
-      options.duration + 1000
+      duration + 1000
     );
 
     // Remove toast when click

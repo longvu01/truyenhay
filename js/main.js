@@ -1,21 +1,21 @@
 'use strict';
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 
-let menuBar = $('#menu__bar');
-let menu = $('.menu');
-let formProcesses = $$('.form__process');
-let formTitle = $('.form__title');
-let btnDel = $('#btn_del');
-let menuRightItems = $$('.menu__right--item');
-let notiBtn = $('.noti');
+let menuBar = document.querySelector('#menu__bar');
+let menu = document.querySelector('.menu');
+let formProcesses = document.querySelectorAll('.form__process');
+let formTitle = document.querySelector('.form__title');
+let btnDel = document.querySelector('#btn_del');
+let menuRightItems = document.querySelectorAll('.menu__right--item');
+let notiBtn = document.querySelector('.noti');
 
-let formTitleContent = formTitle.innerText;
-menuRightItems.forEach(item => {
-  if (formTitleContent.includes(item.innerText)) {
-    item.classList.add('active');
-  }
-});
+let formTitleContent = formTitle?.innerText;
+if (formTitleContent) {
+  menuRightItems.forEach(item => {
+    if (formTitleContent.includes(item.innerText)) {
+      item.classList.add('active');
+    }
+  });
+}
 
 menuBar.addEventListener('click', function () {
   menu.classList.toggle('menu--transform');

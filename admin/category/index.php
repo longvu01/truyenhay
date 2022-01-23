@@ -7,7 +7,7 @@
     $role = 1;
     if($role != 1) {
         echo"<script>window.location = '../' </script>";
-        die();
+        exit;
     }
 
     $sql = "select * from categories";
@@ -36,7 +36,7 @@
 <body>
     <div id="toast"></div>
     
-    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/header.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
 
     <div class="wrapper">
@@ -86,23 +86,10 @@
 
     </div>
 
+    <?php require_once ('../root/footer.php'); ?>
+    
     <script src = "../../js/toast_msg.js"></script>
-    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
-        <?php 
-            $info_title = $_SESSION['info_title'];
-            $info_message = $_SESSION['info_message'];
-            $info_type = $_SESSION['info_type'];
-            unset($_SESSION['info_title']);
-            unset($_SESSION['info_message']);
-            unset($_SESSION['info_type']);
-            echo "<script>showToast({
-                title: '$info_title',
-                message: '$info_message',
-                type: '$info_type',
-                duration: 5000,
-            })</script>";
-        ?>
-    <?php }?>  
+    <?php require_once ('../root/show_toast.php'); ?>
 
     <script src = "../../js/validator.js"></script>
     <script>
@@ -136,6 +123,5 @@
             }
         }
     </script>
-
 </body>
 </html>

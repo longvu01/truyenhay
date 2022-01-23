@@ -11,7 +11,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
     // ----------------------------------------------------------------
     $user_id = addslashes($_POST['user_id']);
@@ -38,7 +38,7 @@
         $_SESSION['info_type'] = "info";
 
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $sql = "insert into novel 
