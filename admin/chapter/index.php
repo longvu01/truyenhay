@@ -4,31 +4,25 @@
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
-    $role = 0;
+    $role = 1;
     // $user_id = $_SESSION['id'];
-    $user_id = 1;
+    $user_id = 2;
     
     $sql = "select * from novel where user_id = '$user_id'";
     $novels = mysqli_query($conn, $sql);
+    
+    // Count
+    $sql_total_records = "select count(*) from novel where user_id = '$user_id'";
+    $arr_total = mysqli_query($conn, $sql_total_records);
+    $total_result = mysqli_fetch_array($arr_total);
+    $total_records = $total_result['count(*)'];
 
     mysqli_close($conn);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm chương</title>
-    <link rel="stylesheet" href="../../css/reset1.css">
-    <link rel="stylesheet" href="../../css/base1.css">
-    <link rel="stylesheet" href="../../css/style1.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Start HTML -->
+    <?php require_once ('../root/lazy.php'); ?>
+    <?php lazy('Thêm chương') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>
@@ -47,10 +41,14 @@
                     <label>Chọn truyện của bạn</label>
                     <select name="novel_id" class="form-control" rules="required">
                         <option value="" hidden>Chọn truyện</option>
-                            <?php foreach ($novels as $novel) {?>
-                                <option value="<?php echo $novel["id"]?>">
-                                    <?php echo $novel["title"]?>
-                                </option>
+                            <?php if($total_records != 0) { ?>
+                                <?php foreach ($novels as $novel) {?>
+                                    <option value="<?php echo $novel["id"]?>">
+                                        <?php echo $novel["title"]?>
+                                    </option>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <option disabled>Bạn chưa có truyện nào</option>
                             <?php } ?>
                     </select>
                     <span class="form-message"></span>
@@ -59,11 +57,13 @@
             
             <div class="form-group">
                 <label>Nội dung chương</label>
-                <textarea name="chapter_content" id="" cols="30" rows="50" placeholder="Nhập nội dung chương" class="form-control" rules="required"></textarea>
+                <textarea name="chapter_content" id="" cols="30" rows="50" 
+                placeholder="Nhập nội dung chương" class="form-control" rules="required" <?php if($total_records == 0) echo 'disabled' ?>>
+                </textarea>
                 <span class="form-message"></span>
             </div>
 
-            <button class="btn" type="submit">Thêm chương mới</button>
+            <button class="btn" type="submit" <?php if($total_records == 0) echo 'disabled' ?>>Thêm chương mới</button>
         </form>
     </div>
 

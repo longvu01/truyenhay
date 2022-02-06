@@ -5,6 +5,8 @@
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 1;
+    // $ss_user_id = $_SESSION['id'];
+    $ss_user_id = 1;
 
     // Nếu k truyền chap_id
     if(empty($_POST['chap_id']) ) {
@@ -29,8 +31,6 @@
     $row = mysqli_fetch_assoc($sql_result);
     $user_id = $row['id'];
     // Session user id
-    // $ss_user_id = $_SESSION['id'];
-    $ss_user_id = 1;
 
     if(isset($ss_user_id)) {
         if($user_id != $ss_user_id || $role != 1) {
