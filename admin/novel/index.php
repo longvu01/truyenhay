@@ -5,33 +5,24 @@
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 0;
+    // $user_id = $_SESSION['id'];
+    $user_id = 2;
+
     $sql = "select * from categories";
     $cates = mysqli_query($conn, $sql);
 
     mysqli_close($conn);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm truyện</title>
-    <link rel="stylesheet" href="../../css/reset1.css">
-    <link rel="stylesheet" href="../../css/base1.css">
-    <link rel="stylesheet" href="../../css/style1.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Start HTML -->
+    <?php require_once ('../root/lazy.php'); ?>
+    <?php lazy('Thêm truyện') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>
     <div id="toast"></div>
     
-    <?php require_once ('../root/header_admin.php'); ?>
+    <?php require_once ('../root/header.php'); ?>
     <?php require_once ('../root/menu.php'); ?>
     
     <div class="wrapper">
@@ -53,7 +44,7 @@
                 </div>
             </div>
             <!-- User id qua session -->
-            <input name="user_id" type = "hidden" value = "1"/>
+            <input name="user_id" type = "hidden" value = "<?php echo $user_id ?>"/>
             <!--  -->
             <div class="form-group">
                 <label>Tác giả</label>
@@ -83,28 +74,10 @@
         </form>
     </div>
 
-    <footer class="footer">
-        <p class="footer__text">K1 - J2 School</p>
-        <img src="../../img/j2team.png" alt="">
-    </footer>
-
+    <?php require_once ('../root/footer.php'); ?>
+    
     <script src = "../../js/toast_msg.js"></script>
-    <?php if(isset($_SESSION['info_title']) && isset($_SESSION['info_message']) && isset($_SESSION['info_type'])) { ?>
-        <?php 
-            $info_title = $_SESSION['info_title'];
-            $info_message = $_SESSION['info_message'];
-            $info_type = $_SESSION['info_type'];
-            unset($_SESSION['info_title']);
-            unset($_SESSION['info_message']);
-            unset($_SESSION['info_type']);
-            echo "<script>showToast({
-                title: '$info_title',
-                message: '$info_message',
-                type: '$info_type',
-                duration: 5000,
-            })</script>";
-        ?>
-    <?php }?> 
+    <?php require_once ('../root/show_toast.php'); ?>
     
     <script src = "../../js/validator.js"></script>
     <script>

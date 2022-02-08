@@ -7,7 +7,7 @@
     $role = 1;
     if($role != 1) {
         header('Location: index.php');
-        die();
+        exit;
     }
     // Kiểm tra mã hợp lệ
     if(empty($_POST['id']) ) {
@@ -16,7 +16,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: search.php');
-        die();
+        exit;
     }
     // ----------------------------------------------------------------
     $id = addslashes($_POST['id']);

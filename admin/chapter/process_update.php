@@ -11,7 +11,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
     
     if(empty($_POST['chap_id']) || empty($_POST['chapter_content'])) {
@@ -20,7 +20,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
     // ----------------------------------------------------------------
     $chap_id = addslashes($_POST['chap_id']);
@@ -28,7 +28,8 @@
     $novel_title = addslashes($_POST['novel_title']);
 
     $sql = "update chapter set
-    chapter_content = '$chapter_content'
+    chapter_content = '$chapter_content',
+    verify = 0
     where
     chap_id = $chap_id";
 

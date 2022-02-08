@@ -11,7 +11,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
     // Xử lý upload ảnh
     $img_link_new = $_FILES['img_link_new'];
@@ -43,7 +43,7 @@
         $_SESSION['info_type'] = "info";
 
         header('Location: update.php?id=' . $id);
-        die();
+        exit;
     }
     //
 
@@ -61,7 +61,8 @@
     mysqli_query($conn, $sql);
 
     $_SESSION['info_title'] = "Thành công!";
-    $_SESSION['info_message'] = "✅Bạn đã sửa thông tin truyện thành công!";
+    $_SESSION['info_message'] = "✅Bạn đã sửa thông tin truyện thành công! 
+    Hãy liên hệ với quản trị viên để được duyệt lại";
     $_SESSION['info_type'] = "success";
 
     header('Location: search.php');

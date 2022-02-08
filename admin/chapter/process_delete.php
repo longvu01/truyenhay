@@ -5,17 +5,19 @@
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 1;
+    // $ss_user_id = $_SESSION['id'];
+    $ss_user_id = 1;
 
     // Nếu k truyền chap_id
     if(empty($_POST['chap_id']) ) {
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $chap_id = addslashes($_POST['chap_id']);
     if ($chap_id < 1) {
         header('Location: search.php');
-        die();
+        exit;
     }
     // Nếu đúng là tác giả/ admin thì được phép xóa
     $sql = "SELECT user.id FROM chapter
@@ -29,17 +31,15 @@
     $row = mysqli_fetch_assoc($sql_result);
     $user_id = $row['id'];
     // Session user id
-    // $ss_user_id = $_SESSION['id'];
-    $ss_user_id = 1;
 
     if(isset($ss_user_id)) {
         if($user_id != $ss_user_id || $role != 1) {
             header('Location: index.php');
-        die();
+        exit;
         }
     } else {
         header('Location: index.php');
-        die();
+        exit;
     }
 
     // ----------------------------------------------------------------

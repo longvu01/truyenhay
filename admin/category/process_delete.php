@@ -6,7 +6,7 @@
     $role = 1;
     if($role != 1) {
         header('Location: index.php');
-        die();
+        exit;
     }
 
     if(empty($_GET['id']) ) {
@@ -15,7 +15,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
     // ----------------------------------------------------------------
     $id = addslashes($_GET['id']);
@@ -30,7 +30,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     }
 
     $sql = "delete from categories where id = '$id'";

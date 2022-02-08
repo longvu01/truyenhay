@@ -16,7 +16,7 @@
         $_SESSION['info_type'] = "error";
 
         header('Location: index.php');
-        die();
+        exit;
     } else {
         $sql = "insert into categories (category_name) values ('$category_name')";
         mysqli_query($conn, $sql);
@@ -26,7 +26,7 @@
         $_SESSION['info_type'] = "success";
 
         header('Location: index.php');
-        die();
+        exit;
     }
   } 
 
