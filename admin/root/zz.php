@@ -1,5 +1,5 @@
 <?php
-function lazy($title) {
+function zz($title) {
   echo "<!DOCTYPE html>
   <html lang='en'>
   <head>

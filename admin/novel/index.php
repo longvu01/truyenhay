@@ -4,7 +4,7 @@
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
-    $role = 0;
+    $role = 1;
     // $user_id = $_SESSION['id'];
     $user_id = 2;
 
@@ -15,8 +15,8 @@
 ?>
 
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Thêm truyện') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Thêm truyện') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>

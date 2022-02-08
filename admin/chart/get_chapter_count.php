@@ -3,13 +3,13 @@
   
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-  if ($contentType === "application/json") {
+  // if ($contentType === "application/json") {
     //Receive the RAW post data.
     $content = trim(file_get_contents("php://input"));
     $decoded = json_decode($content, true);
-  }
+  // }
   $max_date = $decoded['days'];
-  
+
   if($max_date != 7 && $max_date != 30 && $max_date != 60) {
     $max_date = 30;
   }

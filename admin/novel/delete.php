@@ -45,8 +45,8 @@
 ?>
 
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Xóa truyện') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Xóa truyện') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>

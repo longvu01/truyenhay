@@ -11,8 +11,8 @@
 ?>
 
 <!-- Start HTML -->
-  <?php require_once ('../root/lazy.php'); ?>
-  <?php lazy('Thống kê chi tiết') ?>
+  <?php require_once ('../root/zz.php'); ?>
+  <?php zz('Thống kê chi tiết') ?>
 
   <link rel='stylesheet' href='./css/chart_details.css'>
   <script defer src = "../../js/main.js"></script>

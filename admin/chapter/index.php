@@ -21,8 +21,8 @@
 ?>
 
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Thêm chương') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Thêm chương') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>

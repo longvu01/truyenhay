@@ -3,11 +3,11 @@
 
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-  if ($contentType === "application/json") {
+  // if ($contentType === "application/json") {
     //Receive the RAW post data.
     $content = trim(file_get_contents("php://input"));
     $decoded = json_decode($content, true);
-  }
+  // }
   $max_date = $decoded['days'];
   
   if($max_date != 7 && $max_date != 30 && $max_date != 60) {
@@ -41,17 +41,17 @@
   }
 
   // Query
-  // ViewCount
+  // ChapCount
   $sql = "SELECT DATE_FORMAT(create_at, '%e-%m') as 'day',
-  count(chap_id) as 'view_count' 
+  count(chap_id) as 'chap_count' 
   from chapter 
   WHERE DATE(create_at) >= CURDATE() - INTERVAL $max_date DAY
   group by DATE_FORMAT(create_at, '%e-%m')";
-
+  // die($sql);
   $resultViewCount = mysqli_query($conn, $sql);
 
   foreach ($resultViewCount as $each) {
-    $arr[$each['day']][0] = (int)$each['view_count'];
+    $arr[$each['day']][0] = (int)$each['chap_count'];
   }
 
   // Verified
@@ -61,7 +61,7 @@
   WHERE DATE(create_at) >= CURDATE() - INTERVAL $max_date DAY
   and verify = 1
   group by DATE_FORMAT(create_at, '%e-%m')";
-
+  // die($sql);
   $resultVerified = mysqli_query($conn, $sql);
 
   foreach ($resultVerified as $each) {

@@ -54,8 +54,8 @@
 ?>
 
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Tìm kiếm truyện') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Tìm kiếm truyện') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>
@@ -121,7 +121,7 @@
                                 <?php echo $item['verify'] == 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅' ?>
                             </td>
                             <td>
-                                <a href="insert_chapter.php"><i class="far fa-plus-square"></i></a>
+                                <a href="../chapter/index.php"><i class="far fa-plus-square"></i></a>
                             </td>
                             <td>
                                 <a href="update.php?id=<?php echo $item['id'];?>"><i class="fas fa-edit"></i></a>

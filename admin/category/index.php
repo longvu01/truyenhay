@@ -17,8 +17,8 @@
 ?>
 
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Tùy chỉnh thể loại') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Tùy chỉnh thể loại') ?>
     <script defer src = "../../js/main.js"></script>
 </head>
 <body>

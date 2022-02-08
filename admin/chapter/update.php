@@ -74,8 +74,8 @@
     mysqli_close($conn);
 ?>
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Sửa chương') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Sửa chương') ?>
 
     <script defer src = "../../js/main.js"></script>
     <script defer src = "../../js/toast_msg.js"></script>
