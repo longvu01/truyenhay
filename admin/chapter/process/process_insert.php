@@ -1,15 +1,15 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../../cdb.php");
     // Kiểm tra quyền, dữ liệu
-    require_once("../root/check_permission.php");
+    require_once("../../root/check_permission.php");
     // Back to home page when data is empty
     if(empty($_POST['novel_id']) || empty($_POST['chapter_content'])) {
         $_SESSION['info_title'] = "Có lỗi!";
         $_SESSION['info_message'] = "❌Cần điền đầy đủ thông tin!";
         $_SESSION['info_type'] = "error";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
 
@@ -40,7 +40,7 @@
     $_SESSION['info_message'] = "Bạn đã thêm chương mới thành công!";
     $_SESSION['info_type'] = "success";
 
-    header('Location: index.php');
+    header('Location: ../');
 
     mysqli_close($conn);
 ?>

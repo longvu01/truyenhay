@@ -1,12 +1,12 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../../cdb.php");
     // Kiểm tra quyền, dữ liệu
-    require_once("../root/check_permission.php");
+    require_once("../../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
     // Kiểm tra mã hợp lệ
@@ -15,7 +15,7 @@
         $_SESSION['info_message'] = "❌Cần có mã để duyệt!";
         $_SESSION['info_type'] = "error";
 
-        header('Location: search.php');
+        header('Location: ../search.php');
         exit;
     }
     // ----------------------------------------------------------------
@@ -37,7 +37,7 @@
     $_SESSION['info_message'] = "✅Bạn đã duyệt truyện này";
     $_SESSION['info_type'] = "success";
 
-    header('Location: search.php');
+    header('Location: ../search.php');
     
     mysqli_close($conn);
 ?>

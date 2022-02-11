@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../../cdb.php");
     // Kiểm tra quyền, dữ liệu
-    require_once("../root/check_permission.php");
+    require_once("../../root/check_permission.php");
 
     if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['status'])
     || empty($_POST['author']) || empty($_POST['pre_view'])) {
@@ -10,7 +10,7 @@
         $_SESSION['info_message'] = "❌Cần điền đầy đủ thông tin!";
         $_SESSION['info_type'] = "error";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
     // Xử lý upload ảnh
@@ -42,7 +42,7 @@
         $_SESSION['info_message'] = "Tên truyện này có người đặt gòi !";
         $_SESSION['info_type'] = "info";
 
-        header('Location: update.php?id=' . $id);
+        header('Location: ../update.php?id=' . $id);
         exit;
     }
     //
@@ -65,7 +65,7 @@
     Hãy liên hệ với quản trị viên để được duyệt lại";
     $_SESSION['info_type'] = "success";
 
-    header('Location: search.php');
+    header('Location: ../search.php');
 
     mysqli_close($conn);
 ?>

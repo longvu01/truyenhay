@@ -19,7 +19,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Tùy chỉnh thể loại') ?>
-    <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/script.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -29,7 +29,7 @@
 
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" method="POST" id="form-add" action="process_insert.php">
+        <form class="form form__process active" method="POST" id="form-add" action="./process/process_insert.php">
             <h1 class= "form__title">Tùy chỉnh thể loại</h1>
             <div class="form-group">
                 <label>Thể loại mới</label>
@@ -50,7 +50,7 @@
                 </tr>
                 <?php foreach ($cates as $cate) {?>
                     <tr>
-                        <form class="form form__process form-update" method="POST" action="process_update.php">
+                        <form class="form form__process form-update" method="POST" action="./process/process_update.php">
                             <td>
                                 <input type="hidden" name="id" value="<?php echo $cate["id"]?>"/>
                                 <div class="form-group">
@@ -64,7 +64,7 @@
                             </td>
 
                             <td>
-                                <a href="process_delete.php?id=<?php echo $cate['id']?>"><i class="fas fa-trash-alt"></i></a>
+                                <a href="./process/process_delete.php?id=<?php echo $cate['id']?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </form>
                     </tr>
@@ -78,9 +78,9 @@
     
     <script src = "../../js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
-
-    <script src = "../../js/validator.js"></script>
-    <script>
+    
+    <script type="module">
+        import Validator from "../../js/validator.js"
         const formAdd = new Validator('#form-add')
 
         // Cái form update render từ PHP nó lsao ý nên là em show error thôi chứ chưa validate = js đc 🙄

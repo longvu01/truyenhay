@@ -63,7 +63,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Sửa truyện') ?>
-    <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/script.js"></script>
     <script defer src = "../../js/toast_msg.js"></script>
 </head>
 <body>
@@ -73,7 +73,7 @@
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="process_update.php">
+        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="./process/process_update.php">
             <h1 class= "form__title">Sửa truyện</h1>
             <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">
@@ -134,8 +134,8 @@
 
     <?php require_once ('../root/footer.php'); ?>
 
-    <script src = "../../js/validator.js"></script>
-    <script>
+    <script type="module">
+        import Validator from "../../js/validator.js"
         const formAdd = new Validator('#form-update')
     </script>
 </body>

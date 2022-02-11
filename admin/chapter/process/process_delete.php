@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../../cdb.php");
     // Kiểm tra quyền, dữ liệu
-    require_once("../root/check_permission.php");
+    require_once("../../root/check_permission.php");
     // $role = $_SESSION['role'];
     $role = 1;
     // $ss_user_id = $_SESSION['id'];
@@ -10,13 +10,13 @@
 
     // Nếu k truyền chap_id
     if(empty($_POST['chap_id']) ) {
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
 
     $chap_id = addslashes($_POST['chap_id']);
     if ($chap_id < 1) {
-        header('Location: search.php');
+        header('Location: ../search.php');
         exit;
     }
     // Nếu đúng là tác giả/ admin thì được phép xóa
@@ -34,11 +34,11 @@
 
     if(isset($ss_user_id)) {
         if($user_id != $ss_user_id || $role != 1) {
-            header('Location: index.php');
+            header('Location: ../');
         exit;
         }
     } else {
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
 
@@ -61,7 +61,7 @@
     $_SESSION['info_message'] = "Bạn đã xoá chương thành công!";
     $_SESSION['info_type'] = "success";
 
-    header('Location: search.php?search=' . $novel_title);
+    header('Location: ../search.php?search=' . $novel_title);
 
     mysqli_close($conn);
 ?>

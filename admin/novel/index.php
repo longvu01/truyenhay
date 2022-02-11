@@ -17,7 +17,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Thêm truyện') ?>
-    <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/script.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -27,7 +27,7 @@
     
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process" id="form-add" method="POST" enctype="multipart/form-data" action="process_insert.php">
+        <form class="form form__process" id="form-add" method="POST" enctype="multipart/form-data" action="./process/process_insert.php">
             <h1 class= "form__title">Thêm truyện</h1>
             <div class = "form__process--top">
                 <div class="form-group">
@@ -79,8 +79,8 @@
     <script src = "../../js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
     
-    <script src = "../../js/validator.js"></script>
-    <script>
+    <script type="module">
+        import Validator from "../../js/validator.js"
         const formAdd = new Validator('#form-add')
     </script>
 </body>

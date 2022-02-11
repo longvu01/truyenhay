@@ -50,7 +50,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Duyệt truyện') ?>
-    <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/script.js"></script>
 </head>
 <body>
 
@@ -58,7 +58,7 @@
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" method="POST" action="verify.php">
+        <form class="form form__process" method="POST" action="./process/verify.php">
             <h1 class= "form__title">Duyệt truyện</h1>
             <input type="hidden" name="id" value="<?php echo $id?>"/>
 

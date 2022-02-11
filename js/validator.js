@@ -1,5 +1,4 @@
-'use strict';
-function Validator(formSelector) {
+export default function Validator(formSelector) {
   // Lấy ra form element trong DOM by `formSelector`
   const formElement = document.querySelector(formSelector);
   // Lưu các rules của form element

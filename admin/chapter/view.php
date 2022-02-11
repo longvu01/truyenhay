@@ -49,7 +49,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Xem nội dung') ?>
-    <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/script.js"></script>
 </head>
 <body>
 

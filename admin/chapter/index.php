@@ -23,7 +23,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Thêm chương') ?>
-    <script defer src = "../../js/main.js"></script>
+    <script defer src = "../../js/script.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -72,8 +72,8 @@
     <script src = "../../js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
 
-    <script src = "../../js/validator.js"></script>
-    <script>
+    <script type="module">
+        import Validator from "../../js/validator.js"
         const formAdd = new Validator('#form-add')
     </script>
 </body>

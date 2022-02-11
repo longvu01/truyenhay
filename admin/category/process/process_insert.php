@@ -1,7 +1,7 @@
 <?php
   session_start();
-  require_once("../../cdb.php");
-  require_once("../root/check_permission.php");
+  require_once("../../../cdb.php");
+  require_once("../../root/check_permission.php");
 
   if(isset($_POST['category_name'])) {
 
@@ -15,7 +15,7 @@
         $_SESSION['info_message'] = "Thể loại bạn thêm đã tồn tại!";
         $_SESSION['info_type'] = "error";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     } else {
         $sql = "insert into categories (category_name) values ('$category_name')";
@@ -25,12 +25,12 @@
         $_SESSION['info_message'] = "Bạn đã thêm thể loại thành công!";
         $_SESSION['info_type'] = "success";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
   } 
 
-  header('Location: index.php');
+  header('Location: ../');
 
   mysqli_close($conn);
 ?>
