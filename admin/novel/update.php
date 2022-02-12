@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
@@ -61,10 +61,10 @@
     mysqli_close($conn);
 ?>
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Sửa truyện') ?>
-    <script defer src = "../../js/main.js"></script>
-    <script defer src = "../../js/toast_msg.js"></script>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Sửa truyện') ?>
+    <script defer src = "../js/script.js"></script>
+    <script defer src = "../js/toast_msg.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -73,7 +73,7 @@
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="process_update.php">
+        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="./process/process_update.php">
             <h1 class= "form__title">Sửa truyện</h1>
             <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">
@@ -134,8 +134,8 @@
 
     <?php require_once ('../root/footer.php'); ?>
 
-    <script src = "../../js/validator.js"></script>
-    <script>
+    <script type="module">
+        import Validator from "../js/validator.js"
         const formAdd = new Validator('#form-update')
     </script>
 </body>

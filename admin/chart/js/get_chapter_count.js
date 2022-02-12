@@ -1,9 +1,16 @@
 'use strict';
 let chartSelect = document.querySelector('#chart__select');
+const spinner = document.querySelector('.load-spinner');
+////
+const toggleRenderSpinner = function () {
+  spinner.classList.toggle('hidden');
+};
 
 const callAjax = async function (days) {
   try {
-    const url = 'get_chapter_count.php';
+    toggleRenderSpinner();
+
+    const url = './process/get_chapter_count.php';
     const data = await fetch(url, {
       method: 'POST',
       headers: {
@@ -16,6 +23,8 @@ const callAjax = async function (days) {
 
     const res = await data.json();
 
+    toggleRenderSpinner();
+    
     const arr = Object.values(res[0]);
     const arrDetails = [];
     Object.values(res[1]).forEach(each => {

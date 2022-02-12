@@ -1,11 +1,11 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../../connect.php");
 
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
 
@@ -14,7 +14,7 @@
         $_SESSION['info_message'] = "❌Yêu cầu không hợp lệ!";
         $_SESSION['info_type'] = "error";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
     // ----------------------------------------------------------------
@@ -42,7 +42,7 @@
     $_SESSION['info_message'] = "Bạn đã xoá thể loại thành công!";
     $_SESSION['info_type'] = "success";
 
-    header('Location: index.php');
+    header('Location: ../');
 
     mysqli_close($conn);
 ?>

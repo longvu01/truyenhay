@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $ss_user_id = $_SESSION['id'];
@@ -74,11 +74,11 @@
     mysqli_close($conn);
 ?>
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Sửa chương') ?>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Sửa chương') ?>
 
-    <script defer src = "../../js/main.js"></script>
-    <script defer src = "../../js/toast_msg.js"></script>
+    <script defer src = "../js/script.js"></script>
+    <script defer src = "../js/toast_msg.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -89,7 +89,7 @@
     <div class="wrapper">
         <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="process_update.php">
             <h1 class= "form__title form__title--large">Truyện: <?php echo $novel_title?></h1>
-            <h2 class= "form__title">Sửa chương<?php echo $result["chap"]?></h1>
+            <h2 class= "form__title">Sửa chương <?php echo $result["chap"]?></h1>
             <input type="hidden" name="chap_id" value="<?php echo $chap_id?>"/>
             <input type="hidden" name="novel_title" value="<?php echo $novel_title?>"/>
 
@@ -105,8 +105,8 @@
 
     <?php require_once ('../root/footer.php'); ?>
 
-    <script src = "../../js/validator.js"></script>
-    <script>
+    <script type="module">
+        import Validator from "../js/validator.js"
         const formAdd = new Validator('#form-update')
     </script>
 </body>

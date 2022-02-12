@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
@@ -45,9 +45,9 @@
 ?>
 
 <!-- Start HTML -->
-    <?php require_once ('../root/lazy.php'); ?>
-    <?php lazy('Xóa truyện') ?>
-    <script defer src = "../../js/main.js"></script>
+    <?php require_once ('../root/zz.php'); ?>
+    <?php zz('Xóa truyện') ?>
+    <script defer src = "../js/script.js"></script>
 </head>
 <body>
 
@@ -55,7 +55,7 @@
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" method="POST" enctype="multipart/form-data" action="process_delete.php">
+        <form class="form form__process" method="POST" enctype="multipart/form-data" action="./process/process_delete.php">
             <h1 class= "form__title">Xóa truyện</h1>
             <input type="hidden" name="id" value="<?php echo $id?>"/>
             <div class = "form__process--top">

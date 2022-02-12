@@ -1,8 +1,8 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../../connect.php");
     // Kiểm tra quyền, dữ liệu
-    require_once("../root/check_permission.php");
+    require_once("../../root/check_permission.php");
     // Back to home page when data is empty
     if(empty($_POST['category_id']) || empty($_POST['title']) || empty($_POST['author'])
     || empty($_FILES['img_link']) || empty($_POST['pre_view'])) {
@@ -10,7 +10,7 @@
         $_SESSION['info_message'] = "❌Cần điền đầy đủ thông tin!";
         $_SESSION['info_type'] = "error";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
     // ----------------------------------------------------------------
@@ -37,7 +37,7 @@
         $_SESSION['info_message'] = "Tên truyện này có người đặt gòi !";
         $_SESSION['info_type'] = "info";
 
-        header('Location: index.php');
+        header('Location: ../');
         exit;
     }
 
@@ -54,7 +54,7 @@
     $_SESSION['info_message'] = "Bạn đã thêm truyện thành công!";
     $_SESSION['info_type'] = "success";
 
-    header('Location: ../chapter/index.php');
+    header('Location: ../../chapter/index.php');
 
     mysqli_close($conn);
 ?>
