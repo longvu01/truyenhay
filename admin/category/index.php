@@ -1,12 +1,12 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     require_once("../root/check_permission.php");
 
     // $role = $_SESSION['role'];
     $role = 1;
     if($role != 1) {
-        echo"<script>window.location = '../' </script>";
+        header('Location: ../');
         exit;
     }
 
@@ -19,7 +19,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Tùy chỉnh thể loại') ?>
-    <script defer src = "../../js/script.js"></script>
+    <script defer src = "../js/script.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -76,11 +76,11 @@
 
     <?php require_once ('../root/footer.php'); ?>
     
-    <script src = "../../js/toast_msg.js"></script>
+    <script src = "../js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
     
     <script type="module">
-        import Validator from "../../js/validator.js"
+        import Validator from "../js/validator.js"
         const formAdd = new Validator('#form-add')
 
         // Cái form update render từ PHP nó lsao ý nên là em show error thôi chứ chưa validate = js đc 🙄

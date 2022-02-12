@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../../cdb.php");
+    require_once("../../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../../root/check_permission.php");
     // $role = $_SESSION['role'];

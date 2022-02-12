@@ -1,5 +1,5 @@
 <?php
-    include("../../cdb.php");
+    include("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     // ----------------------------------------------------------------
     $sql = 'SELECT * FROM novel ORDER BY id DESC LIMIT 1';
@@ -10,7 +10,7 @@
 ?>
 <div class="menu">
         <div class="menu__header">
-            <a href="../../"><img src="../../img/convert.png" alt=""></a>
+            <a href="../../"><img src="../img/convert.png" alt=""></a>
             <span class="menu__bar" id="menu__bar">
                 <i class="fas fa-align-left"></i>
             </span>

@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once("../../../cdb.php");
+  require_once("../../../connect.php");
   require_once("../../root/check_permission.php");
 
   if(isset($_POST['category_name'])) {

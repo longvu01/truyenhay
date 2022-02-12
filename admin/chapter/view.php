@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
@@ -49,7 +49,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Xem nội dung') ?>
-    <script defer src = "../../js/script.js"></script>
+    <script defer src = "../js/script.js"></script>
 </head>
 <body>
 

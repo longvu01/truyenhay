@@ -17,6 +17,7 @@ const init = (() => {
     nop: 5,
     window: 5,
     totalPage: 0,
+    role: 0,
   };
   state.distance = Math.floor(state.window / 2);
 
@@ -46,28 +47,33 @@ const init = (() => {
       if (!res.ok) throw new Error(`${res.statusText} (${res.status})`);
 
       //// Data
-      const data = await res.json();
-
-      // console.log(data);
-      //// Assign state
-      state.totalPage = data.total_page;
-      if (currentPage > data.total_page) currentPage = data.total_page;
-      state.page = currentPage;
-      state.nop = data.nop;
-      state.window = data.window;
-
-      this.toggleRenderSpinner();
+      const dataArray = await res.json();
 
       //// Clear Table
       while (row.nextElementSibling) {
         row.nextElementSibling.remove();
       }
 
-      //// Render Table
-      this.renderTable(data, data.chap.length);
+      // console.log(dataArray);
+      //// Assign state
+      const info = dataArray[1];
+      state.totalPage = info.total_page;
+      if (currentPage > info.total_page) currentPage = info.total_page;
+      state.page = currentPage;
+      state.nop = info.nop;
+      state.window = info.window;
+      state.role = info.role;
+
+      //// Data
+      const data = dataArray[0];
+
+      this.toggleRenderSpinner();
 
       //// Render pagination
       this.renderPagination(state.totalPage, state.nop);
+
+      //// Render Table
+      this.renderTable(data);
 
       //// Change URL
       if (!data.search) {
@@ -130,49 +136,49 @@ const init = (() => {
     pagination.innerHTML = paginationHTML;
   };
   // Render Table
-  const renderTable = function (data, length) {
+  const renderTable = function (data) {
     let html = '';
-    for (let i = 0; i < length; ++i) {
+    data.forEach(function (item) {
       html += `
         <tr>
-          <td>${data.n_name[i]}</td>
-          <td>${data.chap[i]}</td>
-          <td><p>${data.chapter_content[i]}</p></td>
-      `;
-      if (data.role === 1) {
+          <td>${item.n_name}</td>
+          <td>${item.chap}</td>
+          <td><p>${item.chapter_content}</p></td>
+        `;
+      if (state.role === 1) {
         html += `
           <td>${
-            data.verify[i] === 0
-              ? `<a class="verify" href="view.php?chap_id=${data.chap_id[i]}"><i class="fas fa-check-square"></i></a>`
+            item.verify === 0
+              ? `<a class="verify" href="view.php?chap_id=${item.chap_id}"><i class="fas fa-check-square"></i></a>`
               : 'Đã duyệt '
           }  
           </td>
 
           <td><a href="delete.php?chap_id=${
-            data.chap_id[i]
+            item.chap_id
           }"><i class="fas fa-trash-alt"></i></a>
           </td>
         `;
       } else {
         html += `
             <td>
-              ${data.verify[i] === 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅'}  
+              ${item.verify === 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅'}  
             </td>
 
             <td>
             <a href="update.php?chap_id=${
-              data.chap_id[i]
+              item.chap_id
             }"><i class="fas fa-edit"></i></a>
             </td>
 
             <td><a href="delete.php?chap_id=${
-              data.chap_id[i]
+              item.chap_id
             }"><i class="fas fa-trash-alt"></i></a>
             </td>
           </tr>
         `;
       }
-    }
+    });
     row.insertAdjacentHTML('afterend', html);
   };
 
@@ -211,7 +217,7 @@ pagination.addEventListener('click', function (e) {
   const btnPages = e.target.closest('.btn__page');
   if (!btnPages) return;
 
-  let page = btnPages.dataset.page;
+  let page = +btnPages.dataset.page;
   if (!isFinite(page)) page = Number.parseInt(page) || 1;
   currentPage = page;
 

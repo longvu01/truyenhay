@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once("../../../cdb.php");
+  require_once("../../../connect.php");
 
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
@@ -47,32 +47,25 @@
   // die($sql);
   
   $result = mysqli_query($conn, $sql);
-  
-  // foreach ($result as $each) {
-    $arr['chap_id'] = array();
-    $arr['novel_id'] = array();
-    $arr['chap'] = array();
-    $arr['chapter_content'] = array();
-    $arr['verify'] = array();
-    $arr['n_name'] = array();
-  // }
 
-  $arr['role'] = $role;
-  $arr['user_id'] = $user_id;
-  $arr['search'] = $search;
-  $arr['total_page'] = $total_page;
-  $arr['nop'] = $nop;
-  $arr['window'] = $window;
-
+  $i = 0;
   foreach ($result as $each) {
-    array_push($arr['chap_id'], (int)$each['chap_id']);
-    array_push($arr['novel_id'], (int)$each['novel_id']);
-    array_push($arr['chap'], (int)$each['chap']);
-    array_push($arr['chapter_content'], $each['chapter_content']);
-    array_push($arr['verify'], (int)$each['verify']);
-    array_push($arr['n_name'], $each['n_name']);
+    $arr[$i]['chap_id'] = (int)$each['chap_id'];
+    $arr[$i]['novel_id'] = (int)$each['novel_id'];
+    $arr[$i]['chap'] = (int)$each['chap'];
+    $arr[$i]['chapter_content'] = $each['chapter_content'];
+    $arr[$i]['verify'] = (int)$each['verify'];
+    $arr[$i]['n_name'] = $each['n_name'];
+    ++$i;
   }
 
-  echo json_encode($arr);
+  $arr2['role'] = $role;
+  $arr2['user_id'] = $user_id;
+  $arr2['search'] = $search;
+  $arr2['total_page'] = $total_page;
+  $arr2['nop'] = $nop;
+  $arr2['window'] = $window;
+
+  echo json_encode([$arr, $arr2]);
 
 ?>

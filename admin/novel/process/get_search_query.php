@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once("../../../cdb.php");
+  require_once("../../../connect.php");
 
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
@@ -48,39 +48,27 @@
   // die($sql);
   $result = mysqli_query($conn, $sql);
 
-  // foreach ($result as $each) {
-    $arr['c_name'] = array();
-    $arr['title'] = array();
-    $arr['img_link'] = array();
-    $arr['status'] = array();
-    $arr['total_chapters'] = array();
-    $arr['pre_view'] = array();
-    $arr['author'] = array();
-    $arr['id'] = array();
-    $arr['view_count'] = array();
-    $arr['verify'] = array();
-  // }
-
-  $arr['role'] = $role;
-  $arr['user_id'] = $user_id;
-  $arr['search'] = $search;
-  $arr['total_page'] = $total_page;
-  $arr['nop'] = $nop;
-  $arr['window'] = $window;
-
+  $i = 0;
   foreach ($result as $each) {
-    array_push($arr['c_name'], $each['c_name']);
-    array_push($arr['title'], $each['title']);
-    array_push($arr['img_link'], $each['img_link']);
-    array_push($arr['status'], $each['status']);
-    array_push($arr['total_chapters'], (int)$each['total_chapters']);
-    array_push($arr['pre_view'], $each['pre_view']);
-    array_push($arr['author'], $each['author']);
-    array_push($arr['id'], (int)$each['id']);
-    array_push($arr['view_count'], (int)$each['view_count']);
-    array_push($arr['verify'], (int)$each['verify']);
+    $arr[$i]['c_name'] = (int)$each['c_name'];
+    $arr[$i]['title'] = (int)$each['title'];
+    $arr[$i]['img_link'] = (int)$each['img_link'];
+    $arr[$i]['status'] = $each['status'];
+    $arr[$i]['total_chapters'] = (int)$each['total_chapters'];
+    $arr[$i]['pre_view'] = $each['pre_view'];
+    $arr[$i]['author'] = $each['author'];
+    $arr[$i]['id'] = $each['id'];
+    $arr[$i]['view_count'] = $each['view_count'];
+    $arr[$i]['verify'] = $each['verify'];
+    ++$i;
   }
 
-  echo json_encode($arr);
+  $arr2['role'] = $role;
+  $arr2['user_id'] = $user_id;
+  $arr2['search'] = $search;
+  $arr2['total_page'] = $total_page;
+  $arr2['nop'] = $nop;
+  $arr2['window'] = $window;
 
+  echo json_encode([$arr, $arr2]);
 ?>

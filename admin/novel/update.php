@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
@@ -63,8 +63,8 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Sửa truyện') ?>
-    <script defer src = "../../js/script.js"></script>
-    <script defer src = "../../js/toast_msg.js"></script>
+    <script defer src = "../js/script.js"></script>
+    <script defer src = "../js/toast_msg.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -135,7 +135,7 @@
     <?php require_once ('../root/footer.php'); ?>
 
     <script type="module">
-        import Validator from "../../js/validator.js"
+        import Validator from "../js/validator.js"
         const formAdd = new Validator('#form-update')
     </script>
 </body>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../../cdb.php");
+    require_once("../../../connect.php");
 
     if(empty($_POST['id'])) {
         header('Location: ../');

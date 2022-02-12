@@ -1,10 +1,10 @@
 <?php
     session_start();
-    require_once("../../cdb.php");
+    require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     ///
-    $_SESSION['role'] = 0;
+    $_SESSION['role'] = 1;
     $role = $_SESSION['role'];
     ///
     $_SESSION['id'] = 1;
@@ -27,7 +27,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Tìm chương') ?>
-    <script defer src = "../../js/script.js"></script>
+    <script defer src = "../js/script.js"></script>
     <!-- <script defer src = "./js/get_data_search.js"></script> -->
     <script defer src = "./js/test.js"></script>
 </head>
@@ -71,7 +71,7 @@
 
     <?php require_once ('../root/footer.php'); ?>
     
-    <script src = "../../js/toast_msg.js"></script>
+    <script src = "../js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
 </body>
 </html>

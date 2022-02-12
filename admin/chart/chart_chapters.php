@@ -15,14 +15,13 @@
   <?php zz('Thống kê chi tiết') ?>
 
   <link rel='stylesheet' href='./css/chart_details.css'>
-  <script defer src = "../../js/script.js"></script>
+  <script defer src = "../js/script.js"></script>
   <script defer src="https://code.highcharts.com/highcharts.js"></script>
   <script defer src="https://code.highcharts.com/modules/data.js"></script>
   <script defer src="https://code.highcharts.com/modules/drilldown.js"></script>
   <script defer src="https://code.highcharts.com/modules/exporting.js"></script>
   <script defer src="https://code.highcharts.com/modules/export-data.js"></script>
   <script defer src="https://code.highcharts.com/modules/accessibility.js"></script>
-  <script defer src = "../../js/toast_msg.js"></script>
   <script defer src = "./js/get_chapter_count.js"></script>
 
 </head>
@@ -54,6 +53,7 @@
   </div>
 
   <?php require_once ('../root/footer.php')?>
+  <script src = "../js/toast_msg.js"></script>
   <?php require_once ('../root/show_toast.php')?>
 
 </body>

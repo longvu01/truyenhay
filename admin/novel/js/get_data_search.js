@@ -17,6 +17,7 @@ const init = (() => {
     nop: 5,
     window: 5,
     totalPage: 0,
+    role: 0,
   };
   state.distance = Math.floor(state.window / 2);
 
@@ -46,28 +47,32 @@ const init = (() => {
       if (!res.ok) throw new Error(`${res.statusText} (${res.status})`);
 
       //// Data
-      const data = await res.json();
-
-      // console.log(data);
-      //// Assign state
-      state.totalPage = data.total_page;
-      if (currentPage > data.total_page) currentPage = data.total_page;
-      state.page = currentPage;
-      state.nop = data.nop;
-      state.window = data.window;
-
-      this.toggleRenderSpinner();
+      const dataArray = await res.json();
 
       //// Clear Table
       while (row.nextElementSibling) {
         row.nextElementSibling.remove();
       }
+      // console.log(data);
+      //// Assign state
+      const info = dataArray[1];
+      state.totalPage = info.total_page;
+      if (currentPage > info.total_page) currentPage = info.total_page;
+      state.page = currentPage;
+      state.nop = info.nop;
+      state.window = info.window;
+      state.role = info.role;
 
-      //// Render Table
-      this.renderTable(data, data.author.length);
+      //// Data
+      const data = dataArray[0];
+
+      this.toggleRenderSpinner();
 
       //// Render pagination
       this.renderPagination(state.totalPage, state.nop);
+
+      //// Render Table
+      this.renderTable(data);
 
       //// Change URL
       if (!data.search) {
@@ -130,47 +135,47 @@ const init = (() => {
     pagination.innerHTML = paginationHTML;
   };
   // Render Table
-  const renderTable = function (data, length) {
+  const renderTable = function (data) {
     let html = '';
-    for (let i = 0; i < length; ++i) {
+    data.forEach(function (item) {
       html += `
         <tr>
-          <td>${data.c_name[i]}</td>
-          <td>${data.title[i]}</td>
+          <td>${item.c_name}</td>
+          <td>${item.title}</td>
           <td>
-            <img src="../../photos/${data.img_link[i]}">
+            <img src="../../photos/${item.img_link}">
           </td>
-          <td>${data.status[i]}</td>
-          <td>${data.total_chapters[i]}</td>
+          <td>${item.status}</td>
+          <td>${item.total_chapters}</td>
           <td>
             <p style="white-space: pre-line">
-              ${data.pre_view[i]}
+              ${item.pre_view}
             </p>
           </td>
       `;
-      if (data.role === 1) {
+      if (state.role === 1) {
         html += `
-            <td>${data.author[i]} </td>
-            <td>${data.id[i]}</td>
+            <td>${item.author} </td>
+            <td>${item.id}</td>
             <td>
                 ${
-                  data.verify[i] === 0
-                    ? `<a class="verify" href="view.php?id=${data.id[i]}"><i class="fas fa-check-square"></i></a>`
+                  item.verify === 0
+                    ? `<a class="verify" href="view.php?id=${item.id}"><i class="fas fa-check-square"></i></a>`
                     : 'Đã duyệt'
                 } 
             </td>
             <td>
             <a href="delete.php?id=${
-              data.id[i]
+              item.id
             }"><i class="fas fa-trash-alt"></i></a>
         </td>
         `;
       } else {
         html += `
-            <td>${data.view_count[i]} </td>
+            <td>${item.view_count} </td>
 
             <td>
-              ${data.verify[i] === 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅'}  
+              ${item.verify === 0 ? 'Chưa duyệt ❌' : 'Đã duyệt ✅'}  
             </td>
 
             <td>
@@ -178,13 +183,13 @@ const init = (() => {
             </td>
 
             <td><a href="update.php?id=${
-              data.id[i]
+              item.id
             }"><i class="fas fa-edit"></i></a>
             </td>
           </tr>
         `;
       }
-    }
+    });
     row.insertAdjacentHTML('afterend', html);
   };
 
@@ -223,7 +228,7 @@ pagination.addEventListener('click', function (e) {
   const btnPages = e.target.closest('.btn__page');
   if (!btnPages) return;
 
-  let page = btnPages.dataset.page;
+  let page = +btnPages.dataset.page;
   if (!isFinite(page)) page = Number.parseInt(page) || 1;
   currentPage = page;
 

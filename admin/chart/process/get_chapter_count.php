@@ -1,5 +1,5 @@
 <?php
-  require_once("../../../cdb.php");
+  require_once("../../../connect.php");
   
   $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 

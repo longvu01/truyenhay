@@ -1,10 +1,14 @@
 <?php
     session_start();
-    require_once("../cdb.php");
+    require_once("../connect.php");
     // Kiểm tra quyền, dữ liệu
     // $role = $_SESSION['role'];
     $role = 1;
     // if(empty($_SESSION['id']) || empty($_SESSION['role'])) {
+    //     $_SESSION['info_title'] = "Thông báo!";
+    //     $_SESSION['info_message'] = "Bạn cần đăng nhập để thực hiện chức năng này!";
+    //     $_SESSION['info_type'] = "info";
+
     //     header('Location: ../');
     //     exit;
     // }
@@ -16,9 +20,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chọn chức năng</title>
-    <link rel="stylesheet" href="../css/reset1.css">
-    <link rel="stylesheet" href="../css/base1.css">
-    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
