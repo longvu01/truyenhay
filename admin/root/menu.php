@@ -10,7 +10,7 @@
 ?>
 <div class="menu">
         <div class="menu__header">
-            <a href="../../"><img src="../img/convert.png" alt=""></a>
+            <a href="../../"><img src="../assets/img/convert.png" alt=""></a>
             <span class="menu__bar" id="menu__bar">
                 <i class="fas fa-align-left"></i>
             </span>

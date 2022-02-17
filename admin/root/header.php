@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header__left">
-        <i class="fas fa-bars"></i>
-        <a href ="#" >Home</a>
+        <!-- <i class="fas fa-bars"></i> -->
+        <a href ="../" >Home</a>
         <a href ="#" >Contact</a>
     </div>
     <div class="header__right">

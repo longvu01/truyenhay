@@ -3,8 +3,8 @@
     require_once("../../connect.php");
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
-    // $ss_user_id = $_SESSION['id'];
-    $ss_user_id = 1;
+    // $ss_user_id = 2;
+    $ss_user_id = $_SESSION['id'];
     // $role = $_SESSION['role'];
     $role = 0;
     if($role != 0) {
@@ -63,13 +63,13 @@
 
     $result = mysqli_fetch_array($sql_result);
 
-    $sql = "SELECT title FROM novel 
+    $sql = "SELECT id FROM novel 
     join chapter
     on novel.id = chapter.novel_id
     where chap_id = '$chap_id'";
     $result_novel = mysqli_query($conn, $sql);
     $novel = mysqli_fetch_array($result_novel);
-    $novel_title = $novel['title'];
+    $novel_id = $novel['id'];
     
     mysqli_close($conn);
 ?>
@@ -77,8 +77,8 @@
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Sửa chương') ?>
 
-    <script defer src = "../js/script.js"></script>
-    <script defer src = "../js/toast_msg.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
+    <script defer src = "../assets/js/toast_msg.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -87,11 +87,12 @@
     <?php require_once ('../root/menu.php'); ?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="process_update.php">
-            <h1 class= "form__title form__title--large">Truyện: <?php echo $novel_title?></h1>
+        <form class="form form__process" id="form-update" method="POST" action="./process/process_add_to_queue.php">
+            <h1 class= "form__title form__title--large">Truyện: <?php echo $novel_id?></h1>
             <h2 class= "form__title">Sửa chương <?php echo $result["chap"]?></h1>
             <input type="hidden" name="chap_id" value="<?php echo $chap_id?>"/>
-            <input type="hidden" name="novel_title" value="<?php echo $novel_title?>"/>
+            <input type="hidden" name="chap" value="<?php echo $result["chap"]?>"/>
+            <input type="hidden" name="novel_id" value="<?php echo $novel_id?>"/>
 
             <div class="form-group">
                 <label>Nội dung</label>
@@ -106,7 +107,7 @@
     <?php require_once ('../root/footer.php'); ?>
 
     <script type="module">
-        import Validator from "../js/validator.js"
+        import Validator from "../assets/js/validator.js"
         const formAdd = new Validator('#form-update')
     </script>
 </body>

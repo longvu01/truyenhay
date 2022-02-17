@@ -10,7 +10,7 @@
         exit;
     }
 
-    $sql = "select * from categories";
+    $sql = "select * from categories limit 5";
     $cates = mysqli_query($conn, $sql);
 
     mysqli_close($conn);
@@ -19,7 +19,9 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Tùy chỉnh thể loại') ?>
-    <script defer src = "../js/script.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
+    <script defer src = "../assets/js/toast_msg.js"></script>
+    <script type="module" defer src = "./js/mutate_data.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -29,7 +31,7 @@
 
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" method="POST" id="form-add" action="./process/process_insert.php">
+        <form class="form form__process" id="form-add">
             <h1 class= "form__title">Tùy chỉnh thể loại</h1>
             <div class="form-group">
                 <label>Thể loại mới</label>
@@ -42,74 +44,24 @@
         <!-- Search -->
         <div class="form form__process">
             <h1 class= "form__title">Thể loại hiện có</h1>
-            <table >
-                <tr>
+            <table id="table">
+                <tr id="first-row">
                     <th>Tên thể loại</th>
                     <th>Sửa</th>
                     <th>Xóa</th>
                 </tr>
-                <?php foreach ($cates as $cate) {?>
-                    <tr>
-                        <form class="form form__process form-update" method="POST" action="./process/process_update.php">
-                            <td>
-                                <input type="hidden" name="id" value="<?php echo $cate["id"]?>"/>
-                                <div class="form-group">
-                                    <input class = "category__name-input form-control" name="category_name" value="<?php echo $cate["category_name"]?>"/>
-                                    <span class="form-message"></span>
-                                </div>
-                            </td>
-
-                            <td>
-                                <button type="submit"><i class="fas fa-edit"></i></button>
-                            </td>
-
-                            <td>
-                                <a href="./process/process_delete.php?id=<?php echo $cate['id']?>"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </form>
-                    </tr>
-                <?php } ?>
             </table>
+            <!-- Spinner -->
+            <div class="spinner-container">
+                <div class="load-spinner hidden"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <button class="btn__show-more">
+                Hiển thị thêm 🔻
+            </button>
         </div>
 
     </div>
 
-    <?php require_once ('../root/footer.php'); ?>
-    
-    <script src = "../js/toast_msg.js"></script>
-    <?php require_once ('../root/show_toast.php'); ?>
-    
-    <script type="module">
-        import Validator from "../js/validator.js"
-        const formAdd = new Validator('#form-add')
-
-        // Cái form update render từ PHP nó lsao ý nên là em show error thôi chứ chưa validate = js đc 🙄
-        const updateInput = document.querySelectorAll('.category__name-input')
-        if(updateInput) {
-            for(let input of updateInput) {
-                const formGroup = input.closest('.form-group')
-                const errorElement = formGroup.querySelector('.form-message')
-                function showError() {
-                    errorElement.textContent = 'Vui lòng nhập trường này'
-                    formGroup.classList.add('invalid')
-                    showToast({
-                        title: 'Thiếu thông tin!',
-                        message: 'Bạn cần nhập đủ các trường',
-                        type: 'warning',
-                        duration: 5000,
-                    });
-                }
-                function clearError() {
-                    errorElement.textContent = ''
-                    formGroup.classList.remove('invalid')
-                }
-                function handleValidate() {
-                    if(!input.value.trim()) showError()
-                    else clearError()
-                }
-                input.oninput = handleValidate
-            }
-        }
-    </script>
+    <?php require_once ('../root/footer.php')?>
 </body>
 </html>

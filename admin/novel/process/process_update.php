@@ -39,7 +39,7 @@
     // Nếu đã tồn tại tên truyện thì thông báo và điều hướng quay lại
     if($number_rows == 1) {
         $_SESSION['info_title'] = "Thông báo!";
-        $_SESSION['info_message'] = "Tên truyện này có người đặt gòi !";
+        $_SESSION['info_message'] = "Tên truyện này đã có người đặt!";
         $_SESSION['info_type'] = "info";
 
         header('Location: ../update.php?id=' . $id);
@@ -61,8 +61,7 @@
     mysqli_query($conn, $sql);
 
     $_SESSION['info_title'] = "Thành công!";
-    $_SESSION['info_message'] = "✅Bạn đã sửa thông tin truyện thành công! 
-    Hãy liên hệ với quản trị viên để được duyệt lại";
+    $_SESSION['info_message'] = "✅Bạn đã sửa thông tin truyện thành công! Hãy liên hệ với quản trị viên để được duyệt lại";
     $_SESSION['info_type'] = "success";
 
     header('Location: ../search.php');

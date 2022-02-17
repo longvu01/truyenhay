@@ -4,8 +4,8 @@
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     // $role = $_SESSION['role'];
-    // $ss_user_id = $_SESSION['id'];
-    $ss_user_id = 1;
+    // $_SESSION['id'] = 1;
+    $ss_user_id = $_SESSION['id'];
     $role = 0;
 
     $id = addslashes($_GET["id"]);
@@ -61,21 +61,23 @@
     mysqli_close($conn);
 ?>
 <!-- Start HTML -->
-    <?php require_once ('../root/zz.php'); ?>
+    <?php require_once ('../root/zz.php')?>
     <?php zz('Sửa truyện') ?>
-    <script defer src = "../js/script.js"></script>
-    <script defer src = "../js/toast_msg.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
+    <script defer src = "../assets/js/toast_msg.js"></script>
 </head>
 <body>
     <div id="toast"></div>
 
-    <?php require_once ('../root/header.php'); ?>
-    <?php require_once ('../root/menu.php'); ?>
+    <?php require_once ('../root/header.php')?>
+    <?php require_once ('../root/menu.php')?>
     <!-- Form -->
     <div class="wrapper">
-        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="./process/process_update.php">
+        <form class="form form__process" id="form-update" method="POST" enctype="multipart/form-data" action="./process/process_add_to_queue.php">
             <h1 class= "form__title">Sửa truyện</h1>
-            <input type="hidden" name="id" value="<?php echo $id?>"/>
+            <input type="hidden" name="novel_id" value="<?php echo $id?>"/>
+            <input type="hidden" name="total_chapters" value="<?php echo $result["total_chapters"]?>"/>
+            
             <div class = "form__process--top">
                 <div class="form-group">
                     <label>Chuyên mục</label>
@@ -95,9 +97,9 @@
 
             <div class="form-group">
                 <label>Tiêu đề</label>
+                <input type="hidden" name="old_title" value="<?php echo $result["title"]?>"/>
                 <input name="title" value="<?php echo $result["title"]?>" placeholder="Nhập tiêu đề" class="form-control" rules="required"/>
                 <span class="form-message"></span>
-
             </div>
 
             <div class="form-group">
@@ -132,10 +134,10 @@
         </form>
     </div>
 
-    <?php require_once ('../root/footer.php'); ?>
+    <?php require_once ('../root/footer.php')?>
 
     <script type="module">
-        import Validator from "../js/validator.js"
+        import Validator from "../assets/js/validator.js"
         const formAdd = new Validator('#form-update')
     </script>
 </body>
