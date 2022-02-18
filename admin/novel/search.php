@@ -4,7 +4,7 @@
     // Kiểm tra quyền, dữ liệu
     require_once("../root/check_permission.php");
     ///
-    $_SESSION['role'] = 0;
+    $_SESSION['role'] = 1;
     $role = $_SESSION['role'];
     ///
     $_SESSION['id'] = 1;
@@ -27,7 +27,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Tìm kiếm truyện') ?>
-    <script defer src = "../js/script.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
     <script defer src = "./js/get_data_search.js"></script>
 </head>
 <body>
@@ -54,7 +54,6 @@
                     <th>Xem trước</th>
                     <?php if($role == 1) { ?>
                         <th>Tác giả</th>
-                        <th>Id truyện</th><!--  -->
                         <th>Xem, Duyệt</th><!--  -->
                         <th>Xóa</th>
                     <?php } else {?>
@@ -76,7 +75,7 @@
 
     <?php require_once ('../root/footer.php')?>
     
-    <script src = "../js/toast_msg.js"></script>
+    <script src = "../assets/js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
 </body>
 </html>

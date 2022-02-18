@@ -23,7 +23,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Thêm chương') ?>
-    <script defer src = "../js/script.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -33,7 +33,7 @@
     
     <div class="wrapper">
     <!-- Form -->
-        <form class="form form__process active" id="form-add" method="POST" enctype="multipart/form-data" action="process_insert.php">
+        <form class="form form__process active" id="form-add" method="POST"  action="process_insert.php">
             <h1 class= "form__title">Thêm chương</h1>
 
             <div class = "form__process--top">
@@ -57,7 +57,7 @@
             
             <div class="form-group">
                 <label>Nội dung chương</label>
-                <textarea name="chapter_content" id="" cols="30" rows="50" 
+                <textarea name="chapter_content" cols="30" rows="50" 
                 placeholder="Nhập nội dung chương" class="form-control" rules="required" <?php if($total_records == 0) echo 'disabled' ?>>
                 </textarea>
                 <span class="form-message"></span>
@@ -69,11 +69,11 @@
 
     <?php require_once ('../root/footer.php'); ?>
     
-    <script src = "../js/toast_msg.js"></script>
+    <script src = "../assets/js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
 
     <script type="module">
-        import Validator from "../js/validator.js"
+        import Validator from "../assets/js/validator.js"
         const formAdd = new Validator('#form-add')
     </script>
 </body>

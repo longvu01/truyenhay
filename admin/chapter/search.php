@@ -27,9 +27,8 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Tìm chương') ?>
-    <script defer src = "../js/script.js"></script>
-    <!-- <script defer src = "./js/get_data_search.js"></script> -->
-    <script defer src = "./js/test.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
+    <script defer src = "./js/get_data_search.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -50,6 +49,7 @@
                 <!--  -->
                 <tr id="row">
                     <th>Tên truyện</th>
+                    <th>Tên tác giả</th>
                     <th>Chương</th>
                     <th>Nội dung</th>
                     <?php if($role == 1) { ?>
@@ -71,7 +71,7 @@
 
     <?php require_once ('../root/footer.php'); ?>
     
-    <script src = "../js/toast_msg.js"></script>
+    <script src = "../assets/js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
 </body>
 </html>

@@ -17,7 +17,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Thêm truyện') ?>
-    <script defer src = "../js/script.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
 </head>
 <body>
     <div id="toast"></div>
@@ -43,7 +43,6 @@
                     <span class="form-message"></span>
                 </div>
             </div>
-            <!-- User id qua session -->
             <input name="user_id" type = "hidden" value = "<?php echo $user_id ?>"/>
             <!--  -->
             <div class="form-group">
@@ -76,11 +75,11 @@
 
     <?php require_once ('../root/footer.php'); ?>
     
-    <script src = "../js/toast_msg.js"></script>
+    <script src = "../assets/js/toast_msg.js"></script>
     <?php require_once ('../root/show_toast.php'); ?>
     
     <script type="module">
-        import Validator from "../js/validator.js"
+        import Validator from "../assets/js/validator.js"
         const formAdd = new Validator('#form-add')
     </script>
 </body>

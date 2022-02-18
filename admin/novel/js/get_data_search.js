@@ -31,7 +31,7 @@ const init = (() => {
   const ajaxSearch = async function (page, search = '') {
     try {
       this.toggleRenderSpinner();
-      // if (search.includes('%')) search = '';
+      if (search.includes('%')) search = '';
       ////
       const url = './process/get_search_query.php';
       const options = {
@@ -65,7 +65,9 @@ const init = (() => {
 
       //// Data
       const data = dataArray[0];
-
+      if (data.length === 0) {
+        this.renderError('Không có truyện cần duyệt');
+      }
       this.toggleRenderSpinner();
 
       //// Render pagination
@@ -75,10 +77,10 @@ const init = (() => {
       this.renderTable(data);
 
       //// Change URL
-      if (!data.search) {
+      if (!info.search) {
         history.pushState(null, '', 'search.php');
       } else {
-        const urlSearch = `?search=${data.search}`;
+        const urlSearch = `?search=${info.search}`;
         history.pushState(null, '', urlSearch);
       }
     } catch (err) {
@@ -156,11 +158,10 @@ const init = (() => {
       if (state.role === 1) {
         html += `
             <td>${item.author} </td>
-            <td>${item.id}</td>
             <td>
                 ${
                   item.verify === 0
-                    ? `<a class="verify" href="view.php?id=${item.id}"><i class="fas fa-check-square"></i></a>`
+                    ? `<a class="verify" href="view.php?novel_id=${item.id}"><i class="fas fa-check-square"></i></a>`
                     : 'Đã duyệt'
                 } 
             </td>
@@ -206,6 +207,7 @@ const init = (() => {
 
   //// Start
   const start = function () {
+    state.searchValue = window.location.search.slice(8);
     this.ajaxSearch(1, state.searchValue);
   };
 

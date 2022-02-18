@@ -15,7 +15,7 @@
   <?php zz('Thống kê chung') ?>
 
   <link rel='stylesheet' href='./css/chart_full.css'>
-  <script defer src = "../js/script.js"></script>
+  <script defer src = "../assets/js/script.js"></script>
   <script defer src="https://code.highcharts.com/highcharts.js"></script>
   <script defer src="https://code.highcharts.com/modules/series-label.js"></script>
   <script defer src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -52,7 +52,7 @@
   </div>
 
   <?php require_once ('../root/footer.php')?>
-  <script src = "../js/toast_msg.js"></script>
+  <script src = "../assets/js/toast_msg.js"></script>
   <?php require_once ('../root/show_toast.php')?>
 
 </body>

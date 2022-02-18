@@ -71,7 +71,7 @@
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Xoá chương') ?>
     
-    <script defer src = "../js/script.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
 </head>
 <body>
 

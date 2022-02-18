@@ -250,6 +250,11 @@
     width: 50%;
     margin: 12px auto;
     cursor: pointer;
+    transition: all 0.2s linear;
+}
+
+.form__process button:hover {
+    opacity: 0.85;
 }
 
 .form__title {
@@ -299,7 +304,7 @@ table {
 }
 .form__process td p {
     display: -webkit-box;
-    -webkit-line-clamp: 10;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -315,6 +320,16 @@ table {
 .form__process--top {
     display: flex;
     align-items: center;
+}
+
+.btn__show-more {
+    background-color: rgb(197, 190, 190) !important;
+    border: 1px solid rgb(161, 136, 136);
+    transition: all 0.2s linear;
+}
+
+.btn__show-more:active {
+    background-color: rgb(184, 171, 171) !important;
 }
 
 .form__search {
@@ -460,7 +475,6 @@ table {
     );
     border-radius: 12px;
     width: 20vw;
-    transition: background 2s;
 }
 
 .admin__page a:hover {
@@ -479,6 +493,7 @@ table {
     color: #fff;
     padding: 100px 30px;
     height: 100%;
+    transition: background 1s linear;
 }
 
 /* ======= Toast message ======== */

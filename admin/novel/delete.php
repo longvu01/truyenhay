@@ -47,7 +47,7 @@
 <!-- Start HTML -->
     <?php require_once ('../root/zz.php'); ?>
     <?php zz('Xóa truyện') ?>
-    <script defer src = "../js/script.js"></script>
+    <script defer src = "../assets/js/script.js"></script>
 </head>
 <body>
 
